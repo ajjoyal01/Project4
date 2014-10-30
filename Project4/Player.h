@@ -18,11 +18,11 @@ public:
 
 	void setDeck(vector<Card*>);
 	void printDeck();
+	void recycleDiscard();
 
 private:
 
 	PlayDeck deck;
 	PlayDeck discard;
-
 };
 

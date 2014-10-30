@@ -11,10 +11,14 @@ public:
 	~Deck();
 
 	Card* getCard(int);
+	void setCards(vector<Card*>);
 	void shuffle();
 	int getSize();
 
 	vector<Card*> getCards();
+	void print();
+	void add(Card*);
+	void clear();
 
 protected:
 

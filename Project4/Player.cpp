@@ -5,17 +5,23 @@ Player::Player()
 {
 }
 
-
 Player::~Player()
 {
 }
 
 void Player::setDeck(vector<Card*> inCards)
 {
-	deck.getCards() = inCards;
+	deck.setCards(inCards);
 }
 
 void Player::printDeck()
 {
-	for (int i = 0;i<)
+	deck.print();
+}
+
+void Player::recycleDiscard()
+{
+	deck = discard;
+	discard.clear();
+	deck.shuffle();
 }

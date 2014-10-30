@@ -43,3 +43,31 @@ vector<Card*> Deck::getCards()
 {
 	return cards;
 }
+
+int Deck::getSize()
+{
+	return cards.size();
+}
+
+void Deck::setCards(vector<Card*> inCards)
+{
+	cards = inCards;
+}
+
+void Deck::print()
+{
+	for (int i = 0; i < cards.size(); i++)
+	{
+		cards[i]->print();
+	}
+}
+
+void Deck::add(Card* newCard)
+{
+	cards.push_back(newCard);
+}
+
+void Deck::clear()
+{
+	cards.clear();
+}

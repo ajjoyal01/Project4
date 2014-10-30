@@ -36,6 +36,8 @@ void World::init()
 	glLineWidth(4);
 
 	glEnable(GL_DEPTH_TEST);
+
+	game.init();
 }
 
 void World::display()

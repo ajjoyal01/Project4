@@ -19,7 +19,6 @@ public:
 	~StandardDeck();
 
 	Card* getCard(int);
-	void shuffle();
 
 private:
 

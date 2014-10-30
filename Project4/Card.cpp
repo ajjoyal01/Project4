@@ -14,3 +14,13 @@ void Card::print()
 {
 	cout << value << " of " + suit << endl;
 }
+
+void Card::setValue(int inVal)
+{
+	value = inVal;
+}
+
+void Card::setSuit(string inSuit)
+{
+	suit = inSuit;
+}

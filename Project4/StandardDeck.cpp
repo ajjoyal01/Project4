@@ -3,6 +3,7 @@
 
 StandardDeck::StandardDeck()
 {
+	/*
 	// setup 52 cards
 	string filename = "cardObjectFiles.txt";
 
@@ -22,9 +23,37 @@ StandardDeck::StandardDeck()
 		card->init(line);
 		cards.push_back(card);
 	}
-	
-}
+	*/
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 2; j < 15; j++)
+		{
+			Card* card = new Card();
+			card->setValue(j);
 
+			switch (i)
+			{
+			case 0:
+				card->setSuit("Hearts");
+				break;
+			case 1:
+				card->setSuit("Diamonds");
+				break;
+			case 2:
+				card->setSuit("Spades");
+				break;
+			case 3:
+				card->setSuit("Clubs");
+				break;
+			default:
+				cout << "ERROR\n";
+				break;
+			}
+			
+			cards.push_back(card);
+		}
+	}
+}
 
 StandardDeck::~StandardDeck()
 {

@@ -337,6 +337,7 @@ void Object::translate(float x, float y, float z)
 {
 	vmath::mat4 translate = vmath::translate(x, y, z);
 	transform = translate * transform;
+	/*
 	for (int i = 0; i < 4; i++)
 	{
 		for (int j = 0; j < 4; j++)
@@ -346,7 +347,7 @@ void Object::translate(float x, float y, float z)
 		cout << endl;
 	}
 	cout << endl;
-	
+	*/
 	updateCenter();
 }
 

@@ -46,8 +46,10 @@ public:
 private:
 
 	vector<vmath::vec4> vertices;
-	vector<vmath::vec3> normals;
 	vector<vmath::vec2> texels;
+	vector<vmath::vec3> normals;
+	vector<int> textureIDs;
+	vector<Texture*> textures;
 
 	//---------------------------------------------------------
 	// Declare Data (Vertex Arrays and Buffers)

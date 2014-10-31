@@ -415,9 +415,11 @@ void Object::loadObjectTextured(string filename)
 	vector<vmath::vec4> in_vertices;
 	vector<vmath::vec3> in_normals;
 	vector<vmath::vec2> in_texels;
+	vector<string> in_materials;
 
 	bool isTexel = false;
 	bool isNormal = false;
+	int curTextID = -1;
 
 	string matFileName;
 
@@ -497,140 +499,157 @@ void Object::loadObjectTextured(string filename)
 					}
 					else
 					{
-						//-----------------------------------
-						// Read Face Info
-						//-----------------------------------
-						if (line.substr(0, 2) == "f ")
+						if (line.substr(0, 7) == "usemtl ")
 						{
-							istringstream s(line.substr(2));
+							istringstream s(line.substr(7));
+							string temp;
+							s >> temp;
+							in_materials.push_back(temp);
+							curTextID++;
+						}
+						else
+						{
+							//-----------------------------------
+							// Read Face Info
+							//-----------------------------------
+							if (line.substr(0, 2) == "f ")
+							{
+								istringstream s(line.substr(2));
 
-							if (!isNormal && !isTexel)
-							{
-								GLushort av, bv, cv;
-								s >> av;
-								s >> bv;
-								s >> cv;
-								vertices.push_back(in_vertices[--av]);
-								vertices.push_back(in_vertices[--bv]);
-								vertices.push_back(in_vertices[--cv]);
-							}
-							else if (!isTexel)
-							{
-								GLushort av, an, bv, bn, cv, cn;
-								s >> av;
-								while (s.peek() == '/')
+								if (!isNormal && !isTexel)
 								{
-									s.get();
+									GLushort av, bv, cv;
+									s >> av;
+									s >> bv;
+									s >> cv;
+									vertices.push_back(in_vertices[--av]);
+									vertices.push_back(in_vertices[--bv]);
+									vertices.push_back(in_vertices[--cv]);
 								}
-								s >> an;
-								s >> bv;
-								while (s.peek() == '/')
+								else if (!isTexel)
 								{
-									s.get();
+									GLushort av, an, bv, bn, cv, cn;
+									s >> av;
+									while (s.peek() == '/')
+									{
+										s.get();
+									}
+									s >> an;
+									s >> bv;
+									while (s.peek() == '/')
+									{
+										s.get();
+									}
+									s >> bn;
+									s >> cv;
+									while (s.peek() == '/')
+									{
+										s.get();
+									}
+									s >> cn;
+									vertices.push_back(in_vertices[--av]);
+									vertices.push_back(in_vertices[--bv]);
+									vertices.push_back(in_vertices[--cv]);
+									normals.push_back(in_normals[--an]);
+									normals.push_back(in_normals[--bn]);
+									normals.push_back(in_normals[--cn]);
 								}
-								s >> bn;
-								s >> cv;
-								while (s.peek() == '/')
+								else if (!isNormal)
 								{
-									s.get();
+									GLushort av, at, bv, bt, cv, ct;
+									s >> av;
+									while (s.peek() == '/')
+									{
+										s.get();
+									}
+									s >> at;
+									s >> bv;
+									while (s.peek() == '/')
+									{
+										s.get();
+									}
+									s >> bt;
+									s >> cv;
+									while (s.peek() == '/')
+									{
+										s.get();
+									}
+									s >> ct;
+									vertices.push_back(in_vertices[--av]);
+									vertices.push_back(in_vertices[--bv]);
+									vertices.push_back(in_vertices[--cv]);
+									texels.push_back(in_texels[--at]);
+									texels.push_back(in_texels[--bt]);
+									texels.push_back(in_texels[--ct]);
+									textureIDs.push_back(curTextID);
+									textureIDs.push_back(curTextID);
+									textureIDs.push_back(curTextID);
 								}
-								s >> cn;
-								vertices.push_back(in_vertices[--av]);
-								vertices.push_back(in_vertices[--bv]);
-								vertices.push_back(in_vertices[--cv]);
-								normals.push_back(in_normals[--an]);
-								normals.push_back(in_normals[--bn]);
-								normals.push_back(in_normals[--cn]);
-							}
-							else if (!isNormal)
-							{
-								GLushort av, at, bv, bt, cv, ct;
-								s >> av;
-								while (s.peek() == '/')
+								else if (isNormal && isTexel)
 								{
-									s.get();
+									GLushort av, at, an, bv, bt, bn, cv, ct, cn;
+									s >> av;
+									while (s.peek() == '/')
+									{
+										s.get();
+									}
+									s >> at;
+									while (s.peek() == '/')
+									{
+										s.get();
+									}
+									s >> an;
+									while (s.peek() == '/')
+									{
+										s.get();
+									}
+									s >> bv;
+									while (s.peek() == '/')
+									{
+										s.get();
+									}
+									s >> bt;
+									while (s.peek() == '/')
+									{
+										s.get();
+									}
+									s >> bn;
+									while (s.peek() == '/')
+									{
+										s.get();
+									}
+									s >> cv;
+									while (s.peek() == '/')
+									{
+										s.get();
+									}
+									s >> ct;
+									while (s.peek() == '/')
+									{
+										s.get();
+									}
+									s >> cn;
+									while (s.peek() == '/')
+									{
+										s.get();
+									}
+									vertices.push_back(in_vertices[--av]);
+									vertices.push_back(in_vertices[--bv]);
+									vertices.push_back(in_vertices[--cv]);
+									texels.push_back(in_texels[--at]);
+									texels.push_back(in_texels[--bt]);
+									texels.push_back(in_texels[--ct]);
+									normals.push_back(in_normals[--an]);
+									normals.push_back(in_normals[--bn]);
+									normals.push_back(in_normals[--cn]);
+									textureIDs.push_back(curTextID);
+									textureIDs.push_back(curTextID);
+									textureIDs.push_back(curTextID);
 								}
-								s >> at;
-								s >> bv;
-								while (s.peek() == '/')
-								{
-									s.get();
-								}
-								s >> bt;
-								s >> cv;
-								while (s.peek() == '/')
-								{
-									s.get();
-								}
-								s >> ct;
-								vertices.push_back(in_vertices[--av]);
-								vertices.push_back(in_vertices[--bv]);
-								vertices.push_back(in_vertices[--cv]);
-								texels.push_back(in_texels[--at]);
-								texels.push_back(in_texels[--bt]);
-								texels.push_back(in_texels[--ct]);
-							}
-							else if (isNormal && isTexel)
-							{
-								GLushort av, at, an, bv, bt, bn, cv, ct, cn;
-								s >> av;
-								while (s.peek() == '/')
-								{
-									s.get();
-								}
-								s >> at;
-								while (s.peek() == '/')
-								{
-									s.get();
-								}
-								s >> an;
-								while (s.peek() == '/')
-								{
-									s.get();
-								}
-								s >> bv;
-								while (s.peek() == '/')
-								{
-									s.get();
-								}
-								s >> bt;
-								while (s.peek() == '/')
-								{
-									s.get();
-								}
-								s >> bn;
-								while (s.peek() == '/')
-								{
-									s.get();
-								}
-								s >> cv;
-								while (s.peek() == '/')
-								{
-									s.get();
-								}
-								s >> ct;
-								while (s.peek() == '/')
-								{
-									s.get();
-								}
-								s >> cn;
-								while (s.peek() == '/')
-								{
-									s.get();
-								}
-								vertices.push_back(in_vertices[--av]);
-								vertices.push_back(in_vertices[--bv]);
-								vertices.push_back(in_vertices[--cv]);
-								texels.push_back(in_texels[--at]);
-								texels.push_back(in_texels[--bt]);
-								texels.push_back(in_texels[--ct]);
-								normals.push_back(in_normals[--an]);
-								normals.push_back(in_normals[--bn]);
-								normals.push_back(in_normals[--cn]);
-							}
 
-						}// end "f " if else
-						//-----------------------------------
+							}// end "f " if else
+							
+						}// end "usemtl " else
 
 					}// end "vn " if else
 
@@ -640,9 +659,47 @@ void Object::loadObjectTextured(string filename)
 
 		}// end getting material file name
 
-	}// end parse while loop
+	}// end parse while loop for .obj files
 
-	cout << matFileName << endl;
+	in.close();
+
+	// if there is a material file
+	if (matFileName != "")
+	{
+		// switch to parsing Material File
+		ifstream in(matFileName, ios::in);
+
+		if (!in)
+		{
+			cerr << "Cannot open " << matFileName << endl;
+			exit(1);
+		}
+
+		// while the line == map_Kd, get the filename off the back of the line
+		while (getline(in, line))
+		{
+			if (line.substr(0, 7) == "map_Kd ")
+			{
+				istringstream s(line.substr(7));
+				string texName;
+				s >> texName;
+
+				//erase up to file name
+				texName.erase(name.begin(), name.begin() + texName.find_last_of("/") + 1);
+
+				// make new texture
+				Texture* newTexture = new Texture();
+
+				// load texture from file
+				newTexture->loadFromFile("../Textures/" + texName);
+
+				// push texture into object's texture vector
+				textures.push_back(newTexture);
+			}
+		}
+	}
+	
+	in.close();
 }
 
 void Object::calculateDimentions()

@@ -19,10 +19,13 @@ public:
 	void setDeck(vector<Card*>);
 	void printDeck();
 	void recycleDiscard();
-
-private:
+	int getDeckSize();
 
 	PlayDeck deck;
 	PlayDeck discard;
+
+private:
+
+	
 };
 

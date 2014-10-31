@@ -58,10 +58,10 @@ int main(int argc,char* argv[])
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGBA);
 	glutInitWindowSize(WIN_WIDTH, WIN_HEIGHT);
-	glutInitWindowPosition(600, 0);
+	glutInitWindowPosition(900, 0);
 	glutInitContextVersion(3, 3);
 	glutInitContextProfile(GLUT_CORE_PROFILE);
-	glutCreateWindow("Project 3");
+	glutCreateWindow("Project 4");
 
 	glewExperimental = GL_TRUE;
 

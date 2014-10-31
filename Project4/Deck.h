@@ -10,7 +10,7 @@ public:
 	Deck();
 	~Deck();
 
-	Card* getCard(int);
+	Card* getCard();
 	void setCards(vector<Card*>);
 	void shuffle();
 	int getSize();
@@ -20,9 +20,14 @@ public:
 	void add(Card*);
 	void clear();
 
-protected:
+
+
 
 	vector<Card*> cards;
+
+protected:
+
+	
 
 };
 

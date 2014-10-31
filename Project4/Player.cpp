@@ -25,3 +25,8 @@ void Player::recycleDiscard()
 	discard.clear();
 	deck.shuffle();
 }
+
+int Player::getDeckSize()
+{
+	return deck.getSize();
+}

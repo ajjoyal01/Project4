@@ -14,6 +14,7 @@ public:
 	void print();
 
 	void setValue(int);
+	int getValue();
 	void setSuit(string);
 
 private:

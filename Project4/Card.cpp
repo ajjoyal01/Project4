@@ -20,6 +20,11 @@ void Card::setValue(int inVal)
 	value = inVal;
 }
 
+int Card::getValue()
+{
+	return value;
+}
+
 void Card::setSuit(string inSuit)
 {
 	suit = inSuit;

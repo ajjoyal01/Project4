@@ -11,9 +11,9 @@ Deck::~Deck()
 }
 
 
-Card* Deck::getCard(int index)
+Card* Deck::getCard()
 {
-	return cards[index];
+	return cards.back();
 }
 
 // shuffles cards

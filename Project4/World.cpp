@@ -57,6 +57,11 @@ void World::keyPress(unsigned char key,int x,int y)
 	switch (key)
 	{
 	case 'n':
+		if (game.getWinner() == 0)
+		{
+			game.playTurn();
+		}
+		
 		break;
 	case 'l':
 		_light.toggle();

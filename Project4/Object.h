@@ -15,6 +15,7 @@
 #include "vec.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "Color.h"
 //#include "ObjLoader.h"
 
 using namespace std;
@@ -39,7 +40,6 @@ public:
 	void select(Shader);
 	void updateCenter();
 	void calculateDimentions();
-	void setTexture(Texture);
 
 	vec4 center;
 
@@ -63,17 +63,20 @@ private:
 	//---------------------------------------------------------
 	// Vertex Attributes
 	//---------------------------------------------------------
-	enum { vPosition, vTexel, vNormal, vTexture, vIsTextured, vIsTransformed, vModelMatrix, vColor};
+	enum { vPosition, vTexel, vNormal, vTexture, vIsTextured, vIsTransformed, 
+		vModelMatrix0, vModelMatrix1, vModelMatrix2, vModelMatrix3, vColor
+	};
 	//---------------------------------------------------------
 
 	int isTransformed;
 	GLuint isTextured;
+
+	Color color;
 
 	vmath::mat4 transform;
 
 protected:
 
 	string name;
-	vector<Texture> _textures;
 };
 

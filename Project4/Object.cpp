@@ -3,7 +3,7 @@
 
 Object::Object()
 {
-	
+	color = { 1, 1, 1, 1 };
 }
 
 
@@ -24,13 +24,18 @@ void Object::draw()
 	{ 
 		glEnableVertexAttribArray(vNormal);
 	}
+	if (textureIDs.size() > 0)
+	{
+		glEnableVertexAttribArray(vTexture);
+	}
 	
+	glVertexAttribI1i(vIsTextured, isTextured);
 	glVertexAttribI1i(vIsTransformed, isTransformed);
-
-	glVertexAttrib4fv(vModelMatrix, &transform[0][0]);
-	glVertexAttrib4fv(vModelMatrix + 1, &transform[1][0]);
-	glVertexAttrib4fv(vModelMatrix + 2, &transform[2][0]);
-	glVertexAttrib4fv(vModelMatrix + 3, &transform[3][0]);
+	glVertexAttrib4fv(vModelMatrix0, &transform[0][0]);
+	glVertexAttrib4fv(vModelMatrix1, &transform[1][0]);
+	glVertexAttrib4fv(vModelMatrix2, &transform[2][0]);
+	glVertexAttrib4fv(vModelMatrix3, &transform[3][0]);
+	glVertexAttrib4fv(vColor, &color.red);
 
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 }
@@ -39,83 +44,41 @@ void Object::init(string filename)
 {
 	loadObjectTextured(filename);
 	
-	/*
-	for (int i = 0; i < vertices.size(); i++)
-	{
-		for (int j = 0; j < 4; j++)
-		{
-			cout << vertices[i][j] << "\t";
-		}
-		cout << endl;
-		if (texels.size() > 0)
-		{
-			for (int j = 0; j < 2; j++)
-			{
-				cout << texels[i][j] << "\t";
-			}
-			cout << endl;
-		}
-		if (normals.size() > 0)
-		{
-			for (int j = 0; j < 3; j++)
-			{
-				cout << normals[i][j] << "\t";
-			}
-			cout << endl;
-		}
-		cout << endl;
-	}
-
-	cout << vertices.size() << endl;
-	*/
-
+	
 	// create Vertex Array
 	glGenVertexArrays(1, VAOs);
 	glBindVertexArray(VAOs[0]);
 
 	// create Buffers
-	glGenBuffers(4, Buffers);
+	glGenBuffers(NUM_BUFFERS, Buffers);
 	
 	glEnableVertexAttribArray(vPosition);
-	glBindBuffer(GL_ARRAY_BUFFER, Buffers[0]);
+	glBindBuffer(GL_ARRAY_BUFFER, Buffers[POS_BUFFER]);
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(vmath::vec4), &vertices[0], GL_DYNAMIC_DRAW);
-	glVertexAttribPointer(
-		vPosition,			// attribute
-		4,                  // number of elements per vertex, here (x,y,z,w)
-		GL_FLOAT,           // the type of each element
-		GL_FALSE,           // take our values as-is
-		0,                  // no extra data between each position
-		0                   // offset of first element
-		);
+	glVertexAttribPointer(vPosition,4,GL_FLOAT,GL_FALSE,0,0);
 
 	if (texels.size() > 0)
 	{
 		glEnableVertexAttribArray(vTexel);
-		glBindBuffer(GL_ARRAY_BUFFER, Buffers[1]);
+		glBindBuffer(GL_ARRAY_BUFFER, Buffers[TEXEL_BUFFER]);
 		glBufferData(GL_ARRAY_BUFFER, texels.size() * sizeof(vmath::vec2), &texels[0], GL_DYNAMIC_DRAW);
-		glVertexAttribPointer(
-			vTexel, // attribute
-			2,                  // number of elements per vertex, here (x,y,z)
-			GL_FLOAT,           // the type of each element
-			GL_FALSE,           // take our values as-is
-			0,                  // no extra data between each position
-			0                   // offset of first element
-			);
+		glVertexAttribPointer(vTexel, 2, GL_FLOAT, GL_FALSE, 0, 0);
 	}
 
 	if (normals.size() > 0)
 	{
 		glEnableVertexAttribArray(vNormal);
-		glBindBuffer(GL_ARRAY_BUFFER, Buffers[2]);
+		glBindBuffer(GL_ARRAY_BUFFER, Buffers[NORMAL_BUFFER]);
 		glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(vmath::vec3), &normals[0], GL_DYNAMIC_DRAW);
-		glVertexAttribPointer(
-			vNormal, // attribute
-			3,                  // number of elements per vertex, here (x,y,z)
-			GL_FLOAT,           // the type of each element
-			GL_FALSE,           // take our values as-is
-			0,                  // no extra data between each position
-			0                   // offset of first element
-			);
+		glVertexAttribPointer(vNormal, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	}
+
+	if (textureIDs.size() > 0)
+	{
+		glEnableVertexAttribArray(vTexture);
+		glBindBuffer(GL_ARRAY_BUFFER, Buffers[TEXTURE_BUFFER]);
+		glBufferData(GL_ARRAY_BUFFER, textureIDs.size() * sizeof(int), &textureIDs[0], GL_DYNAMIC_DRAW);
+		glVertexAttribPointer(vTexture, 1, GL_FLOAT, GL_FALSE, 0, 0);
 	}
 
 	transform = vmath::mat4::identity();
@@ -733,9 +696,3 @@ void Object::calculateDimentions()
 	cout << "Depth: " << max_x - min_x << endl;
 }
 
-
-// TEXTURES
-void Object::setTexture(Texture texture)
-{
-	_texture = texture;
-}

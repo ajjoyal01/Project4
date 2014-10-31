@@ -21,6 +21,8 @@ public:
 	Camera();
 	~Camera();
 
+	void camOut(float);
+	void camIn(float);
 	void camUp(float);
 	void camDown(float);
 	void camLeft(float);

@@ -8,11 +8,13 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <algorithm>
 
 #include "vgl.h"
 #include "vmath.h"
 #include "vec.h"
 #include "Shader.h"
+#include "Texture.h"
 //#include "ObjLoader.h"
 
 using namespace std;
@@ -28,6 +30,7 @@ public:
 	void draw();
 	void init(string);
 	void loadObject(string);
+	void loadObjectTextured(string);
 
 	void scale(float);
 	void translate(float, float, float);
@@ -35,7 +38,8 @@ public:
 	void deselect(Shader);
 	void select(Shader);
 	void updateCenter();
-
+	void calculateDimentions();
+	void setTexture(Texture);
 
 	vec4 center;
 
@@ -48,20 +52,26 @@ private:
 	//---------------------------------------------------------
 	// Declare Data (Vertex Arrays and Buffers)
 	//---------------------------------------------------------
+	enum { POS_BUFFER, TEXEL_BUFFER, NORMAL_BUFFER, TEXTURE_BUFFER, NUM_BUFFERS };
+
 	GLuint VAOs[1];
-	GLuint Buffers[3];
+	GLuint Buffers[NUM_BUFFERS];
 	//---------------------------------------------------------
 
 	//---------------------------------------------------------
 	// Vertex Attributes
 	//---------------------------------------------------------
-	enum { vPosition, vTexel, vNormal, vIsTextured, vIsTransformed, vModelMatrix};
+	enum { vPosition, vTexel, vNormal, vTexture, vIsTextured, vIsTransformed, vModelMatrix, vColor};
 	//---------------------------------------------------------
 
 	int isTransformed;
 	GLuint isTextured;
 
 	vmath::mat4 transform;
-	
+
+protected:
+
+	string name;
+	vector<Texture> _textures;
 };
 

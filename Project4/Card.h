@@ -16,6 +16,7 @@ public:
 	void setValue(int);
 	int getValue();
 	void setSuit(string);
+	void parseData();
 
 private:
 

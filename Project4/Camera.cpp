@@ -11,6 +11,18 @@ Camera::~Camera()
 {
 }
 
+void Camera::camOut(float move)
+{
+	eye_z += move;
+	update();
+}
+
+void Camera::camIn(float move)
+{
+	eye_z -= move;
+	update();
+}
+
 void Camera::camUp(float move)
 {
 	eye_y += move;
@@ -39,15 +51,15 @@ void Camera::init()
 {
 	eye_x = 0;
 	eye_y = 0;
-	eye_z = 30;
+	eye_z = 3;
 
 	eye = vmath::vec3(eye_x, eye_y, eye_z);
 	center = vmath::vec3(0, 0, 0);
 	up = vmath::vec3(0, 1, 0);
 
 	
-	overhead = vmath::rotate((float)60, vmath::vec3(1, 0, 0));
-	view = vmath::lookat(eye, center, up) * overhead;
+	//overhead = vmath::rotate((float)60, vmath::vec3(1, 0, 0)) * vmath::rotate((float)-90, vmath::vec3(0, 1, 0));
+	view = vmath::lookat(eye, center, up);// *overhead;
 
 	frustum = vmath::frustum(-0.3, 0.3, -0.3, 0.3, 0.3, 100);
 }
@@ -55,7 +67,7 @@ void Camera::init()
 void Camera::update()
 {
 	eye = vmath::vec3(eye_x, eye_y, eye_z);
-	view = vmath::lookat(eye, center, up) * overhead;
+	view = vmath::lookat(eye, center, up);// *overhead;
 }
 
 void Camera::reverse()

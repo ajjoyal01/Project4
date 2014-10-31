@@ -66,6 +66,12 @@ void World::keyPress(unsigned char key,int x,int y)
 	case 'l':
 		_light.toggle();
 		break;
+	case 'i':
+		_cam.camIn(CAM_MOVE);
+		break;
+	case 'o':
+		_cam.camOut(CAM_MOVE);
+		break;
 	default:
 		break;
 	}

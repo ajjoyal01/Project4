@@ -28,6 +28,29 @@ StandardDeck::StandardDeck()
 
 void StandardDeck::init()
 {
+	// setup 52 cards
+	string filename = "Models/objectFileNames.txt";
+
+	ifstream in(filename, ios::in);
+
+	if (!in)
+	{
+		cerr << "Cannot open " << filename << endl;
+		exit(1);
+	}
+
+	string line;
+
+	while (getline(in, line) && cards.size() < NUM_CARDS)
+	{
+		Card* card = new Card();
+		card->init("Models/" + line);
+		card->parseData();
+		cards.push_back(card);
+	}
+
+
+	/*
 	for (int i = 0; i < 4; i++)
 	{
 		for (int j = 2; j < 15; j++)
@@ -57,7 +80,7 @@ void StandardDeck::init()
 			
 			cards.push_back(card);
 		}
-	}
+	}*/
 }
 
 StandardDeck::~StandardDeck()

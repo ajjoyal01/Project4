@@ -41,7 +41,6 @@ void Texture::loadFromFile(std::string filename)
 
 }
 
-
 void Texture::load()
 {
 	glActiveTexture(GL_TEXTURE0);

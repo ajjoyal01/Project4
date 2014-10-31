@@ -2,6 +2,10 @@
 
 #include "Card.h"
 
+#define CARD_WIDTH .7
+#define CARD_HEIGHT .45
+#define CARD_DEPTH .02
+
 class Deck
 {
 

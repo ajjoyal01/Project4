@@ -12,6 +12,7 @@ Game::~Game()
 void Game::init()
 {
 	master.init();
+	master.cards.at(0)->calculateDimentions();
 	initPlayers();
 }
 
@@ -28,14 +29,16 @@ void Game::initPlayers()
 	player1.setDeck(temp1);
 	player2.setDeck(temp2);
 
-	player1.printDeck();
+	master.print();
+
+	//player1.printDeck();
 
 	cout << endl;
 
-	player2.printDeck();
+	//player2.printDeck();
 
-	player1.setDeckLocation(vec3(15, 0, 10));
-	player2.setDeckLocation(vec3(-10, 0, -15));
+	player1.setDeckLocation(vec3(-.5, 0, .5));
+	player2.setDeckLocation(vec3(.5, 0,-.5));
 
 	player1.placeDeck();
 	player2.placeDeck();
@@ -204,11 +207,14 @@ int Game::getWinner()
 
 void Game::draw()
 {
+	/*
 	player1.draw();
 	player2.draw();
 
 	for (int i = 0; i < pile.size(); i++)
 	{
 		pile.at(i)->draw();
-	}
+	}*/
+
+	master.cards.at(0)->draw();
 }

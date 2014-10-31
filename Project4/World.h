@@ -13,7 +13,7 @@
 #include "Object.h"
 #include "Texture.h"
 #include "Shader.h"
-#include "TextureCache.h"
+
 #include "DirectionalLight.h"
 #include "Camera.h"
 #include "Game.h"

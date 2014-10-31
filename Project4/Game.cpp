@@ -11,6 +11,7 @@ Game::~Game()
 
 void Game::init()
 {
+	master.init();
 	initPlayers();
 }
 
@@ -33,8 +34,11 @@ void Game::initPlayers()
 
 	player2.printDeck();
 
-	
+	player1.setDeckLocation(vec3(15, 0, 10));
+	player2.setDeckLocation(vec3(-10, 0, -15));
 
+	player1.placeDeck();
+	player2.placeDeck();
 }
 
 void Game::playTurn()
@@ -196,4 +200,15 @@ void Game::checkWinner()
 int Game::getWinner()
 {
 	return winner;
+}
+
+void Game::draw()
+{
+	player1.draw();
+	player2.draw();
+
+	for (int i = 0; i < pile.size(); i++)
+	{
+		pile.at(i)->draw();
+	}
 }

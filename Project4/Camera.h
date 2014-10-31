@@ -42,6 +42,6 @@ private:
 
 	mat4 view;
 	mat4 frustum;
-	
+	mat4 overhead;
 };
 

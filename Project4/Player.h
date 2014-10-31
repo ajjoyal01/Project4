@@ -20,12 +20,21 @@ public:
 	void printDeck();
 	void recycleDiscard();
 	int getDeckSize();
+	void draw();
+	void placeDeck();
+
+	void setDeckLocation(vec3);
+	void setDiscardLocation(vec3);
+	vec3 getDeckLocation();
+	vec3 getDiscardLocation();
 
 	PlayDeck deck;
 	PlayDeck discard;
 
 private:
 
+	vec3 deckLocation;
+	vec3 discardLocation;
 	
 };
 

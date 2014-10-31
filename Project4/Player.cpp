@@ -26,7 +26,39 @@ void Player::recycleDiscard()
 	deck.shuffle();
 }
 
+void Player::placeDeck()
+{
+	deck.place(deckLocation.x,deckLocation.y,deckLocation.z);
+	deck.stack();
+}
+
 int Player::getDeckSize()
 {
 	return deck.getSize();
+}
+
+void Player::draw()
+{
+	deck.draw();
+	discard.draw();
+}
+
+void Player::setDeckLocation(vec3 inLocation)
+{
+	deckLocation = inLocation;
+}
+
+void Player::setDiscardLocation(vec3 inLocation)
+{
+	discardLocation = inLocation;
+}
+
+vec3 Player::getDeckLocation()
+{
+	return deckLocation;
+}
+
+vec3 Player::getDiscardLocation()
+{
+	return discardLocation;
 }

@@ -19,7 +19,7 @@
 #include "Game.h"
 
 #define NUM_TEXTURES 10
-#define CAM_MOVE .05
+#define CAM_MOVE .1
 #define NUM_OBJECTS 4
 
 using vmath::mat4;

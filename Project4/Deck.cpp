@@ -71,3 +71,30 @@ void Deck::clear()
 {
 	cards.clear();
 }
+
+void Deck::draw()
+{
+	for (int i = 0; i < cards.size(); i++)
+	{
+		cards.at(i)->draw();
+	}
+}
+
+void Deck::stack()
+{
+	for (int i = 0; i < cards.size(); i++)
+	{
+		cards.at(i)->translate(0, .012 * i, 0);
+		int angle = rand() % 3;
+		int sign = rand() % 3 - 1;
+		cards.at(i)->rotate(angle * sign, vmath::vec3(0, 1, 0));
+	}
+}
+
+void Deck::place(float x,float y,float z)
+{
+	for (int i = 0; i < cards.size(); i++)
+	{
+		cards.at(i)->translate(cards.at(i)->center.x - x, cards.at(i)->center.y - y, cards.at(i)->center.z - z);
+	}
+}

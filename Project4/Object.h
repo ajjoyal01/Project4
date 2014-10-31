@@ -36,6 +36,9 @@ public:
 	void select(Shader);
 	void updateCenter();
 
+
+	vec4 center;
+
 private:
 
 	vector<vmath::vec4> vertices;
@@ -59,6 +62,6 @@ private:
 	GLuint isTextured;
 
 	vmath::mat4 transform;
-	vec4 center;
+	
 };
 

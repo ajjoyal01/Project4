@@ -11,24 +11,29 @@ StandardDeck::StandardDeck()
 
 	if (!in)
 	{
-		cerr << "Cannot open " << filename << endl;
-		exit(1);
+	cerr << "Cannot open " << filename << endl;
+	exit(1);
 	}
 
 	string line;
 
 	while (getline(in, line) && cards.size() < NUM_CARDS)
 	{
-		Card* card = new Card();
-		card->init(line);
-		cards.push_back(card);
+	Card* card = new Card();
+	card->init(line);
+	cards.push_back(card);
 	}
 	*/
+}
+
+void StandardDeck::init()
+{
 	for (int i = 0; i < 4; i++)
 	{
 		for (int j = 2; j < 15; j++)
 		{
 			Card* card = new Card();
+			card->init("cardTest.obj");
 			card->setValue(j);
 
 			switch (i)

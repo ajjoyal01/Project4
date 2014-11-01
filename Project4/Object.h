@@ -28,7 +28,7 @@ public:
 	Object();
 	~Object();
 
-	void draw();
+	void draw(Shader);
 	void init(string);
 	void loadObject(string);
 	void loadObjectTextured(string);
@@ -40,6 +40,8 @@ public:
 	void select(Shader);
 	void updateCenter();
 	void calculateDimentions();
+	void activateTextures(Shader);
+	void deactivateTextures();
 
 	vec4 center;
 

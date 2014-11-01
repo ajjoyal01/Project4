@@ -205,16 +205,16 @@ int Game::getWinner()
 	return winner;
 }
 
-void Game::draw()
+void Game::draw(Shader shader)
 {
-	/*
-	player1.draw();
-	player2.draw();
+	
+	player1.draw(shader);
+	player2.draw(shader);
 
 	for (int i = 0; i < pile.size(); i++)
 	{
-		pile.at(i)->draw();
-	}*/
+		pile.at(i)->draw(shader);
+	}
 
-	master.cards.at(0)->draw();
+	//master.cards.at(0)->draw();
 }

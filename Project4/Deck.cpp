@@ -72,11 +72,11 @@ void Deck::clear()
 	cards.clear();
 }
 
-void Deck::draw()
+void Deck::draw(Shader shader)
 {
 	for (int i = 0; i < cards.size(); i++)
 	{
-		cards.at(i)->draw();
+		cards.at(i)->draw(shader);
 	}
 }
 
@@ -85,7 +85,7 @@ void Deck::stack()
 	for (int i = 0; i < cards.size(); i++)
 	{
 		cards.at(i)->translate(0, CARD_DEPTH * i, 0);
-		int angle = rand() % 3;
+		int angle = rand() % 5;
 		int sign = rand() % 3 - 1;
 		cards.at(i)->rotate(angle * sign, vmath::vec3(0, 1, 0));
 	}

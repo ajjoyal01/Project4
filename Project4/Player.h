@@ -20,7 +20,7 @@ public:
 	void printDeck();
 	void recycleDiscard();
 	int getDeckSize();
-	void draw();
+	void draw(Shader);
 	void placeDeck();
 
 	void setDeckLocation(vec3);

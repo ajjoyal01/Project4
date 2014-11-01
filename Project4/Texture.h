@@ -18,7 +18,7 @@ public:
 	~Texture();
 
 	void loadFromFile(std::string filename);
-	void load();
+	void load(int);
 	void activate(GLint uniformLocation);
 	void deactivate();
 

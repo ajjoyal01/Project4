@@ -115,7 +115,7 @@ void World::draw()
 		objects[i]->draw();
 	}*/
 
-	game.draw();
+	game.draw(_shader);
 
 }
 

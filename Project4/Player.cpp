@@ -37,10 +37,10 @@ int Player::getDeckSize()
 	return deck.getSize();
 }
 
-void Player::draw()
+void Player::draw(Shader shader)
 {
-	deck.draw();
-	discard.draw();
+	deck.draw(shader);
+	discard.draw(shader);
 }
 
 void Player::setDeckLocation(vec3 inLocation)

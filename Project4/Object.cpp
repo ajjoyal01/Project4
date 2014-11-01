@@ -11,9 +11,11 @@ Object::~Object()
 {
 }
 
-void Object::draw()
+void Object::draw(Shader shader)
 {
 	glBindVertexArray(VAOs[0]);
+
+	activateTextures(shader);
 
 	glEnableVertexAttribArray(vPosition);
 	if (texels.size() > 0)
@@ -38,12 +40,42 @@ void Object::draw()
 	glVertexAttrib4fv(vColor, &color.red);
 
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+
+	deactivateTextures();
+}
+
+void Object::activateTextures(Shader shader)
+{
+	for (int i = 0; i < textures.size(); i++)
+	{
+		textures.at(i)->load(i);
+	}
+
+	if (textures.at(0) != nullptr)
+		textures.at(0)->activate(shader.getUniformLocation("tex0"));
+	
+	if (textures.at(1) != nullptr)
+		textures.at(1)->activate(shader.getUniformLocation("tex1"));
+		
+	if (textures.at(2) != nullptr)
+		textures.at(2)->activate(shader.getUniformLocation("tex2"));
+}
+
+void Object::deactivateTextures()
+{
+	if (textures.at(0) != nullptr)
+		textures.at(0)->deactivate();
+
+	if (textures.at(1) != nullptr)
+		textures.at(1)->deactivate();
+
+	if (textures.at(2) != nullptr)
+		textures.at(2)->deactivate();
 }
 
 void Object::init(string filename)
 {
 	loadObjectTextured(filename);
-	
 	
 	// create Vertex Array
 	glGenVertexArrays(1, VAOs);
@@ -78,11 +110,16 @@ void Object::init(string filename)
 		glEnableVertexAttribArray(vTexture);
 		glBindBuffer(GL_ARRAY_BUFFER, Buffers[TEXTURE_BUFFER]);
 		glBufferData(GL_ARRAY_BUFFER, textureIDs.size() * sizeof(int), &textureIDs[0], GL_DYNAMIC_DRAW);
-		glVertexAttribPointer(vTexture, 1, GL_FLOAT, GL_FALSE, 0, 0);
+		glVertexAttribPointer(vTexture, 1, GL_INT, GL_FALSE, 0, 0);
 	}
 
 	transform = vmath::mat4::identity();
 	center = vec4(0.0, 0.0, 0.0, 1.0);
+
+	if (textures.size() > 0)
+	{
+		//isTextured = 1;
+	}
 
 	isTransformed = 1;
 }
@@ -102,17 +139,7 @@ void Object::translate(float x, float y, float z)
 {
 	vmath::mat4 translate = vmath::translate(x, y, z);
 	transform = translate * transform;
-	/*
-	for (int i = 0; i < 4; i++)
-	{
-		for (int j = 0; j < 4; j++)
-		{
-			cout << transform[j][i] << "\t";
-		}
-		cout << endl;
-	}
-	cout << endl;
-	*/
+
 	updateCenter();
 }
 
@@ -467,8 +494,29 @@ void Object::loadObjectTextured(string filename)
 							istringstream s(line.substr(7));
 							string temp;
 							s >> temp;
-							in_materials.push_back(temp);
-							curTextID++;
+							//cout << temp << endl;
+							bool newMaterial = true;
+
+							// if material name is already in the vector
+							for (int i = 0; i < in_materials.size(); i++)
+							{
+								if (temp == in_materials.at(i))
+								{
+									newMaterial = false;
+
+									// set current ID to the location of the existing material
+									curTextID = i;
+								}
+							}
+
+							// if this is a new material
+							if (newMaterial)
+							{
+								in_materials.push_back(temp);
+
+								// current ID is the location of the last element in the array
+								curTextID = in_materials.size();
+							}			
 						}
 						else
 						{
@@ -630,7 +678,7 @@ void Object::loadObjectTextured(string filename)
 	if (matFileName != "")
 	{
 		// switch to parsing Material File
-		ifstream in(matFileName, ios::in);
+		ifstream in("Models/" + matFileName, ios::in);
 
 		if (!in)
 		{
@@ -645,10 +693,10 @@ void Object::loadObjectTextured(string filename)
 			{
 				istringstream s(line.substr(7));
 				string texName;
-				s >> texName;
+				getline(s, texName);
 
 				//erase up to file name
-				texName.erase(name.begin(), name.begin() + texName.find_last_of("/") + 1);
+				texName.erase(texName.begin(), texName.begin() + texName.find_last_of("\\") + 1);
 
 				// make new texture
 				Texture* newTexture = new Texture();
@@ -663,6 +711,7 @@ void Object::loadObjectTextured(string filename)
 	}
 	
 	in.close();
+
 }
 
 void Object::calculateDimentions()

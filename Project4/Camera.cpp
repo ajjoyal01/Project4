@@ -51,7 +51,7 @@ void Camera::init()
 {
 	eye_x = 0;
 	eye_y = 0;
-	eye_z = 3;
+	eye_z = 0;
 
 	eye = vmath::vec3(eye_x, eye_y, eye_z);
 	center = vmath::vec3(0, 0, 0);

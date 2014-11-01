@@ -10,7 +10,6 @@ Texture::Texture() :
 	glGenTextures(1, &_id);
 }
 
-
 Texture::~Texture()
 {
 	if (_id != 0)
@@ -41,9 +40,9 @@ void Texture::loadFromFile(std::string filename)
 
 }
 
-void Texture::load()
+void Texture::load(int i)
 {
-	glActiveTexture(GL_TEXTURE0);
+	glActiveTexture(GL_TEXTURE0 + i);
 	glBindTexture(GL_TEXTURE_2D, _id);
 
 		glTexImage2D(GL_TEXTURE_2D,
@@ -52,7 +51,7 @@ void Texture::load()
 			_width, _height,					// width, height
 			0,									// border
 			GL_RGBA, GL_UNSIGNED_BYTE,			// format, type
-			&(_image[0]));						// data
+			&_image);							// data
 
 		// Texture parameters
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);

@@ -69,7 +69,6 @@ void Object::init(string filename)
 	cout << vertices.size() << endl;
 	*/
 
-
 	// create Vertex Array
 	glGenVertexArrays(1, VAOs);
 	glBindVertexArray(VAOs[0]);

@@ -32,6 +32,7 @@ public:
 	void outputStats();
 	void checkWinner();
 	int getWinner();
+	void draw();
 	
 private:
 

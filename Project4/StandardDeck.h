@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <ctime>
 
 #include "Deck.h"
 #include "Card.h"
@@ -17,6 +18,7 @@ public:
 
 	StandardDeck();
 	~StandardDeck();
+	void init();
 
 	Card* getCard(int);
 

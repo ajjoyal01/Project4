@@ -9,7 +9,7 @@ World::World()
 	_ambientColor = { 0.5, 0.5, 0.5 };
 	_lightStrength = 2.0;
 	_lightShinniness = 3.0;
-	_lightDirection = vmath::vec3(1.0, 1.0, 1.0);
+	_lightDirection = vmath::vec3(.5, .5, 1.0);
 }
 
 World::~World()
@@ -103,10 +103,13 @@ void World::draw()
 	_cam.render(_shader);
 
 	//now draw the scene
+	/*
 	for (int i = 0; i < NUM_OBJECTS;i++)
 	{
 		objects[i]->draw();
-	}
+	}*/
+
+	game.draw();
 
 }
 

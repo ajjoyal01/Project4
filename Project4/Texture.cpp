@@ -40,9 +40,9 @@ void Texture::loadFromFile(std::string filename)
 
 }
 
-void Texture::load(int i)
+void Texture::load()
 {
-	glActiveTexture(GL_TEXTURE0 + i);
+	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _id);
 
 		glTexImage2D(GL_TEXTURE_2D,
@@ -51,7 +51,7 @@ void Texture::load(int i)
 			_width, _height,					// width, height
 			0,									// border
 			GL_RGBA, GL_UNSIGNED_BYTE,			// format, type
-			&_image);							// data
+			&(_image[0]));							// data
 
 		// Texture parameters
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);

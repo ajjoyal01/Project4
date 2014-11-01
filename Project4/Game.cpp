@@ -124,11 +124,11 @@ void Game::war()
 	{
 		if (player1.deck.cards.size() + player1.discard.cards.size() > player2.deck.cards.size() + player2.discard.cards.size())
 		{
-			warSize = player1.deck.cards.size() + player1.discard.cards.size() - 1;
+			warSize = player2.deck.cards.size() + player2.discard.cards.size() - 1;
 		}
 		else
 		{
-			warSize = player2.deck.cards.size() + player2.discard.cards.size() - 1;
+			warSize = player1.deck.cards.size() + player1.discard.cards.size() - 1;
 		}
 	
 		for (int i = 0; i < 3 && i < warSize; i++)
@@ -192,11 +192,11 @@ void Game::checkWinner()
 {
 	if (player1.deck.cards.size() + player1.discard.cards.size() == 0)
 	{
-		winner = 1;
+		winner = 2;
 	}
 	else if (player2.deck.cards.size() + player2.discard.cards.size() == 0)
 	{
-		winner = 2;
+		winner = 1;
 	}
 }
 

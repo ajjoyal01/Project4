@@ -46,10 +46,6 @@ void Object::draw(Shader shader)
 
 void Object::activateTextures(Shader shader)
 {
-	for (int i = 0; i < textures.size(); i++)
-	{
-		textures.at(i)->load(i);
-	}
 
 	if (textures.at(0) != nullptr)
 		textures.at(0)->activate(shader.getUniformLocation("tex0"));
@@ -122,6 +118,11 @@ void Object::init(string filename)
 	}
 
 	isTransformed = 1;
+
+	//for (int i = 0; i < textures.size(); i++)
+	//{
+		//textures.at(0)->load();
+	//}
 }
 
 void Object::scale(float scaleFactor)

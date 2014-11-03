@@ -25,12 +25,16 @@ public:
 	int getDeckSize();
 	void draw(Shader);
 	void placeDeck();
-	void setup();
 
 	void setDeckLocation(vec3);
 	void setDiscardLocation(vec3);
-	vec3 getDeckLocation();
-	vec3 getDiscardLocation();
+
+	void scale(float);
+	void translate(float, float, float);
+	void rotate(float, vmath::vec3);
+	void updateCenter();
+
+	void transformDecks();
 
 	PlayDeck deck;
 	PlayDeck discard;
@@ -40,6 +44,7 @@ private:
 	vec3 deckLocation;
 	vec3 discardLocation;
 
+	vec4 center;
 	mat4 transform;
 	
 };

@@ -50,8 +50,8 @@ void Camera::camRight(float move)
 void Camera::init()
 {
 	eye_x = 0;
-	eye_y = 2;
-	eye_z = 2;
+	eye_y = 0;
+	eye_z = 5;
 
 	eye = vmath::vec3(eye_x, eye_y, eye_z);
 	center = vmath::vec3(0, 0, 0);
@@ -61,7 +61,7 @@ void Camera::init()
 	//overhead = vmath::rotate((float)60, vmath::vec3(1, 0, 0)) * vmath::rotate((float)-90, vmath::vec3(0, 1, 0));
 	view = vmath::lookat(eye, center, up);// *overhead;
 
-	frustum = vmath::frustum(-0.3, 0.3, -0.3, 0.3, 0.3, 100);
+	frustum = vmath::frustum(-0.3, 0.3, -0.3, 0.3, 0.3, 10);
 }
 
 void Camera::update()

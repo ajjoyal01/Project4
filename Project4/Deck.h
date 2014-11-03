@@ -30,8 +30,17 @@ public:
 	void stack();	// stack deck vertically once in place
 	void place(float,float,float);	// put deck in base spot on a player's field
 
+	void scale(float);
+	void translate(float, float, float);
+	void rotate(float, vmath::vec3);
+	void updateCenter();
+
+	void transformCards();
+	void updateTransform(vmath::mat4);
+
 	vector<Card*> cards;
 
+	vec4 center;
 	mat4 transform;
 
 protected:

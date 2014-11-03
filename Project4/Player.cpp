@@ -4,6 +4,7 @@
 Player::Player()
 {
 	transform = mat4::identity();
+	center = vec3(0, 0, 0);
 }
 
 Player::~Player()
@@ -29,7 +30,7 @@ void Player::recycleDiscard()
 
 void Player::placeDeck()
 {
-	deck.place(deckLocation.x,deckLocation.y,deckLocation.z);
+	deck.translate((center.x + deckLocation.x), (center.y + deckLocation.y), (center.z + deckLocation.z));
 	deck.stack();
 }
 
@@ -46,25 +47,60 @@ void Player::draw(Shader shader)
 
 void Player::setDeckLocation(vec3 inLocation)
 {
-	deckLocation = inLocation;
+	deck.translate(inLocation.x, inLocation.y, inLocation.z);
 }
 
 void Player::setDiscardLocation(vec3 inLocation)
 {
-	discardLocation = inLocation;
+	discard.translate(inLocation.x - discard.center.x, inLocation.y - discard.center.y, inLocation.z - discard.center.z);
 }
 
-vec3 Player::getDeckLocation()
+// Transformation Stuff
+void Player::scale(float scaleFactor)
 {
-	return deckLocation;
+	// Translate to center
+	vmath::mat4 translate1 = vmath::translate(0 - center.x, 0 - center.y, 0 - center.z);
+	vmath::mat4 scale = vmath::scale(scaleFactor);
+	vmath::mat4 translate2 = vmath::translate(center.x, center.y, center.z);
+
+	transform = (translate2 * scale * translate1) * transform;
+	updateCenter();
+
+	transformDecks();
 }
 
-vec3 Player::getDiscardLocation()
+void Player::translate(float x, float y, float z)
 {
-	return discardLocation;
+	vmath::mat4 translate = vmath::translate(x, y, z);
+	transform = translate * transform;
+
+	updateCenter();
+
+	transformDecks();
 }
 
-void Player::setup()
+void Player::rotate(float angle, vmath::vec3 inAxis)
 {
-	
+	// Translate to center
+	vmath::mat4 translate1 = vmath::translate(0 - center.x, 0 - center.y, 0 - center.z);
+	vmath::mat4 rotate = vmath::rotate(angle, inAxis);
+	vmath::mat4 translate2 = vmath::translate(center.x, center.y, center.z);
+
+	transform = (translate2 * rotate * translate1) * transform;
+	updateCenter();
+
+	transformDecks();
+}
+
+void Player::updateCenter()
+{
+	center.x = transform[3][0];
+	center.y = transform[3][1];
+	center.z = transform[3][2];
+}
+
+void Player::transformDecks()
+{
+	deck.updateTransform(transform);
+	discard.updateTransform(transform);
 }

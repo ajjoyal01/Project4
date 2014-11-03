@@ -1,9 +1,9 @@
 #pragma once
 
 #include <iostream>
-#include "Object.h"
+#include "Model.h"
 
-class Card : public Object
+class Card : public Model
 {
 
 public:

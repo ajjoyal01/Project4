@@ -3,13 +3,13 @@
 
 Deck::Deck()
 {
+	transform = mat4::identity();
+	center = vec3(0, 0, 0);
 }
-
 
 Deck::~Deck()
 {
 }
-
 
 Card* Deck::getCard()
 {
@@ -97,4 +97,64 @@ void Deck::place(float x,float y,float z)
 	{
 		cards.at(i)->translate(cards.at(i)->center.x - x, cards.at(i)->center.y - y, cards.at(i)->center.z - z);
 	}
+}
+
+// Transformation Stuff
+void Deck::scale(float scaleFactor)
+{
+	// Translate to center
+	vmath::mat4 translate1 = vmath::translate(0 - center.x, 0 - center.y, 0 - center.z);
+	vmath::mat4 scale = vmath::scale(scaleFactor);
+	vmath::mat4 translate2 = vmath::translate(center.x, center.y, center.z);
+
+	transform = (translate2 * scale * translate1) * transform;
+	updateCenter();
+
+	transformCards();
+}
+
+void Deck::translate(float x, float y, float z)
+{
+	vmath::mat4 translate = vmath::translate(x, y, z);
+	transform = translate * transform;
+
+	updateCenter();
+
+	transformCards();
+}
+
+void Deck::rotate(float angle, vmath::vec3 inAxis)
+{
+	// Translate to center
+	vmath::mat4 translate1 = vmath::translate(0 - center.x, 0 - center.y, 0 - center.z);
+	vmath::mat4 rotate = vmath::rotate(angle, inAxis);
+	vmath::mat4 translate2 = vmath::translate(center.x, center.y, center.z);
+
+	transform = (translate2 * rotate * translate1) * transform;
+	updateCenter();
+
+	transformCards();
+}
+
+void Deck::updateCenter()
+{
+	center.x = transform[3][0];
+	center.y = transform[3][1];
+	center.z = transform[3][2];
+}
+
+void Deck::transformCards()
+{
+	for (int i = 0; i < cards.size(); i++)
+	{
+		cards.at(i)->updateTransform(transform);
+	}
+}
+
+void Deck::updateTransform(vmath::mat4 inTransform)
+{
+	transform = inTransform * transform;
+
+	updateCenter();
+	transformCards();
 }

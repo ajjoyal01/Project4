@@ -29,9 +29,14 @@ void Game::initPlayers()
 	player1.setDeck(temp1);
 	player2.setDeck(temp2);
 
-	player1.setDeckLocation(vec3(.5, 0, 0));
-	player2.setDeckLocation(vec3(.5, 0, 0));
+	player1.setDeckLocation(vec3(1, 0, 0));
+	player2.setDeckLocation(vec3(1, 0, 0));
 
+	//player1.translate(0, 0, 1);
+	player2.rotate(180, vmath::vec3(0, 1, 0));
+	//player2.translate(0, 0, -1);
+	
+	//player1.deck.rotate(180, vmath::vec3(0, 1, 0));
 
 	player1.placeDeck();
 	player2.placeDeck();

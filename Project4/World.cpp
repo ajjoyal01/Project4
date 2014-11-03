@@ -14,7 +14,7 @@ World::World()
 
 World::~World()
 {
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < NUM_TEXTURES; i++)
 	{
 		delete _textures[i];
 	}
@@ -121,22 +121,6 @@ void World::draw()
 
 void World::initValues()
 {
-	for (int i = 0; i < NUM_OBJECTS; i++)
-	{
-		objects[i] = new Object();
-	}
-	
-	objects[0]->init("sphere.obj");
-	objects[1]->init("torus.obj");
-	objects[2]->init("monkey.obj");
-	objects[3]->init("cube.obj");
-
-	objects[0]->translate(0, 0, .3);
-	objects[1]->translate(1.3, 0, 0);
-	objects[2]->translate(-1.3,0, 0);
-	objects[3]->translate(0, 0, -1.3);
-
-
 	// init light values
 	_light.setColor(_directionalColor);
 	_light.setAmbient(_ambientColor);
@@ -150,16 +134,8 @@ void World::setupTextures()
 {
 	
 	// Texture Files
-	_textureFilenames[0] = "Images/BrushedMetalTexture.png";
-	_textureFilenames[1] = "Images/DarkWoodTexture.png";
-	_textureFilenames[2] = "Images/DieTexture.png";
-	_textureFilenames[3] = "Images/LightWoodTexture.png";
-	_textureFilenames[4] = "Images/MinecraftTexture.png";
-	_textureFilenames[5] = "Images/RubikTexture.png";
-	_textureFilenames[6] = "Images/StyrofoamTexture.png";
-	_textureFilenames[7] = "Images/Lava.png";
-	_textureFilenames[8] = "Images/Portal.png";
-	_textureFilenames[9] = "Images/Ice.png";
+	_textureFilenames[0] = "Textures/all-cards.png";
+	_textureFilenames[1] = "Textures/table.png";
 
 	for (int i = 0; i < NUM_TEXTURES; i++)
 	{

@@ -29,16 +29,9 @@ void Game::initPlayers()
 	player1.setDeck(temp1);
 	player2.setDeck(temp2);
 
-	master.print();
+	player1.setDeckLocation(vec3(.5, 0, 0));
+	player2.setDeckLocation(vec3(.5, 0, 0));
 
-	//player1.printDeck();
-
-	cout << endl;
-
-	//player2.printDeck();
-
-	player1.setDeckLocation(vec3(-.5, 0, .5));
-	player2.setDeckLocation(vec3(.5, 0,-.5));
 
 	player1.placeDeck();
 	player2.placeDeck();
@@ -94,7 +87,7 @@ void Game::flipCards()
 	pile.back()->print();
 	player2.deck.cards.pop_back();
 
-	cout << endl;
+	// *****animate card flips*****
 }
 
 int Game::getHandWinner()
@@ -150,6 +143,8 @@ void Game::burn()
 	// push player 2's card onto the pile
 	pile.push_back(player2.deck.cards.back());
 	player2.deck.cards.pop_back();
+
+	// *****animate card burns*****
 }
 
 void Game::takePile(int player)
@@ -157,13 +152,19 @@ void Game::takePile(int player)
 	if (player == 1)
 	{
 		player1.discard.cards.insert(player1.discard.cards.end(), pile.begin(), pile.end());
+
+		// *****animate discard pile move*****
 	}
 	else
 	{
 		player2.discard.cards.insert(player2.discard.cards.end(), pile.begin(), pile.end());
+
+		// *****animate discard pile move*****
 	}
 
 	pile.clear();
+
+	
 }
 
 void Game::checkReshuffle()
@@ -216,5 +217,5 @@ void Game::draw(Shader shader)
 		pile.at(i)->draw(shader);
 	}
 
-	//master.cards.at(0)->draw();
+	//master.cards.at(0)->draw(shader);
 }

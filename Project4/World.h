@@ -18,7 +18,7 @@
 #include "Camera.h"
 #include "Game.h"
 
-#define NUM_TEXTURES 10
+#define NUM_TEXTURES 2 // cards and table
 #define CAM_MOVE .1
 #define NUM_OBJECTS 4
 
@@ -61,9 +61,7 @@ private:
 	Color _directionalColor;
 	Color _ambientColor;
 	//--------------------------------
-
-	Object* objects[NUM_OBJECTS];
-
+	
 	Game game;
 };
 

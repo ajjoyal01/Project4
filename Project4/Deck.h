@@ -1,10 +1,13 @@
 #pragma once
 
 #include "Card.h"
+#include "vmath.h"
 
 #define CARD_WIDTH .7
 #define CARD_HEIGHT .45
 #define CARD_DEPTH .002
+
+using vmath::mat4;
 
 class Deck
 {
@@ -28,6 +31,8 @@ public:
 	void place(float,float,float);	// put deck in base spot on a player's field
 
 	vector<Card*> cards;
+
+	mat4 transform;
 
 protected:
 

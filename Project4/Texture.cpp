@@ -38,6 +38,7 @@ void Texture::loadFromFile(std::string filename)
 	// decodes the texture
 	unsigned error = lodepng::decode(_image, _width, _height, buffer);
 
+	path = filename;
 }
 
 void Texture::load()
@@ -51,7 +52,7 @@ void Texture::load()
 			_width, _height,					// width, height
 			0,									// border
 			GL_RGBA, GL_UNSIGNED_BYTE,			// format, type
-			&(_image[0]));							// data
+			&(_image[0]));						// data
 
 		// Texture parameters
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);

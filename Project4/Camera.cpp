@@ -50,8 +50,8 @@ void Camera::camRight(float move)
 void Camera::init()
 {
 	eye_x = 0;
-	eye_y = 0;
-	eye_z = 0;
+	eye_y = 2;
+	eye_z = 2;
 
 	eye = vmath::vec3(eye_x, eye_y, eye_z);
 	center = vmath::vec3(0, 0, 0);

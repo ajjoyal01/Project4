@@ -31,17 +31,18 @@ public:
 	void draw(Shader);
 	void init(string);
 	void loadObject(string);
-	void loadObjectTextured(string);
 
 	void scale(float);
 	void translate(float, float, float);
 	void rotate(float, vmath::vec3);
-	void deselect(Shader);
-	void select(Shader);
 	void updateCenter();
+
 	void calculateDimentions();
+
 	void activateTextures(Shader);
 	void deactivateTextures();
+
+	void setTexture(Texture*, int);
 
 	vec4 center;
 

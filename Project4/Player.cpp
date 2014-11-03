@@ -3,6 +3,7 @@
 
 Player::Player()
 {
+	transform = mat4::identity();
 }
 
 Player::~Player()
@@ -61,4 +62,9 @@ vec3 Player::getDeckLocation()
 vec3 Player::getDiscardLocation()
 {
 	return discardLocation;
+}
+
+void Player::setup()
+{
+	
 }

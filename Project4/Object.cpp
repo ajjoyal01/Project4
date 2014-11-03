@@ -6,16 +6,16 @@ Object::Object()
 	color = { 1, 1, 1, 1 };
 }
 
-
 Object::~Object()
 {
 }
 
+// Draw
 void Object::draw(Shader shader)
 {
 	glBindVertexArray(VAOs[0]);
 
-	activateTextures(shader);
+	//activateTextures(shader);
 
 	glEnableVertexAttribArray(vPosition);
 	if (texels.size() > 0)
@@ -26,10 +26,10 @@ void Object::draw(Shader shader)
 	{ 
 		glEnableVertexAttribArray(vNormal);
 	}
-	if (textureIDs.size() > 0)
-	{
-		glEnableVertexAttribArray(vTexture);
-	}
+	//if (textureIDs.size() > 0)
+	//{
+	//	glEnableVertexAttribArray(vTexture);
+	//}
 	
 	glVertexAttribI1i(vIsTextured, isTextured);
 	glVertexAttribI1i(vIsTransformed, isTransformed);
@@ -41,49 +41,65 @@ void Object::draw(Shader shader)
 
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
-	deactivateTextures();
+	//deactivateTextures();
 }
 
-void Object::activateTextures(Shader shader)
+
+// Transformation Stuff
+void Object::scale(float scaleFactor)
 {
+	// Translate to center
+	vmath::mat4 translate1 = vmath::translate(0 - center.x, 0 - center.y, 0 - center.z);
+	vmath::mat4 scale = vmath::scale(scaleFactor);
+	vmath::mat4 translate2 = vmath::translate(center.x, center.y, center.z);
 
-	if (textures.at(0) != nullptr)
-		textures.at(0)->activate(shader.getUniformLocation("tex0"));
-	
-	if (textures.at(1) != nullptr)
-		textures.at(1)->activate(shader.getUniformLocation("tex1"));
-		
-	if (textures.at(2) != nullptr)
-		textures.at(2)->activate(shader.getUniformLocation("tex2"));
+	transform = (translate2 * scale * translate1) * transform;
+	updateCenter();
 }
 
-void Object::deactivateTextures()
+void Object::translate(float x, float y, float z)
 {
-	if (textures.at(0) != nullptr)
-		textures.at(0)->deactivate();
+	vmath::mat4 translate = vmath::translate(x, y, z);
+	transform = translate * transform;
 
-	if (textures.at(1) != nullptr)
-		textures.at(1)->deactivate();
-
-	if (textures.at(2) != nullptr)
-		textures.at(2)->deactivate();
+	updateCenter();
 }
 
+void Object::rotate(float angle, vmath::vec3 inAxis)
+{
+	// Translate to center
+	vmath::mat4 translate1 = vmath::translate(0 - center.x, 0 - center.y, 0 - center.z);
+	vmath::mat4 rotate = vmath::rotate(angle, inAxis);
+	vmath::mat4 translate2 = vmath::translate(center.x, center.y, center.z);
+
+	transform = (translate2 * rotate * translate1) * transform;
+	updateCenter();
+}
+
+void Object::updateCenter()
+{
+	center.x = transform[3][0];
+	center.y = transform[3][1];
+	center.z = transform[3][2];
+}
+
+
+// Loading Stuff
 void Object::init(string filename)
 {
-	loadObjectTextured(filename);
-	
+	loadObject(filename);
+
 	// create Vertex Array
 	glGenVertexArrays(1, VAOs);
 	glBindVertexArray(VAOs[0]);
 
 	// create Buffers
 	glGenBuffers(NUM_BUFFERS, Buffers);
-	
+
 	glEnableVertexAttribArray(vPosition);
 	glBindBuffer(GL_ARRAY_BUFFER, Buffers[POS_BUFFER]);
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(vmath::vec4), &vertices[0], GL_DYNAMIC_DRAW);
-	glVertexAttribPointer(vPosition,4,GL_FLOAT,GL_FALSE,0,0);
+	glVertexAttribPointer(vPosition, 4, GL_FLOAT, GL_FALSE, 0, 0);
 
 	if (texels.size() > 0)
 	{
@@ -119,287 +135,10 @@ void Object::init(string filename)
 
 	isTransformed = 1;
 
-	//for (int i = 0; i < textures.size(); i++)
-	//{
-		//textures.at(0)->load();
-	//}
-}
-
-void Object::scale(float scaleFactor)
-{
-	// Translate to center
-	vmath::mat4 translate1 = vmath::translate(0 - center.x, 0 - center.y, 0 - center.z);
-	vmath::mat4 scale = vmath::scale(scaleFactor);
-	vmath::mat4 translate2 = vmath::translate(center.x, center.y, center.z);
-
-	transform = (translate2 * scale * translate1) * transform;
-	updateCenter();
-}
-
-void Object::translate(float x, float y, float z)
-{
-	vmath::mat4 translate = vmath::translate(x, y, z);
-	transform = translate * transform;
-
-	updateCenter();
-}
-
-void Object::rotate(float angle, vmath::vec3 inAxis)
-{
-	// Translate to center
-	vmath::mat4 translate1 = vmath::translate(0 - center.x, 0 - center.y, 0 - center.z);
-	vmath::mat4 rotate = vmath::rotate(angle, inAxis);
-	vmath::mat4 translate2 = vmath::translate(center.x, center.y, center.z);
-
-	transform = (translate2 * rotate * translate1) * transform;
-	updateCenter();
-}
-
-void Object::deselect(Shader shader)
-{
-	//selected = false;
-
-	//draw(shader);
-}
-
-void Object::select(Shader shader)
-{
-	//selected = true;
-
-	//draw(shader);
-}
-
-void Object::updateCenter()
-{
-	center.x = transform[3][0];
-	center.y = transform[3][1];
-	center.z = transform[3][2];
 }
 
 // Gets vertex, texel, normal data
 void Object::loadObject(string filename)
-{
-	vector<vmath::vec4> in_vertices;
-	vector<vmath::vec3> in_normals;
-	vector<vmath::vec2> in_texels;
-
-	bool isTexel = false;
-	bool isNormal = false;
-
-	ifstream in(filename, ios::in);
-
-	if (!in)
-	{
-		cerr << "Cannot open " << filename << endl;
-		exit(1);
-	}
-
-	string line;
-
-	while (getline(in, line))
-	{
-
-
-
-		//-----------------------------------
-		// Read Vertex Positions
-		//-----------------------------------
-		if (line.substr(0, 2) == "v ")
-		{
-			istringstream s(line.substr(2));
-			vmath::vec4 v;
-			float x, y, z, w;
-			s >> x;
-			s >> y;
-			s >> z;
-			w = 1.0f;
-			v = vmath::vec4(x, y, z, w);
-			in_vertices.push_back(v);
-		}
-		//-----------------------------------
-		else
-		{
-			//-----------------------------------
-			// Read Texels
-			//-----------------------------------
-			if (line.substr(0, 3) == "vt ")
-			{
-				isTexel = true;
-				istringstream s(line.substr(3));
-				vmath::vec2 v;
-				float x, y;
-				s >> x;
-				s >> y;
-				v = vmath::vec2(x, y);
-				in_texels.push_back(v);
-				//-----------------------------------
-			}
-			else
-			{
-				//-----------------------------------
-				// Read Normals
-				//-----------------------------------
-				if (line.substr(0, 3) == "vn ")
-				{
-					isNormal = true;
-					istringstream s(line.substr(3));
-					vmath::vec3 v;
-					float x, y, z;
-					s >> x;
-					s >> y;
-					s >> z;
-					v = vmath::vec3(x, y, z);
-					in_normals.push_back(v);
-					//-----------------------------------
-				}
-				else
-				{
-					//-----------------------------------
-					// Read Face Info
-					//-----------------------------------
-					if (line.substr(0, 2) == "f ")
-					{
-						istringstream s(line.substr(2));
-						
-						if (!isNormal && !isTexel)
-						{
-							GLushort av, bv, cv;
-							s >> av;
-							s >> bv;
-							s >> cv;
-							vertices.push_back(in_vertices[--av]);
-							vertices.push_back(in_vertices[--bv]);
-							vertices.push_back(in_vertices[--cv]);
-						}
-						else if (!isTexel)
-						{
-							GLushort av, an, bv, bn, cv, cn;
-							s >> av;
-							while (s.peek() == '/')
-							{
-								s.get();
-							}
-							s >> an;
-							s >> bv;
-							while (s.peek() == '/')
-							{
-								s.get();
-							}
-							s >> bn;
-							s >> cv;
-							while (s.peek() == '/')
-							{
-								s.get();
-							}
-							s >> cn;
-							vertices.push_back(in_vertices[--av]);
-							vertices.push_back(in_vertices[--bv]);
-							vertices.push_back(in_vertices[--cv]);
-							normals.push_back(in_normals[--an]);
-							normals.push_back(in_normals[--bn]);
-							normals.push_back(in_normals[--cn]);
-						}
-						else if (!isNormal)
-						{
-							GLushort av, at, bv, bt, cv, ct;
-							s >> av;
-							while (s.peek() == '/')
-							{
-								s.get();
-							}
-							s >> at;
-							s >> bv;
-							while (s.peek() == '/')
-							{
-								s.get();
-							}
-							s >> bt;
-							s >> cv;
-							while (s.peek() == '/')
-							{
-								s.get();
-							}
-							s >> ct;
-							vertices.push_back(in_vertices[--av]);
-							vertices.push_back(in_vertices[--bv]);
-							vertices.push_back(in_vertices[--cv]);
-							texels.push_back(in_texels[--at]);
-							texels.push_back(in_texels[--bt]);
-							texels.push_back(in_texels[--ct]);
-						}
-						else if (isNormal && isTexel)
-						{
-							GLushort av, at, an, bv, bt, bn, cv, ct, cn;
-							s >> av;
-							while (s.peek() == '/')
-							{
-								s.get();
-							}
-							s >> at;
-							while (s.peek() == '/')
-							{
-								s.get();
-							}
-							s >> an;
-							while (s.peek() == '/')
-							{
-								s.get();
-							}
-							s >> bv;
-							while (s.peek() == '/')
-							{
-								s.get();
-							}
-							s >> bt;
-							while (s.peek() == '/')
-							{
-								s.get();
-							}
-							s >> bn;
-							while (s.peek() == '/')
-							{
-								s.get();
-							}
-							s >> cv;
-							while (s.peek() == '/')
-							{
-								s.get();
-							}
-							s >> ct;
-							while (s.peek() == '/')
-							{
-								s.get();
-							}
-							s >> cn;
-							while (s.peek() == '/')
-							{
-								s.get();
-							}
-							vertices.push_back(in_vertices[--av]);
-							vertices.push_back(in_vertices[--bv]);
-							vertices.push_back(in_vertices[--cv]);
-							texels.push_back(in_texels[--at]);
-							texels.push_back(in_texels[--bt]);
-							texels.push_back(in_texels[--ct]);
-							normals.push_back(in_normals[--an]);
-							normals.push_back(in_normals[--bn]);
-							normals.push_back(in_normals[--cn]);
-						}
-
-					}// end "f " if else
-					//-----------------------------------
-
-				}// end "vn " if else
-
-			}// end "vt " if else
-
-		}// end "v " if else
-
-	}// end parse while loop
-}
-
-// Gets vertex, texel, normal data
-void Object::loadObjectTextured(string filename)
 {
 	name = filename;
 
@@ -675,6 +414,7 @@ void Object::loadObjectTextured(string filename)
 
 	in.close();
 
+	/*
 	// if there is a material file
 	if (matFileName != "")
 	{
@@ -703,7 +443,7 @@ void Object::loadObjectTextured(string filename)
 				Texture* newTexture = new Texture();
 
 				// load texture from file
-				newTexture->loadFromFile("../Textures/" + texName);
+				newTexture->loadFromFile( "../Textures/Playing Cards/" + texName);
 
 				// push texture into object's texture vector
 				textures.push_back(newTexture);
@@ -712,7 +452,7 @@ void Object::loadObjectTextured(string filename)
 	}
 	
 	in.close();
-
+	*/
 }
 
 void Object::calculateDimentions()
@@ -744,5 +484,37 @@ void Object::calculateDimentions()
 	cout << "Width: " << max_y - min_y << endl;
 	cout << "Height: " << max_z - min_z << endl;
 	cout << "Depth: " << max_x - min_x << endl;
+}
+
+
+// Texture Stuff
+void Object::setTexture(Texture* texture,int index)
+{
+	textures.at(index) = texture;
+}
+
+void Object::activateTextures(Shader shader)
+{
+
+	//if (textures.at(0) != nullptr)
+	//textures.at(0)->activate(shader.getUniformLocation("tex0"));
+
+	//if (textures.at(1) != nullptr)
+	//textures.at(1)->activate(shader.getUniformLocation("tex1"));
+
+	if (textures.at(2) != nullptr)
+		textures.at(2)->activate(shader.getUniformLocation("tex2"));
+}
+
+void Object::deactivateTextures()
+{
+	if (textures.at(0) != nullptr)
+		textures.at(0)->deactivate();
+
+	if (textures.at(1) != nullptr)
+		textures.at(1)->deactivate();
+
+	if (textures.at(2) != nullptr)
+		textures.at(2)->deactivate();
 }
 

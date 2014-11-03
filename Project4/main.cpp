@@ -85,6 +85,9 @@ int main(int argc,char* argv[])
 	//glut main loop
 	glutMainLoop();
 
+	int p;
+	cin >> p;
+
 	return 0;
 }
 

@@ -35,7 +35,7 @@ public:
 	void rotate(float, vmath::vec3);
 	void updateCenter();
 
-	void transformCards();
+	void transformCards(vmath::mat4);
 	void updateTransform(vmath::mat4);
 
 	vector<Card*> cards;

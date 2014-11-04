@@ -33,6 +33,9 @@ public:
 	void loadObject(string);
 
 	void calculateDimentions();
+	float getWidth();
+	float getHeight();
+	float getDepth();
 
 	void activateTextures(Shader);
 	void deactivateTextures();
@@ -79,6 +82,9 @@ private:
 
 	Color color;
 
+	float width;
+	float height;
+	float depth;
 
 
 protected:

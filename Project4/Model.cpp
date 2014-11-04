@@ -83,7 +83,6 @@ void Model::updateCenter()
 	center.z = transform[3][2];
 }
 
-
 // Loading Stuff
 void Model::init(string filename)
 {
@@ -134,7 +133,7 @@ void Model::init(string filename)
 	}
 
 	isTransformed = 1;
-
+	calculateDimentions();
 }
 
 // Gets vertex, texel, normal data
@@ -481,9 +480,30 @@ void Model::calculateDimentions()
 			min_z = vertices.at(i)[2];
 	}
 
-	cout << "Width: " << max_y - min_y << endl;
-	cout << "Height: " << max_z - min_z << endl;
-	cout << "Depth: " << max_x - min_x << endl;
+	//cout << "Width: " << max_y - min_y << endl;
+	//cout << "Height: " << max_z - min_z << endl;
+	//cout << "Depth: " << max_x - min_x << endl;
+
+	width = max_x - min_x;
+	depth = max_y - min_y;
+	height = max_z - min_z;
+
+
+}
+
+float Model::getWidth()
+{
+	return width;
+}
+
+float Model::getHeight()
+{
+	return height;
+}
+
+float Model::getDepth()
+{
+	return depth;
 }
 
 

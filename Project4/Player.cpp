@@ -4,7 +4,7 @@
 Player::Player()
 {
 	transform = mat4::identity();
-	center = vec3(0, 0, 0);
+	center = vec4(0, 0, 0, 1);
 }
 
 Player::~Player()
@@ -26,12 +26,28 @@ void Player::recycleDiscard()
 	deck = discard;
 	discard.clear();
 	deck.shuffle();
+
+	for (int i = 0; i < deck.cards.size(); i++)
+	{
+		if (!deck.cards.at(i)->isFaceUp())
+		{
+			deck.cards.at(i)->rotate(180, vmath::vec3(0, 0, 1));
+			deck.cards.at(i)->flip();
+		}
+	}
+	placeDeck();
 }
 
 void Player::placeDeck()
 {
-	deck.translate((center.x + deckLocation.x), (center.y + deckLocation.y), (center.z + deckLocation.z));
+	deck.translate(deckLocation.x - deck.center.x, deckLocation.y - deck.center.y, deckLocation.z - deck.center.z);
 	deck.stack();
+}
+
+void Player::placeDiscard()
+{
+	discard.translate(discardLocation.x - deck.center.x, discardLocation.y - deck.center.y, discardLocation.z - deck.center.z);
+	discard.stack();
 }
 
 int Player::getDeckSize()
@@ -45,14 +61,14 @@ void Player::draw(Shader shader)
 	discard.draw(shader);
 }
 
-void Player::setDeckLocation(vec3 inLocation)
+void Player::setDeckLocation()
 {
-	deck.translate(inLocation.x, inLocation.y, inLocation.z);
+	deckLocation = deck.center;
 }
 
-void Player::setDiscardLocation(vec3 inLocation)
+void Player::setDiscardLocation()
 {
-	discard.translate(inLocation.x - discard.center.x, inLocation.y - discard.center.y, inLocation.z - discard.center.z);
+	discardLocation = discard.center;
 }
 
 // Transformation Stuff
@@ -63,10 +79,11 @@ void Player::scale(float scaleFactor)
 	vmath::mat4 scale = vmath::scale(scaleFactor);
 	vmath::mat4 translate2 = vmath::translate(center.x, center.y, center.z);
 
-	transform = (translate2 * scale * translate1) * transform;
+	scale = (translate2 * scale * translate1);
+	transform = scale * transform;
 	updateCenter();
 
-	transformDecks();
+	transformDecks(scale);
 }
 
 void Player::translate(float x, float y, float z)
@@ -76,7 +93,7 @@ void Player::translate(float x, float y, float z)
 
 	updateCenter();
 
-	transformDecks();
+	transformDecks(translate);
 }
 
 void Player::rotate(float angle, vmath::vec3 inAxis)
@@ -86,10 +103,11 @@ void Player::rotate(float angle, vmath::vec3 inAxis)
 	vmath::mat4 rotate = vmath::rotate(angle, inAxis);
 	vmath::mat4 translate2 = vmath::translate(center.x, center.y, center.z);
 
-	transform = (translate2 * rotate * translate1) * transform;
+	rotate = (translate2 * rotate * translate1);
+	transform = rotate * transform;
 	updateCenter();
 
-	transformDecks();
+	transformDecks(rotate);
 }
 
 void Player::updateCenter()
@@ -99,8 +117,8 @@ void Player::updateCenter()
 	center.z = transform[3][2];
 }
 
-void Player::transformDecks()
+void Player::transformDecks(vmath::mat4 inTransform)
 {
-	deck.updateTransform(transform);
-	discard.updateTransform(transform);
+	deck.updateTransform(inTransform);
+	discard.updateTransform(inTransform);
 }

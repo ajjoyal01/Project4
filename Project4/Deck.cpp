@@ -4,7 +4,7 @@
 Deck::Deck()
 {
 	transform = mat4::identity();
-	center = vec3(0, 0, 0);
+	center = vec4(0, 0, 0, 1);
 }
 
 Deck::~Deck()
@@ -84,6 +84,11 @@ void Deck::stack()
 {
 	for (int i = 0; i < cards.size(); i++)
 	{
+		cards.at(i)->translate(center.x - cards.at(i)->center.x, center.y - cards.at(i)->center.y, center.z - cards.at(i)->center.z);
+	}
+
+	for (int i = 0; i < cards.size(); i++)
+	{
 		cards.at(i)->translate(0, CARD_DEPTH * i, 0);
 		int angle = rand() % 5;
 		int sign = rand() % 3 - 1;
@@ -107,10 +112,11 @@ void Deck::scale(float scaleFactor)
 	vmath::mat4 scale = vmath::scale(scaleFactor);
 	vmath::mat4 translate2 = vmath::translate(center.x, center.y, center.z);
 
-	transform = (translate2 * scale * translate1) * transform;
+	scale = (translate2 * scale * translate1);
+	transform = scale * transform;
 	updateCenter();
 
-	transformCards();
+	transformCards(scale);
 }
 
 void Deck::translate(float x, float y, float z)
@@ -120,7 +126,7 @@ void Deck::translate(float x, float y, float z)
 
 	updateCenter();
 
-	transformCards();
+	transformCards(translate);
 }
 
 void Deck::rotate(float angle, vmath::vec3 inAxis)
@@ -130,10 +136,11 @@ void Deck::rotate(float angle, vmath::vec3 inAxis)
 	vmath::mat4 rotate = vmath::rotate(angle, inAxis);
 	vmath::mat4 translate2 = vmath::translate(center.x, center.y, center.z);
 
-	transform = (translate2 * rotate * translate1) * transform;
+	rotate = (translate2 * rotate * translate1);
+	transform = rotate * transform;
 	updateCenter();
 
-	transformCards();
+	transformCards(rotate);
 }
 
 void Deck::updateCenter()
@@ -143,11 +150,11 @@ void Deck::updateCenter()
 	center.z = transform[3][2];
 }
 
-void Deck::transformCards()
+void Deck::transformCards(vmath::mat4 inTransform)
 {
 	for (int i = 0; i < cards.size(); i++)
 	{
-		cards.at(i)->updateTransform(transform);
+		cards.at(i)->updateTransform(inTransform);
 	}
 }
 
@@ -156,5 +163,5 @@ void Deck::updateTransform(vmath::mat4 inTransform)
 	transform = inTransform * transform;
 
 	updateCenter();
-	transformCards();
+	transformCards(inTransform);
 }

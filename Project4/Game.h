@@ -22,7 +22,8 @@ public:
 	~Game();
 
 	void init();
-	void playTurn();
+	void playTurn1();
+	void playTurn2();
 	void flipCards();
 	int getHandWinner();
 	void war();
@@ -33,6 +34,11 @@ public:
 	void checkWinner();
 	int getWinner();
 	void draw(Shader);
+
+	void animateCardFlip();
+	void animateBurn();
+	void animateDiscard(int);
+	void animateDeckReset(int);
 	
 private:
 
@@ -44,9 +50,13 @@ private:
 
 	void initPlayers();
 
-	vmath::vec3 target1;
-	vmath::vec3 target2;
+	vmath::vec3 origTarget1;
+	vmath::vec3 origTarget2;
+
+	vmath::vec3 tempTarget1;
+	vmath::vec3 tempTarget2;
 
 	int winner;
+	int handWinner;
 };
 

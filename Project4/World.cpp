@@ -4,6 +4,9 @@ World::World()
 {
 	srand(time(NULL));
 
+	sequenceTest = 0;
+	axes = new Axes();
+
 	// Lighting parameters
 	_directionalColor = { 0.9, 0.9, 0.9 };
 	_ambientColor = { 0.5, 0.5, 0.5 };
@@ -26,6 +29,7 @@ void World::init()
 	_cam.init();
 	_shader.init();
 	//setupTextures(); 
+
 	
 	// Antialiasing
 	glEnable(GL_LINE_SMOOTH);
@@ -59,7 +63,18 @@ void World::keyPress(unsigned char key,int x,int y)
 	case 'n':
 		if (game.getWinner() == 0)
 		{
-			game.playTurn();
+			if (sequenceTest == 0)
+			{
+				cout << "Flip\n";
+				game.playTurn1();
+				sequenceTest = (sequenceTest + 1) % 2;
+			}	
+			else
+			{
+				cout << "Discard\n";
+				game.playTurn2();
+				sequenceTest = (sequenceTest + 1) % 2;
+			}
 		}
 		
 		break;
@@ -115,6 +130,7 @@ void World::draw()
 		objects[i]->draw();
 	}*/
 
+	axes->draw(_shader);
 	game.draw(_shader);
 
 }
@@ -128,6 +144,20 @@ void World::initValues()
 	_light.setShininess(_lightShinniness);
 	_light.setStrength(_lightStrength);
 	_light.toggle();
+
+	//----------------------------------------------------------
+	// Data for Axes
+	//----------------------------------------------------------
+	vec4 axesPosition[NUM_AXES][2] = {
+			{ vec4(-5.0, 0.0, 0.0, 1.0), vec4(5.0, 0.0, 0.0, 1.0) },
+			{ vec4(0.0, -5.0, 0.0, 1.0), vec4(0.0, 5.0, 0.0, 1.0) },
+			{ vec4(0.0, 0.0, -5.0, 1.0), vec4(0.0, 0.0, 5.0, 1.0) }
+	};
+
+	Color axesColor = { .8, .8, .8, 1 };
+
+	axes->init(axesPosition);
+	axes->setColor(axesColor);
 }
 
 void World::setupTextures()

@@ -17,10 +17,14 @@ public:
 	int getValue();
 	void setSuit(string);
 	void parseData();
+	bool isFaceUp();
+	void flip();
 
 private:
 
 	int value;
 	string suit;
+
+	bool faceUp;
 };
 

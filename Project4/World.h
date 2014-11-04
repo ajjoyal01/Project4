@@ -13,7 +13,7 @@
 #include "Object.h"
 #include "Texture.h"
 #include "Shader.h"
-
+#include "Axes.h"
 #include "DirectionalLight.h"
 #include "Camera.h"
 #include "Game.h"
@@ -49,6 +49,7 @@ private:
 	Texture * _textures[NUM_TEXTURES];
 
 	Camera _cam;
+	Axes* axes;
 	GLuint _program;
 
 	//--------------------------------
@@ -63,5 +64,7 @@ private:
 	//--------------------------------
 	
 	Game game;
+
+	int sequenceTest;
 };
 

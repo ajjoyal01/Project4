@@ -1,5 +1,7 @@
 #pragma once
 
+#include "vmath.h"
+
 #include <iostream>
 #include "Model.h"
 
@@ -26,5 +28,7 @@ private:
 	string suit;
 
 	bool faceUp;
+
+	vmath::mat4 totalRotate;
 };
 

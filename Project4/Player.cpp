@@ -29,7 +29,7 @@ void Player::recycleDiscard()
 
 	for (int i = 0; i < deck.cards.size(); i++)
 	{
-		if (!deck.cards.at(i)->isFaceUp())
+		if (deck.cards.at(i)->isFaceUp())
 		{
 			deck.cards.at(i)->rotate(180, vmath::vec3(0, 0, 1));
 			deck.cards.at(i)->flip();

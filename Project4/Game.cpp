@@ -252,6 +252,8 @@ void Game::draw(Shader shader)
 
 
 
+
+
 //****** ANIMATE MOVEMENTS*****
 
 void Game::animateCardFlip()
@@ -268,6 +270,7 @@ void Game::animateCardFlip()
 	// flip
 	pile.at(pile.size() - 2)->rotate(180, vmath::vec3(0, 0, 1));
 	pile.at(pile.size() - 1)->rotate(180, vmath::vec3(0, 0, 1));
+
 	pile.at(pile.size() - 2)->flip();
 	pile.at(pile.size() - 1)->flip();
 
@@ -289,39 +292,6 @@ void Game::animateBurn()
 
 void Game::animateDiscard(int player)
 {
-	// **THIS IS FOR ANIMATION**
-	/*
-	// if player 1 won the hand
-	if (player == 1)
-	{
-		// move all cards to discard location
-		for (int i = 0; i < pile.size(); i++)
-		{
-			pile.at(i)->translate(player1.discardLocation.x - pile.at(i)->center.x,
-				player1.discardLocation.y - pile.at(i)->center.y,
-				player1.discardLocation.z - pile.at(i)->center.z);
-
-			if (!pile.at(i)->isFaceUp())
-			{
-				pile.at(i)->flip();
-			}
-		}
-	}
-	else
-	{
-		for (int i = 0; i < pile.size(); i++)
-		{
-			pile.at(i)->translate(player2.discardLocation.x - pile.at(i)->center.x,
-				player2.discardLocation.y - pile.at(i)->center.y,
-				player2.discardLocation.z - pile.at(i)->center.z);
-
-			if (!pile.at(i)->isFaceUp())
-			{
-				pile.at(i)->flip();
-			}
-		}
-	}*/
-
 	if (player == 1)
 	{
 		for (int i = 0; i < pile.size(); i++)

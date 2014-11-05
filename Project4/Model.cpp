@@ -511,7 +511,6 @@ void Model::setTexture(Texture* inTexture)
 	if (texture != nullptr)
 	{
 		isTextured = 1;
-		
 	}
 	else
 	{

@@ -170,9 +170,9 @@ void World::setupTextures()
 	
 	// Texture Files
 	_textureFilenames[0] = "Textures/all_cards.png";
-	_textureFilenames[1] = "Textures/table.png";
+	//_textureFilenames[1] = "Textures/table.png";
 
-	for (int i = 0; i < NUM_TEXTURES; i++)
+	for (int i = 0; i < 1; i++)
 	{
 		_textures[i] = new Texture();
 		_textures[i]->loadFromFile(_textureFilenames[i]);

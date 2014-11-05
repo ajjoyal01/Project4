@@ -18,6 +18,7 @@ void Model::draw(Shader shader)
 	activateTextures(shader);
 
 	glEnableVertexAttribArray(vPosition);
+
 	if (texels.size() > 0)
 	{ 
 		glEnableVertexAttribArray(vTexel);
@@ -108,6 +109,7 @@ void Model::init(string filename)
 
 	if (texels.size() > 0)
 	{
+		cout << "Texels\n";
 		glEnableVertexAttribArray(vTexel);
 		glBindBuffer(GL_ARRAY_BUFFER, Buffers[TEXEL_BUFFER]);
 		glBufferData(GL_ARRAY_BUFFER, texels.size() * sizeof(vmath::vec2), &texels[0], GL_DYNAMIC_DRAW);
@@ -406,6 +408,22 @@ void Model::loadObject(string filename)
 		}// end getting material file name
 
 	}// end parse while loop for .obj files
+
+	/*
+	if (filename == "Models/2_clubs.obj")
+	{
+		for (int i = 0; i < in_texels.size(); i++)
+		{
+			for (int j = 0; j < 2; j++)
+			{
+				cout << in_texels[i][j] << "\t";
+			}
+			cout << endl;
+
+		}
+
+		cout << endl << endl << endl;
+	}*/
 
 	in.close();
 

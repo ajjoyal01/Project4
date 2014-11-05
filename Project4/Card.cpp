@@ -4,6 +4,7 @@
 Card::Card()
 {
 	faceUp = false;
+	totalRotate = 0;
 }
 
 Card::~Card()

@@ -10,6 +10,8 @@
 #include <sstream>
 #include <algorithm>
 
+#include "glm/glm.hpp"
+
 #include "vgl.h"
 #include "vmath.h"
 #include "vec.h"
@@ -41,6 +43,7 @@ public:
 	void deactivateTextures();
 
 	void setTexture(Texture*, int);
+	void setColor(Color);
 
 	void scale(float);
 	void translate(float, float, float);
@@ -48,6 +51,7 @@ public:
 	void updateCenter();
 
 	void updateTransform(vmath::mat4);
+	void updateNormalMat();
 
 	vec4 center;
 	mat4 transform;
@@ -73,7 +77,8 @@ private:
 	// Vertex Attributes
 	//---------------------------------------------------------
 	enum { vPosition, vTexel, vNormal, vTexture, vIsTextured, vIsTransformed, 
-		vModelMatrix0, vModelMatrix1, vModelMatrix2, vModelMatrix3, vColor
+		vModelMatrix0, vModelMatrix1, vModelMatrix2, vModelMatrix3, vColor,
+		vNormalMatrix0, vNormalMatrix1, vNormalMatrix2
 	};
 	//---------------------------------------------------------
 
@@ -86,6 +91,7 @@ private:
 	float height;
 	float depth;
 
+	glm::mat3 nTransform;
 
 protected:
 

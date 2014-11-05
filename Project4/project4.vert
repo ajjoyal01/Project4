@@ -25,16 +25,16 @@ void main()
 	if(in_isTransformed == 1)
 	{
 		gl_Position = VPMatrix * ModelMatrix * in_position;
+		Normal = normalize(NormalMatrix * in_normal);
 	}
 	else
 	{
 		gl_Position = VPMatrix * in_position;
+		Normal = in_normal;
 	}
 
 	vertColor = in_color;
 	vertTexCoord = in_texel;
 	vertIsTextured = in_isTextured;
 	textureID = in_textureID;
-	//Normal = normalize(NormalMatrix * inNormal);
-	Normal = in_normal;
 }

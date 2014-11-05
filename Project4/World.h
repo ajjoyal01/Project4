@@ -17,6 +17,7 @@
 #include "DirectionalLight.h"
 #include "Camera.h"
 #include "Game.h"
+#include "Room.h"
 
 #define NUM_TEXTURES 2 // cards and table
 #define CAM_MOVE .1
@@ -49,7 +50,10 @@ private:
 	Texture * _textures[NUM_TEXTURES];
 
 	Camera _cam;
+
+	bool drawAxes;
 	Axes* axes;
+	
 	GLuint _program;
 
 	//--------------------------------
@@ -64,6 +68,7 @@ private:
 	//--------------------------------
 	
 	Game game;
+	Room room;
 
 	int sequenceTest;
 };

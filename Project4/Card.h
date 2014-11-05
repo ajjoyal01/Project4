@@ -22,6 +22,8 @@ public:
 	bool isFaceUp();
 	void flip();
 
+	float totalRotate;
+
 private:
 
 	int value;
@@ -29,6 +31,6 @@ private:
 
 	bool faceUp;
 
-	vmath::mat4 totalRotate;
+	
 };
 

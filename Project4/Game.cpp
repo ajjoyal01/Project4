@@ -20,6 +20,7 @@ void Game::init()
 
 	tempTarget1 = origTarget1;
 	tempTarget2 = origTarget2;
+	
 }
 
 void Game::initPlayers()

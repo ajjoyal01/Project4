@@ -5,7 +5,9 @@ World::World()
 	srand(time(NULL));
 
 	sequenceTest = 0;
+
 	axes = new Axes();
+	drawAxes = false;
 
 	// Lighting parameters
 	_directionalColor = { 0.9, 0.9, 0.9 };
@@ -37,7 +39,7 @@ void World::init()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glHint(GL_LINE_SMOOTH_HINT, GL_DONT_CARE);
 
-	glLineWidth(4);
+	glLineWidth(3);
 
 	glEnable(GL_DEPTH_TEST);
 
@@ -87,6 +89,9 @@ void World::keyPress(unsigned char key,int x,int y)
 	case 'o':
 		_cam.camOut(CAM_MOVE);
 		break;
+	case 'q':
+		drawAxes = !drawAxes;
+		break;
 	default:
 		break;
 	}
@@ -123,16 +128,12 @@ void World::draw()
 	// setup camera uniforms
 	_cam.render(_shader);
 
-	//now draw the scene
-	/*
-	for (int i = 0; i < NUM_OBJECTS;i++)
-	{
-		objects[i]->draw();
-	}*/
+	if (drawAxes)
+		axes->draw(_shader);
 
-	axes->draw(_shader);
 	game.draw(_shader);
 
+	room.draw(_shader);
 }
 
 void World::initValues()
@@ -155,9 +156,13 @@ void World::initValues()
 	};
 
 	Color axesColor = { .8, .8, .8, 1 };
+	Color roomColor = { 1, .3, 0, 1 };
 
 	axes->init(axesPosition);
 	axes->setColor(axesColor);
+
+	room.init("Models/room1.obj");
+	room.setColor(roomColor);
 }
 
 void World::setupTextures()

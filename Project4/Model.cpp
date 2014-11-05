@@ -38,6 +38,9 @@ void Model::draw(Shader shader)
 	glVertexAttrib4fv(vModelMatrix2, &transform[2][0]);
 	glVertexAttrib4fv(vModelMatrix3, &transform[3][0]);
 	glVertexAttrib4fv(vColor, &color.red);
+	glVertexAttrib4fv(vNormalMatrix0, &nTransform[0][0]);
+	glVertexAttrib4fv(vNormalMatrix1, &nTransform[1][0]);
+	glVertexAttrib4fv(vNormalMatrix2, &nTransform[2][0]);
 
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
@@ -55,6 +58,7 @@ void Model::scale(float scaleFactor)
 
 	transform = (translate2 * scale * translate1) * transform;
 	updateCenter();
+	updateNormalMat();
 }
 
 void Model::translate(float x, float y, float z)
@@ -63,6 +67,7 @@ void Model::translate(float x, float y, float z)
 	transform = translate * transform;
 
 	updateCenter();
+	updateNormalMat();
 }
 
 void Model::rotate(float angle, vmath::vec3 inAxis)
@@ -74,6 +79,7 @@ void Model::rotate(float angle, vmath::vec3 inAxis)
 
 	transform = (translate2 * rotate * translate1) * transform;
 	updateCenter();
+	updateNormalMat();
 }
 
 void Model::updateCenter()
@@ -125,6 +131,7 @@ void Model::init(string filename)
 	}
 
 	transform = vmath::mat4::identity();
+	updateNormalMat();
 	center = vec4(0.0, 0.0, 0.0, 1.0);
 
 	if (textures.size() > 0)
@@ -542,4 +549,23 @@ void Model::updateTransform(vmath::mat4 inTransform)
 {
 	transform = inTransform * transform;
 	updateCenter();
+	updateNormalMat();
+}
+
+void Model::setColor(Color inColor)
+{
+	color = inColor;
+}
+
+void Model::updateNormalMat()
+{
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			nTransform[j][i] = transform[j][i];
+		}
+	}
+
+	nTransform = glm::transpose(glm::inverse(nTransform));
 }

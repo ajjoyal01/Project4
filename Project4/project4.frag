@@ -2,9 +2,7 @@
 
 out vec4 fragColor;
 
-uniform sampler2D tex0;
-uniform sampler2D tex1;
-uniform sampler2D tex2;
+uniform sampler2D tex;
 
 uniform vec3 Ambient;
 uniform vec3 LightColor;
@@ -43,23 +41,8 @@ void main()
 	if(directionalLightingOn == 1) {
 		if(vertIsTextured == 1)
 		{
-
-			switch(textureID)
-			{
-			case 0:
-				rgb = min(texture(tex0, vertTexCoord).rgb * scatteredLight + reflectedLight, vec3(1.0));
-				fragColor = vec4(rgb, texture(tex0, vertTexCoord).a);
-				break;
-			case 1:
-				rgb = min(texture(tex1, vertTexCoord).rgb * scatteredLight + reflectedLight, vec3(1.0));
-				fragColor = vec4(rgb, texture(tex1, vertTexCoord).a);
-				break;
-			case 2:
-				rgb = min(texture(tex2, vertTexCoord).rgb * scatteredLight + reflectedLight, vec3(1.0));
-				fragColor = vec4(rgb, texture(tex2, vertTexCoord).a);
-				break;
-			}
-				
+			rgb = min(texture(tex, vertTexCoord).rgb * scatteredLight + reflectedLight, vec3(1.0));
+			fragColor = vec4(rgb, texture(tex, vertTexCoord).a);
 		}
 		else 
 		{
@@ -69,18 +52,8 @@ void main()
 	} else 
 		if(vertIsTextured == 1)
 		{
-			switch(textureID)
-			{
-			case 0:
-				fragColor = texture(tex0, vertTexCoord);
-				break;
-			case 1:
-				fragColor = texture(tex1, vertTexCoord);
-				break;
-			case 2:
-				fragColor = texture(tex2, vertTexCoord);
-				break;
-			}
+			fragColor = texture(tex, vertTexCoord);
+				
 		}
 		else 
 			fragColor = vertColor;

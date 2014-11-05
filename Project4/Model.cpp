@@ -15,7 +15,7 @@ void Model::draw(Shader shader)
 {
 	glBindVertexArray(VAOs[0]);
 
-	//activateTextures(shader);
+	activateTextures(shader);
 
 	glEnableVertexAttribArray(vPosition);
 	if (texels.size() > 0)
@@ -44,7 +44,7 @@ void Model::draw(Shader shader)
 
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
-	//deactivateTextures();
+	deactivateTextures();
 }
 
 
@@ -133,11 +133,6 @@ void Model::init(string filename)
 	transform = vmath::mat4::identity();
 	updateNormalMat();
 	center = vec4(0.0, 0.0, 0.0, 1.0);
-
-	if (textures.size() > 0)
-	{
-		//isTextured = 1;
-	}
 
 	isTransformed = 1;
 	calculateDimentions();
@@ -338,9 +333,6 @@ void Model::loadObject(string filename)
 									texels.push_back(in_texels[--at]);
 									texels.push_back(in_texels[--bt]);
 									texels.push_back(in_texels[--ct]);
-									textureIDs.push_back(curTextID);
-									textureIDs.push_back(curTextID);
-									textureIDs.push_back(curTextID);
 								}
 								else if (isNormal && isTexel)
 								{
@@ -399,9 +391,6 @@ void Model::loadObject(string filename)
 									normals.push_back(in_normals[--an]);
 									normals.push_back(in_normals[--bn]);
 									normals.push_back(in_normals[--cn]);
-									textureIDs.push_back(curTextID);
-									textureIDs.push_back(curTextID);
-									textureIDs.push_back(curTextID);
 								}
 
 							}// end "f " if else
@@ -515,34 +504,31 @@ float Model::getDepth()
 
 
 // Texture Stuff
-void Model::setTexture(Texture* texture, int index)
+void Model::setTexture(Texture* inTexture)
 {
-	textures.at(index) = texture;
+	texture = inTexture;
+
+	if (texture != nullptr)
+	{
+		isTextured = 1;
+		
+	}
+	else
+	{
+		isTextured = 0;
+	}
 }
 
 void Model::activateTextures(Shader shader)
 {
-
-	//if (textures.at(0) != nullptr)
-	//textures.at(0)->activate(shader.getUniformLocation("tex0"));
-
-	//if (textures.at(1) != nullptr)
-	//textures.at(1)->activate(shader.getUniformLocation("tex1"));
-
-	if (textures.at(2) != nullptr)
-		textures.at(2)->activate(shader.getUniformLocation("tex2"));
+	if (texture != nullptr)
+		texture->activate(shader.getUniformLocation("tex"));
 }
 
 void Model::deactivateTextures()
 {
-	if (textures.at(0) != nullptr)
-		textures.at(0)->deactivate();
-
-	if (textures.at(1) != nullptr)
-		textures.at(1)->deactivate();
-
-	if (textures.at(2) != nullptr)
-		textures.at(2)->deactivate();
+	if (texture != nullptr)
+		texture->deactivate();
 }
 
 void Model::updateTransform(vmath::mat4 inTransform)

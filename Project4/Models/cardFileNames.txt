@@ -1,3 +1,7 @@
+10_clubs.obj
+10_diamonds.obj
+10_hearts.obj
+10_spades.obj
 2_clubs.obj
 2_diamonds.obj
 2_hearts.obj

@@ -29,6 +29,7 @@ public:
 	void draw(Shader);
 	void stack();	// stack deck vertically once in place
 	void place(float,float,float);	// put deck in base spot on a player's field
+	void flip();
 
 	void scale(float);
 	void translate(float, float, float);

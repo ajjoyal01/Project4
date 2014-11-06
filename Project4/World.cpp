@@ -41,7 +41,6 @@ void World::init()
 	glLineWidth(3);
 
 	glEnable(GL_DEPTH_TEST);
-
 	game.init();
 	setupTextures();
 }

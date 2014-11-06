@@ -59,6 +59,9 @@ void Game::initPlayers()
 	// place the decks at the designated start positions
 	player1.placeDeck();
 	player2.placeDeck();
+
+	player1.deck.flip();
+	player2.deck.flip();
 }
 
 void Game::playTurn1()
@@ -110,12 +113,12 @@ void Game::flipCards()
 {
 	// push player 1's card onto the pile
 	pile.push_back(player1.deck.cards.back());
-	//pile.back()->print();
+	pile.back()->print();
 	player1.deck.cards.pop_back();
 
 	// push player 2's card onto the pile
 	pile.push_back(player2.deck.cards.back());
-	//pile.back()->print();
+	pile.back()->print();
 	player2.deck.cards.pop_back();
 
 	// *****animate card flips*****
@@ -141,6 +144,10 @@ int Game::getHandWinner()
 void Game::war()
 {
 	cout << "WAR!!!\n";
+
+	tempTarget1[0] += pile.at(0)->getWidth();
+	tempTarget2[0] -= pile.at(0)->getWidth();
+
 	int warSize;
 
 	checkWinner();
@@ -160,7 +167,8 @@ void Game::war()
 		{
 			checkReshuffle();
 			burn();
-			
+			tempTarget1[1] += .002;
+			tempTarget2[1] += .002;
 		}
 	}
 }
@@ -249,13 +257,9 @@ void Game::draw(Shader shader)
 	{
 		pile.at(i)->draw(shader);
 	}
-
+	
 	//master.cards.at(0)->draw(shader);
 }
-
-
-
-
 
 //****** ANIMATE MOVEMENTS*****
 
@@ -277,8 +281,7 @@ void Game::animateCardFlip()
 	pile.at(pile.size() - 2)->flip();
 	pile.at(pile.size() - 1)->flip();
 
-	tempTarget1[0] += pile.at(0)->getWidth();
-	tempTarget2[0] -= pile.at(0)->getWidth();
+	
 }
 
 void Game::animateBurn()

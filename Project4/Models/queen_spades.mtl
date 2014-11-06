@@ -1,60 +1,11 @@
-<<<<<<< HEAD
-# Blender MTL File: 'PlayingCard.blend'
-<<<<<<< HEAD
-# Material Count: 4
-=======
-# Material Count: 3
->>>>>>> 0f3f402201e5f3f51f1ab57d87c9fdf03039c12a
-=======
 # Blender MTL File: 'PlayingCard1.0.blend'
 # Material Count: 1
->>>>>>> origin/Greg
 
 newmtl None
 Ns 0
 Ka 0.000000 0.000000 0.000000
-<<<<<<< HEAD
-Kd 0.640000 0.640000 0.640000
-Ks 0.500000 0.500000 0.500000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd C:\Users\Gregory Venezia\Documents\Visual Studio 2013\Projects\Graphics\Project4\Project4\Textures\all_cards.png
-
-newmtl Material_Back
-Ns 96.078431
-Ka 0.000000 0.000000 0.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.500000 0.500000 0.500000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd C:\Users\Gregory Venezia\Documents\Visual Studio 2013\Projects\Graphics\Project4\Project4\Textures\all_cards.png
-
-newmtl Material_NONE
-Ns 96.078431
-Ka 0.000000 0.000000 0.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.500000 0.500000 0.500000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd C:\\Users\\Gregory Venezia\\Documents\\Visual Studio 2013\\Projects\\Graphics\\Project4\\Project4\\Textures\\all_cards.png
-<<<<<<< HEAD
-
-newmtl Material_all_cards.png
-Ns 96.078431
-Ka 0.000000 0.000000 0.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.500000 0.500000 0.500000
-Ni 1.000000
-d 1.000000
-=======
 Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
->>>>>>> origin/Greg
 illum 2
 map_Kd C:\Users\Gregory Venezia\Documents\Visual Studio 2013\Projects\Graphics\Project4\Project4\Textures\all_cards.png
-=======
->>>>>>> 0f3f402201e5f3f51f1ab57d87c9fdf03039c12a

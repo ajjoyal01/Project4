@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿Build started 11/5/2014 9:29:23 PM.
      1>Project "D:\Users\Andrew\Documents\GitHub\Project4\Project4\Project4.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
@@ -34,10 +35,43 @@
      1>d:\users\andrew\documents\github\project4\project4\game.cpp(300): warning C4018: '<' : signed/unsigned mismatch
      1>d:\users\andrew\documents\github\project4\project4\game.cpp(317): warning C4018: '<' : signed/unsigned mismatch
      1>d:\users\andrew\documents\github\project4\project4\game.cpp(336): warning C4018: '<' : signed/unsigned mismatch
+=======
+﻿Build started 11/5/2014 9:33:03 PM.
+     1>Project "D:\Users\Andrew\Documents\GitHub\Project4\Project4\Project4.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Camera.cpp Card.cpp Deck.cpp DirectionalLight.cpp Game.cpp LoadShaders.cpp Object.cpp PlayDeck.cpp Player.cpp Shader.cpp StandardDeck.cpp Texture.cpp World.cpp lodepng.cpp main.cpp
+         main.cpp
+     1>d:\users\andrew\documents\github\project4\project4\world.h(68): warning C4091: 'static ' : ignored on left of 'World' when no variable is declared
+         lodepng.cpp
+         World.cpp
+     1>d:\users\andrew\documents\github\project4\project4\world.h(68): warning C4091: 'static ' : ignored on left of 'World' when no variable is declared
+     1>d:\users\andrew\documents\github\project4\project4\world.cpp(5): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>d:\users\andrew\documents\github\project4\project4\world.cpp(70): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\andrew\documents\github\project4\project4\world.cpp(73): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\andrew\documents\github\project4\project4\world.cpp(87): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\andrew\documents\github\project4\project4\world.cpp(90): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\andrew\documents\github\project4\project4\world.cpp(93): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\andrew\documents\github\project4\project4\world.cpp(96): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\andrew\documents\github\project4\project4\world.cpp(134): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\andrew\documents\github\project4\project4\world.cpp(135): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\andrew\documents\github\project4\project4\world.cpp(136): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\andrew\documents\github\project4\project4\world.cpp(137): warning C4305: 'argument' : truncation from 'double' to 'float'
+         Texture.cpp
+         StandardDeck.cpp
+         Shader.cpp
+         Player.cpp
+         PlayDeck.cpp
+         Object.cpp
+     1>d:\users\andrew\documents\github\project4\project4\object.cpp(677): warning C4018: '<' : signed/unsigned mismatch
+         LoadShaders.cpp
+         Game.cpp
+         DirectionalLight.cpp
+>>>>>>> origin/Greg
          Deck.cpp
      1>d:\users\andrew\documents\github\project4\project4\deck.cpp(59): warning C4018: '<' : signed/unsigned mismatch
      1>d:\users\andrew\documents\github\project4\project4\deck.cpp(77): warning C4018: '<' : signed/unsigned mismatch
      1>d:\users\andrew\documents\github\project4\project4\deck.cpp(85): warning C4018: '<' : signed/unsigned mismatch
+<<<<<<< HEAD
      1>d:\users\andrew\documents\github\project4\project4\deck.cpp(90): warning C4018: '<' : signed/unsigned mismatch
      1>d:\users\andrew\documents\github\project4\project4\deck.cpp(94): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
      1>d:\users\andrew\documents\github\project4\project4\deck.cpp(97): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
@@ -52,6 +86,21 @@
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Users\Andrew\Documents\GitHub\Project4\Debug\Project4.exe" /INCREMENTAL /NOLOGO freeglut.lib glew32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Users\Andrew\Documents\GitHub\Project4\Debug\Project4.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Users\Andrew\Documents\GitHub\Project4\Debug\Project4.lib" /MACHINE:X86 Debug\Axes.obj
          Debug\Camera.obj
+=======
+     1>d:\users\andrew\documents\github\project4\project4\deck.cpp(87): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>d:\users\andrew\documents\github\project4\project4\deck.cpp(90): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>d:\users\andrew\documents\github\project4\project4\deck.cpp(96): warning C4018: '<' : signed/unsigned mismatch
+         Card.cpp
+         Camera.cpp
+     1>d:\users\andrew\documents\github\project4\project4\camera.cpp(64): warning C4305: 'argument' : truncation from 'double' to 'float'
+         Generating Code...
+     1>d:\users\andrew\documents\github\project4\project4\object.cpp(673): warning C4756: overflow in constant arithmetic
+     1>d:\users\andrew\documents\github\project4\project4\object.cpp(674): warning C4756: overflow in constant arithmetic
+     1>d:\users\andrew\documents\github\project4\project4\object.cpp(675): warning C4756: overflow in constant arithmetic
+     1>d:\users\andrew\documents\github\project4\project4\object.cpp(673): warning C4756: overflow in constant arithmetic
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Users\Andrew\Documents\GitHub\Project4\Debug\Project4.exe" /INCREMENTAL /NOLOGO freeglut.lib glew32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Users\Andrew\Documents\GitHub\Project4\Debug\Project4.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Users\Andrew\Documents\GitHub\Project4\Debug\Project4.lib" /MACHINE:X86 Debug\Camera.obj
+>>>>>>> origin/Greg
          Debug\Card.obj
          Debug\Deck.obj
          Debug\Object.obj
@@ -68,13 +117,20 @@
          Debug\StandardDeck.obj
          Debug\Texture.obj
          Debug\World.obj
+<<<<<<< HEAD
          LINK : D:\Users\Andrew\Documents\GitHub\Project4\Debug\Project4.exe not found or not built by the last incremental link; performing full link
      1>lodepng.obj : warning LNK4020: a type record in 'd:\users\andrew\documents\github\project4\project4\debug\vc120.pdb' is corrupted; some symbols and types may not be accessible from the debugger
      1>LoadShaders.obj : warning LNK4020: a type record in 'd:\users\andrew\documents\github\project4\project4\debug\vc120.pdb' is corrupted; some symbols and types may not be accessible from the debugger
      1>DirectionalLight.obj : warning LNK4020: a type record in 'd:\users\andrew\documents\github\project4\project4\debug\vc120.pdb' is corrupted; some symbols and types may not be accessible from the debugger
+=======
+>>>>>>> origin/Greg
          Project4.vcxproj -> D:\Users\Andrew\Documents\GitHub\Project4\Debug\Project4.exe
      1>Done Building Project "D:\Users\Andrew\Documents\GitHub\Project4\Project4\Project4.vcxproj" (Build target(s)).
 
 Build succeeded.
 
+<<<<<<< HEAD
 Time Elapsed 00:00:08.68
+=======
+Time Elapsed 00:00:09.87
+>>>>>>> origin/Greg

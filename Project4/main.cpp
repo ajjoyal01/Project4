@@ -1,15 +1,9 @@
 //------------------------------------------------------------------------------------
 // Andrew Joyal and Greg Venezia
-// Project 3
+// Project 4
 // 10/28/14
-// Description: This project creates a 3D scene with three textured cubes. The cubes can be resized, rotated
-//			and translated. 
-//			
-// Special Instructions:
-//
-//		Press 'l' to turn on lighting (ABOVE AND BEYOND!!)
-//		Press 'i' to translate back in the z direction
-//		Press 'o' to translate forwards in the z direction
+// Description: 
+
 //------------------------------------------------------------------------------------
 
 

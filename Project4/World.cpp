@@ -4,6 +4,11 @@ World::World()
 {
 	srand(time(NULL));
 
+	sequenceTest = 0;
+
+	axes = new Axes();
+	drawAxes = false;
+
 	// Lighting parameters
 	_directionalColor = { 0.9, 0.9, 0.9 };
 	_ambientColor = { 0.5, 0.5, 0.5 };
@@ -14,7 +19,7 @@ World::World()
 
 World::~World()
 {
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < NUM_TEXTURES; i++)
 	{
 		delete _textures[i];
 	}
@@ -26,6 +31,7 @@ void World::init()
 	_cam.init();
 	_shader.init();
 	//setupTextures(); 
+
 	
 	// Antialiasing
 	glEnable(GL_LINE_SMOOTH);
@@ -33,7 +39,7 @@ void World::init()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glHint(GL_LINE_SMOOTH_HINT, GL_DONT_CARE);
 
-	glLineWidth(4);
+	glLineWidth(3);
 
 	glEnable(GL_DEPTH_TEST);
 
@@ -59,7 +65,18 @@ void World::keyPress(unsigned char key,int x,int y)
 	case 'n':
 		if (game.getWinner() == 0)
 		{
-			game.playTurn();
+			if (sequenceTest == 0)
+			{
+				cout << "Flip\n";
+				game.playTurn1();
+				sequenceTest = (sequenceTest + 1) % 2;
+			}	
+			else
+			{
+				cout << "Discard\n";
+				game.playTurn2();
+				sequenceTest = (sequenceTest + 1) % 2;
+			}
 		}
 		
 		break;
@@ -71,6 +88,9 @@ void World::keyPress(unsigned char key,int x,int y)
 		break;
 	case 'o':
 		_cam.camOut(CAM_MOVE);
+		break;
+	case 'q':
+		drawAxes = !drawAxes;
 		break;
 	default:
 		break;
@@ -108,35 +128,16 @@ void World::draw()
 	// setup camera uniforms
 	_cam.render(_shader);
 
-	//now draw the scene
-	/*
-	for (int i = 0; i < NUM_OBJECTS;i++)
-	{
-		objects[i]->draw();
-	}*/
+	if (drawAxes)
+		axes->draw(_shader);
 
-	game.draw();
+	game.draw(_shader);
 
+	room.draw(_shader);
 }
 
 void World::initValues()
 {
-	for (int i = 0; i < NUM_OBJECTS; i++)
-	{
-		objects[i] = new Object();
-	}
-	
-	objects[0]->init("sphere.obj");
-	objects[1]->init("torus.obj");
-	objects[2]->init("monkey.obj");
-	objects[3]->init("cube.obj");
-
-	objects[0]->translate(0, 0, .3);
-	objects[1]->translate(1.3, 0, 0);
-	objects[2]->translate(-1.3,0, 0);
-	objects[3]->translate(0, 0, -1.3);
-
-
 	// init light values
 	_light.setColor(_directionalColor);
 	_light.setAmbient(_ambientColor);
@@ -144,22 +145,32 @@ void World::initValues()
 	_light.setShininess(_lightShinniness);
 	_light.setStrength(_lightStrength);
 	_light.toggle();
+
+	//----------------------------------------------------------
+	// Data for Axes
+	//----------------------------------------------------------
+	vec4 axesPosition[NUM_AXES][2] = {
+			{ vec4(-5.0, 0.0, 0.0, 1.0), vec4(5.0, 0.0, 0.0, 1.0) },
+			{ vec4(0.0, -5.0, 0.0, 1.0), vec4(0.0, 5.0, 0.0, 1.0) },
+			{ vec4(0.0, 0.0, -5.0, 1.0), vec4(0.0, 0.0, 5.0, 1.0) }
+	};
+
+	Color axesColor = { .8, .8, .8, 1 };
+	Color roomColor = { 1, .3, 0, 1 };
+
+	axes->init(axesPosition);
+	axes->setColor(axesColor);
+
+	room.init("Models/room1.obj");
+	room.setColor(roomColor);
 }
 
 void World::setupTextures()
 {
 	
 	// Texture Files
-	_textureFilenames[0] = "Images/BrushedMetalTexture.png";
-	_textureFilenames[1] = "Images/DarkWoodTexture.png";
-	_textureFilenames[2] = "Images/DieTexture.png";
-	_textureFilenames[3] = "Images/LightWoodTexture.png";
-	_textureFilenames[4] = "Images/MinecraftTexture.png";
-	_textureFilenames[5] = "Images/RubikTexture.png";
-	_textureFilenames[6] = "Images/StyrofoamTexture.png";
-	_textureFilenames[7] = "Images/Lava.png";
-	_textureFilenames[8] = "Images/Portal.png";
-	_textureFilenames[9] = "Images/Ice.png";
+	_textureFilenames[0] = "Textures/all-cards.png";
+	_textureFilenames[1] = "Textures/table.png";
 
 	for (int i = 0; i < NUM_TEXTURES; i++)
 	{

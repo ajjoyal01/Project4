@@ -10,7 +10,6 @@ Texture::Texture() :
 	glGenTextures(1, &_id);
 }
 
-
 Texture::~Texture()
 {
 	if (_id != 0)
@@ -39,6 +38,7 @@ void Texture::loadFromFile(std::string filename)
 	// decodes the texture
 	unsigned error = lodepng::decode(_image, _width, _height, buffer);
 
+	path = filename;
 }
 
 void Texture::load()

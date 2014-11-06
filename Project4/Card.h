@@ -1,9 +1,11 @@
 #pragma once
 
-#include <iostream>
-#include "Object.h"
+#include "vmath.h"
 
-class Card : public Object
+#include <iostream>
+#include "Model.h"
+
+class Card : public Model
 {
 
 public:
@@ -17,10 +19,18 @@ public:
 	int getValue();
 	void setSuit(string);
 	void parseData();
+	bool isFaceUp();
+	void flip();
+
+	float totalRotate;
 
 private:
 
 	int value;
 	string suit;
+
+	bool faceUp;
+
+	
 };
 

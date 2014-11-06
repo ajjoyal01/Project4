@@ -15,7 +15,7 @@ layout(location = 11)in mat3 NormalMatrix;
 out vec4 vertColor;
 out vec2 vertTexCoord;
 flat out int vertIsTextured;
-flat out int textureID;
+out int textureID;
 
 out vec3 Normal;
 

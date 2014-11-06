@@ -12,12 +12,11 @@ uniform float Shininess;
 uniform float Strength;
 uniform float directionalLightingOn;
 
-flat in int textureID;
+in int textureID;
 in vec4 vertColor;
 in vec3 Normal;
 in vec2 vertTexCoord;
 flat in int vertIsTextured;
-
 
 void main()
 {

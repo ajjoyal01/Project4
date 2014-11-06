@@ -131,7 +131,7 @@ void World::draw()
 	if (drawAxes)
 		axes->draw(_shader);
 
-	_textures[0]->load();
+	
 	game.draw(_shader);
 
 	//room.draw(_shader);
@@ -178,5 +178,6 @@ void World::setupTextures()
 		_textures[i] = new Texture();
 		_textures[i]->loadFromFile(_textureFilenames[i]);
 	}
-	game.master.setTexture(_textures[0]);	
+	game.master.setTexture(_textures[0]);
+	_textures[0]->load();
 }

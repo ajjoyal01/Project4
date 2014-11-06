@@ -66,7 +66,6 @@ void StandardDeck::setTexture(Texture* tex)
 {
 	for (int i = 0; i < cards.size(); i++)
 	{
-		cout << i << endl;
 		cards.at(i)->setTexture(tex);
 	}
 }

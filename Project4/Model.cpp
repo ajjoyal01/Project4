@@ -27,10 +27,10 @@ void Model::draw(Shader shader)
 	{ 
 		glEnableVertexAttribArray(vNormal);
 	}
-	//if (textureIDs.size() > 0)
-	//{
-	//	glEnableVertexAttribArray(vTexture);
-	//}
+	if (textureIDs.size() > 0)
+	{
+		glEnableVertexAttribArray(vTexture);
+	}
 	
 	glVertexAttribI1i(vIsTextured, isTextured);
 	glVertexAttribI1i(vIsTransformed, isTransformed);
@@ -109,7 +109,6 @@ void Model::init(string filename)
 
 	if (texels.size() > 0)
 	{
-		cout << "Texels\n";
 		glEnableVertexAttribArray(vTexel);
 		glBindBuffer(GL_ARRAY_BUFFER, Buffers[TEXEL_BUFFER]);
 		glBufferData(GL_ARRAY_BUFFER, texels.size() * sizeof(vmath::vec2), &texels[0], GL_DYNAMIC_DRAW);
@@ -208,6 +207,14 @@ void Model::loadObject(string filename)
 					float x, y;
 					s >> x;
 					s >> y;
+					if (x > 1)
+						x = 1;
+					if (x < 0)
+						x = 0;
+					if (y > 1)
+						y = 1;
+					if (y < 0)
+						y = 0;
 					v = vmath::vec2(x, y);
 					in_texels.push_back(v);
 					//-----------------------------------
@@ -237,6 +244,17 @@ void Model::loadObject(string filename)
 							istringstream s(line.substr(7));
 							string temp;
 							s >> temp;
+
+							if (temp.find("NONE") == -1)
+							{
+								curTextID = 1;
+							}
+							else
+							{
+								curTextID = 0;
+							}
+
+							/*
 							//cout << temp << endl;
 							bool newMaterial = true;
 
@@ -259,7 +277,7 @@ void Model::loadObject(string filename)
 
 								// current ID is the location of the last element in the array
 								curTextID = in_materials.size();
-							}			
+							}	*/		
 						}
 						else
 						{
@@ -335,6 +353,9 @@ void Model::loadObject(string filename)
 									texels.push_back(in_texels[--at]);
 									texels.push_back(in_texels[--bt]);
 									texels.push_back(in_texels[--ct]);
+									textureIDs.push_back(curTextID);
+									textureIDs.push_back(curTextID);
+									textureIDs.push_back(curTextID);
 								}
 								else if (isNormal && isTexel)
 								{
@@ -393,6 +414,9 @@ void Model::loadObject(string filename)
 									normals.push_back(in_normals[--an]);
 									normals.push_back(in_normals[--bn]);
 									normals.push_back(in_normals[--cn]);
+									textureIDs.push_back(curTextID);
+									textureIDs.push_back(curTextID);
+									textureIDs.push_back(curTextID);
 								}
 
 							}// end "f " if else
@@ -412,12 +436,12 @@ void Model::loadObject(string filename)
 	/*
 	if (filename == "Models/2_clubs.obj")
 	{
-		for (int i = 0; i < in_texels.size(); i++)
+		for (int i = 0; i < textureIDs.size(); i++)
 		{
-			for (int j = 0; j < 2; j++)
-			{
-				cout << in_texels[i][j] << "\t";
-			}
+			//for (int j = 0; j < 2; j++)
+			//{
+				cout << textureIDs[i] << "\t";
+			//}
 			cout << endl;
 
 		}

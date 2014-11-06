@@ -1,58 +1,20 @@
-﻿Build started 11/5/2014 11:07:42 PM.
+﻿Build started 11/5/2014 11:31:52 PM.
      1>Project "D:\Users\Andrew\Documents\GitHub\Project4\Project4\Project4.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Axes.cpp Card.cpp Deck.cpp Game.cpp Model.cpp PlayDeck.cpp Player.cpp Room.cpp StandardDeck.cpp World.cpp main.cpp
-         main.cpp
-     1>d:\users\andrew\documents\github\project4\project4\world.h(74): warning C4091: 'static ' : ignored on left of 'World' when no variable is declared
-         World.cpp
-     1>d:\users\andrew\documents\github\project4\project4\world.h(74): warning C4091: 'static ' : ignored on left of 'World' when no variable is declared
-     1>d:\users\andrew\documents\github\project4\project4\world.cpp(5): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-     1>d:\users\andrew\documents\github\project4\project4\world.cpp(86): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\world.cpp(89): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\world.cpp(106): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\world.cpp(109): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\world.cpp(112): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\world.cpp(115): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\world.cpp(158): warning C4305: 'initializing' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\world.cpp(159): warning C4305: 'initializing' : truncation from 'double' to 'float'
-         StandardDeck.cpp
-     1>d:\users\andrew\documents\github\project4\project4\standarddeck.cpp(67): warning C4018: '<' : signed/unsigned mismatch
-         Room.cpp
-         Player.cpp
-     1>d:\users\andrew\documents\github\project4\project4\player.cpp(30): warning C4018: '<' : signed/unsigned mismatch
-         PlayDeck.cpp
-         Model.cpp
-     1>d:\users\andrew\documents\github\project4\project4\model.cpp(497): warning C4018: '<' : signed/unsigned mismatch
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp
          Game.cpp
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(41): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(42): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(43): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(44): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(46): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(47): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(170): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(171): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(256): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(303): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(320): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(339): warning C4018: '<' : signed/unsigned mismatch
-         Deck.cpp
-     1>d:\users\andrew\documents\github\project4\project4\deck.cpp(59): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\users\andrew\documents\github\project4\project4\deck.cpp(77): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\users\andrew\documents\github\project4\project4\deck.cpp(86): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\users\andrew\documents\github\project4\project4\deck.cpp(91): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\users\andrew\documents\github\project4\project4\deck.cpp(95): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>d:\users\andrew\documents\github\project4\project4\deck.cpp(98): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\users\andrew\documents\github\project4\project4\deck.cpp(105): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\users\andrew\documents\github\project4\project4\deck.cpp(159): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\users\andrew\documents\github\project4\project4\deck.cpp(175): warning C4018: '<' : signed/unsigned mismatch
-         Card.cpp
-         Axes.cpp
-         Generating Code...
-     1>d:\users\andrew\documents\github\project4\project4\model.cpp(493): warning C4756: overflow in constant arithmetic
-     1>d:\users\andrew\documents\github\project4\project4\model.cpp(494): warning C4756: overflow in constant arithmetic
-     1>d:\users\andrew\documents\github\project4\project4\model.cpp(495): warning C4756: overflow in constant arithmetic
-     1>d:\users\andrew\documents\github\project4\project4\model.cpp(493): warning C4756: overflow in constant arithmetic
+     1>d:\users\andrew\documents\github\project4\project4\game.cpp(52): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\andrew\documents\github\project4\project4\game.cpp(53): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\andrew\documents\github\project4\project4\game.cpp(54): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\andrew\documents\github\project4\project4\game.cpp(55): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\andrew\documents\github\project4\project4\game.cpp(57): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\andrew\documents\github\project4\project4\game.cpp(58): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>d:\users\andrew\documents\github\project4\project4\game.cpp(159): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>d:\users\andrew\documents\github\project4\project4\game.cpp(160): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
+     1>d:\users\andrew\documents\github\project4\project4\game.cpp(269): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\users\andrew\documents\github\project4\project4\game.cpp(316): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\users\andrew\documents\github\project4\project4\game.cpp(333): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\users\andrew\documents\github\project4\project4\game.cpp(352): warning C4018: '<' : signed/unsigned mismatch
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Users\Andrew\Documents\GitHub\Project4\Debug\Project4.exe" /INCREMENTAL /NOLOGO freeglut.lib glew32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Users\Andrew\Documents\GitHub\Project4\Debug\Project4.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Users\Andrew\Documents\GitHub\Project4\Debug\Project4.lib" /MACHINE:X86 Debug\Axes.obj
          Debug\Camera.obj
@@ -72,10 +34,9 @@
          Debug\StandardDeck.obj
          Debug\Texture.obj
          Debug\World.obj
-         LINK : D:\Users\Andrew\Documents\GitHub\Project4\Debug\Project4.exe not found or not built by the last incremental link; performing full link
          Project4.vcxproj -> D:\Users\Andrew\Documents\GitHub\Project4\Debug\Project4.exe
      1>Done Building Project "D:\Users\Andrew\Documents\GitHub\Project4\Project4\Project4.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:10.45
+Time Elapsed 00:00:01.37

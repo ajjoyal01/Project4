@@ -33,6 +33,17 @@ void Game::initPlayers()
 	
 	vector<Card*> temp2 = master.getCards();
 	temp2.erase(temp2.begin(), temp2.begin() + 26);
+
+	/*
+	vector<Card*> ordered1;
+	vector<Card*> ordered2;
+	for (int i = 0;i < master.cards.size(); i++)
+	{
+		if (i % 2 == 0)
+			ordered1.push_back(master.cards.at(i));
+		else
+			ordered2.push_back(master.cards.at(i));
+	}*/
 	
 	// give each player half the deck
 	player1.setDeck(temp1);
@@ -145,8 +156,8 @@ void Game::war()
 {
 	cout << "WAR!!!\n";
 
-	tempTarget1[0] += pile.at(0)->getWidth();
-	tempTarget2[0] -= pile.at(0)->getWidth();
+	tempTarget1[0] += pile.at(0)->getWidth() * 1.2;
+	tempTarget2[0] -= pile.at(0)->getWidth() * 1.2;
 
 	int warSize;
 
@@ -167,8 +178,10 @@ void Game::war()
 		{
 			checkReshuffle();
 			burn();
-			tempTarget1[1] += .002;
-			tempTarget2[1] += .002;
+			tempTarget1[1] += master.cards.at(0)->getDepth();
+			tempTarget2[1] += master.cards.at(0)->getDepth();
+			tempTarget1[0] += master.cards.at(0)->getWidth() / 5;
+			tempTarget2[0] -= master.cards.at(0)->getWidth() / 5;
 		}
 	}
 }

@@ -515,9 +515,9 @@ void Model::calculateDimentions()
 	//cout << "Height: " << max_z - min_z << endl;
 	//cout << "Depth: " << max_x - min_x << endl;
 
-	width = max_x - min_x;
+	height = max_x - min_x;
 	depth = max_y - min_y;
-	height = max_z - min_z;
+	width = max_z - min_z;
 
 
 }

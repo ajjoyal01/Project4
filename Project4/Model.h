@@ -42,7 +42,7 @@ public:
 	void activateTextures(Shader);
 	void deactivateTextures();
 
-	void setTexture(Texture*, int);
+	void setTexture(Texture*);
 	void setColor(Color);
 
 	void scale(float);
@@ -62,7 +62,7 @@ private:
 	vector<vmath::vec2> texels;
 	vector<vmath::vec3> normals;
 	vector<int> textureIDs;
-	vector<Texture*> textures;
+	Texture* texture;
 
 	//---------------------------------------------------------
 	// Declare Data (Vertex Arrays and Buffers)

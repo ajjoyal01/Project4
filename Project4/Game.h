@@ -39,10 +39,11 @@ public:
 	void animateBurn();
 	void animateDiscard(int);
 	void animateDeckReset(int);
+
+	StandardDeck master;
 	
 private:
 
-	StandardDeck master;
 	Player player1;
 	Player player2;
 

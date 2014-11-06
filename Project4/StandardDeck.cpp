@@ -62,6 +62,14 @@ void StandardDeck::init()
 	}*/
 }
 
+void StandardDeck::setTexture(Texture* tex)
+{
+	for (int i = 0; i < cards.size(); i++)
+	{
+		cards.at(i)->setTexture(tex);
+	}
+}
+
 StandardDeck::~StandardDeck()
 {
 }

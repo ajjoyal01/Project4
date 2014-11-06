@@ -29,8 +29,7 @@ void World::init()
 {
 	initValues();
 	_cam.init();
-	_shader.init();
-	//setupTextures(); 
+	_shader.init(); 
 
 	
 	// Antialiasing
@@ -44,6 +43,7 @@ void World::init()
 	glEnable(GL_DEPTH_TEST);
 
 	game.init();
+	setupTextures();
 }
 
 void World::display()
@@ -131,9 +131,10 @@ void World::draw()
 	if (drawAxes)
 		axes->draw(_shader);
 
+	
 	game.draw(_shader);
 
-	room.draw(_shader);
+	//room.draw(_shader);
 }
 
 void World::initValues()
@@ -169,12 +170,14 @@ void World::setupTextures()
 {
 	
 	// Texture Files
-	_textureFilenames[0] = "Textures/all-cards.png";
-	_textureFilenames[1] = "Textures/table.png";
+	_textureFilenames[0] = "Textures/all_cards.png";
+	//_textureFilenames[1] = "Textures/table.png";
 
-	for (int i = 0; i < NUM_TEXTURES; i++)
+	for (int i = 0; i < 1; i++)
 	{
 		_textures[i] = new Texture();
 		_textures[i]->loadFromFile(_textureFilenames[i]);
 	}
+	game.master.setTexture(_textures[0]);
+	_textures[0]->load();
 }

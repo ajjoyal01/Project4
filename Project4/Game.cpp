@@ -27,12 +27,14 @@ void Game::initPlayers()
 {
 	master.shuffle();
 
+	// split the deck in half
 	vector<Card*> temp1 = master.getCards();
 	temp1.erase(temp1.begin() + 26, temp1.end());
 	
 	vector<Card*> temp2 = master.getCards();
 	temp2.erase(temp2.begin(), temp2.begin() + 26);
 	
+	// give each player half the deck
 	player1.setDeck(temp1);
 	player2.setDeck(temp2);
 

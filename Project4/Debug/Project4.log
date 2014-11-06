@@ -1,12 +1,7 @@
-﻿Build started 11/4/2014 9:15:46 PM.
+﻿Build started 11/5/2014 4:22:33 PM.
      1>Project "D:\Users\Andrew\Documents\GitHub\Project4\Project4\Project4.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Card.cpp Deck.cpp Game.cpp Model.cpp PlayDeck.cpp Player.cpp Room.cpp StandardDeck.cpp World.cpp main.cpp
-         Card.cpp
-         Generating Code...
-         Compiling...
-         main.cpp
-     1>d:\users\andrew\documents\github\project4\project4\world.h(74): warning C4091: 'static ' : ignored on left of 'World' when no variable is declared
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Model.cpp World.cpp
          World.cpp
      1>d:\users\andrew\documents\github\project4\project4\world.h(74): warning C4091: 'static ' : ignored on left of 'World' when no variable is declared
      1>d:\users\andrew\documents\github\project4\project4\world.cpp(5): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
@@ -16,41 +11,15 @@
      1>d:\users\andrew\documents\github\project4\project4\world.cpp(110): warning C4305: 'argument' : truncation from 'double' to 'float'
      1>d:\users\andrew\documents\github\project4\project4\world.cpp(113): warning C4305: 'argument' : truncation from 'double' to 'float'
      1>d:\users\andrew\documents\github\project4\project4\world.cpp(116): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\world.cpp(158): warning C4305: 'initializing' : truncation from 'double' to 'float'
      1>d:\users\andrew\documents\github\project4\project4\world.cpp(159): warning C4305: 'initializing' : truncation from 'double' to 'float'
-         StandardDeck.cpp
-         Room.cpp
-         Player.cpp
-     1>d:\users\andrew\documents\github\project4\project4\player.cpp(30): warning C4018: '<' : signed/unsigned mismatch
-         PlayDeck.cpp
+     1>d:\users\andrew\documents\github\project4\project4\world.cpp(160): warning C4305: 'initializing' : truncation from 'double' to 'float'
          Model.cpp
-     1>d:\users\andrew\documents\github\project4\project4\model.cpp(247): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\users\andrew\documents\github\project4\project4\model.cpp(473): warning C4018: '<' : signed/unsigned mismatch
-         Game.cpp
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(39): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(40): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(41): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(42): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(44): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(45): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(246): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(298): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(315): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\users\andrew\documents\github\project4\project4\game.cpp(334): warning C4018: '<' : signed/unsigned mismatch
-         Deck.cpp
-     1>d:\users\andrew\documents\github\project4\project4\deck.cpp(59): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\users\andrew\documents\github\project4\project4\deck.cpp(77): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\users\andrew\documents\github\project4\project4\deck.cpp(85): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\users\andrew\documents\github\project4\project4\deck.cpp(90): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\users\andrew\documents\github\project4\project4\deck.cpp(94): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>d:\users\andrew\documents\github\project4\project4\deck.cpp(97): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>d:\users\andrew\documents\github\project4\project4\deck.cpp(104): warning C4018: '<' : signed/unsigned mismatch
-     1>d:\users\andrew\documents\github\project4\project4\deck.cpp(158): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\users\andrew\documents\github\project4\project4\model.cpp(504): warning C4018: '<' : signed/unsigned mismatch
          Generating Code...
-     1>d:\users\andrew\documents\github\project4\project4\model.cpp(469): warning C4756: overflow in constant arithmetic
-     1>d:\users\andrew\documents\github\project4\project4\model.cpp(470): warning C4756: overflow in constant arithmetic
-     1>d:\users\andrew\documents\github\project4\project4\model.cpp(471): warning C4756: overflow in constant arithmetic
-     1>d:\users\andrew\documents\github\project4\project4\model.cpp(469): warning C4756: overflow in constant arithmetic
+     1>d:\users\andrew\documents\github\project4\project4\model.cpp(500): warning C4756: overflow in constant arithmetic
+     1>d:\users\andrew\documents\github\project4\project4\model.cpp(501): warning C4756: overflow in constant arithmetic
+     1>d:\users\andrew\documents\github\project4\project4\model.cpp(502): warning C4756: overflow in constant arithmetic
+     1>d:\users\andrew\documents\github\project4\project4\model.cpp(500): warning C4756: overflow in constant arithmetic
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Users\Andrew\Documents\GitHub\Project4\Debug\Project4.exe" /INCREMENTAL /NOLOGO freeglut.lib glew32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Users\Andrew\Documents\GitHub\Project4\Debug\Project4.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Users\Andrew\Documents\GitHub\Project4\Debug\Project4.lib" /MACHINE:X86 Debug\Axes.obj
          Debug\Camera.obj
@@ -75,4 +44,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:28.85
+Time Elapsed 00:00:03.51

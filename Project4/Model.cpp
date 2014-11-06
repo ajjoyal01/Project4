@@ -15,9 +15,10 @@ void Model::draw(Shader shader)
 {
 	glBindVertexArray(VAOs[0]);
 
-	//activateTextures(shader);
+	activateTextures(shader);
 
 	glEnableVertexAttribArray(vPosition);
+
 	if (texels.size() > 0)
 	{ 
 		glEnableVertexAttribArray(vTexel);
@@ -26,10 +27,10 @@ void Model::draw(Shader shader)
 	{ 
 		glEnableVertexAttribArray(vNormal);
 	}
-	//if (textureIDs.size() > 0)
-	//{
-	//	glEnableVertexAttribArray(vTexture);
-	//}
+	if (textureIDs.size() > 0)
+	{
+		glEnableVertexAttribArray(vTexture);
+	}
 	
 	glVertexAttribI1i(vIsTextured, isTextured);
 	glVertexAttribI1i(vIsTransformed, isTransformed);
@@ -44,7 +45,7 @@ void Model::draw(Shader shader)
 
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
-	//deactivateTextures();
+	deactivateTextures();
 }
 
 
@@ -134,11 +135,6 @@ void Model::init(string filename)
 	updateNormalMat();
 	center = vec4(0.0, 0.0, 0.0, 1.0);
 
-	if (textures.size() > 0)
-	{
-		//isTextured = 1;
-	}
-
 	isTransformed = 1;
 	calculateDimentions();
 }
@@ -211,6 +207,14 @@ void Model::loadObject(string filename)
 					float x, y;
 					s >> x;
 					s >> y;
+					if (x > 1)
+						x = 1;
+					if (x < 0)
+						x = 0;
+					if (y > 1)
+						y = 1;
+					if (y < 0)
+						y = 0;
 					v = vmath::vec2(x, y);
 					in_texels.push_back(v);
 					//-----------------------------------
@@ -240,6 +244,17 @@ void Model::loadObject(string filename)
 							istringstream s(line.substr(7));
 							string temp;
 							s >> temp;
+
+							if (temp.find("NONE") == -1)
+							{
+								curTextID = 1;
+							}
+							else
+							{
+								curTextID = 0;
+							}
+
+							/*
 							//cout << temp << endl;
 							bool newMaterial = true;
 
@@ -262,7 +277,7 @@ void Model::loadObject(string filename)
 
 								// current ID is the location of the last element in the array
 								curTextID = in_materials.size();
-							}			
+							}	*/		
 						}
 						else
 						{
@@ -418,6 +433,22 @@ void Model::loadObject(string filename)
 
 	}// end parse while loop for .obj files
 
+	/*
+	if (filename == "Models/2_clubs.obj")
+	{
+		for (int i = 0; i < textureIDs.size(); i++)
+		{
+			//for (int j = 0; j < 2; j++)
+			//{
+				cout << textureIDs[i] << "\t";
+			//}
+			cout << endl;
+
+		}
+
+		cout << endl << endl << endl;
+	}*/
+
 	in.close();
 
 	/*
@@ -515,34 +546,30 @@ float Model::getDepth()
 
 
 // Texture Stuff
-void Model::setTexture(Texture* texture, int index)
+void Model::setTexture(Texture* inTexture)
 {
-	textures.at(index) = texture;
+	texture = inTexture;
+
+	if (texture != nullptr)
+	{
+		isTextured = 1;
+	}
+	else
+	{
+		isTextured = 0;
+	}
 }
 
 void Model::activateTextures(Shader shader)
 {
-
-	//if (textures.at(0) != nullptr)
-	//textures.at(0)->activate(shader.getUniformLocation("tex0"));
-
-	//if (textures.at(1) != nullptr)
-	//textures.at(1)->activate(shader.getUniformLocation("tex1"));
-
-	if (textures.at(2) != nullptr)
-		textures.at(2)->activate(shader.getUniformLocation("tex2"));
+	if (texture != nullptr)
+		texture->activate(shader.getUniformLocation("tex"));
 }
 
 void Model::deactivateTextures()
 {
-	if (textures.at(0) != nullptr)
-		textures.at(0)->deactivate();
-
-	if (textures.at(1) != nullptr)
-		textures.at(1)->deactivate();
-
-	if (textures.at(2) != nullptr)
-		textures.at(2)->deactivate();
+	if (texture != nullptr)
+		texture->deactivate();
 }
 
 void Model::updateTransform(vmath::mat4 inTransform)

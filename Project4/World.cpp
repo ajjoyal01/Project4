@@ -11,9 +11,9 @@ World::World()
 
 	// Lighting parameters
 	_directionalColor = { 0.9, 0.9, 0.9 };
-	_ambientColor = { 0.7, 0.7, 0.2 };
+	_ambientColor = { 0.7, 0.7, 0.4 };
 	_lightStrength = 5.0;
-	_lightShinniness = 4.0;
+	_lightShinniness = 2.0;
 	_lightDirection = vmath::vec3(.5, .5, 1.0);
 
 }
@@ -30,7 +30,8 @@ void World::init()
 {
 	initValues();
 	_cam.init();
-	_shader.init(); 
+	_shader.init("Project4.vert","Project4.frag");
+	//_roomShader.init("RoomVert.vert", "RoomFrag.frag");
 
 	
 	// Antialiasing
@@ -116,6 +117,8 @@ void World::arrowInput(int key, int x, int y)
 
 void World::draw()
 {
+	//_shader.use();
+
 	// setup lighting uniforms
 	_light.render(_shader);
 
@@ -129,6 +132,13 @@ void World::draw()
 
 	table.draw(_shader);
 
+	//_roomShader.use();
+
+	// setup lighting uniforms
+	//_light.render(_roomShader);
+
+	// setup camera uniforms
+	//_cam.render(_roomShader);
 	room.draw(_shader);
 }
 

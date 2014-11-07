@@ -111,6 +111,8 @@
   <ItemGroup>
     <None Include="project4.frag" />
     <None Include="project4.vert" />
+    <None Include="RoomFrag.frag" />
+    <None Include="RoomVert.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -45,6 +45,7 @@ public:
 private:
 	
 	Shader _shader;
+	Shader _roomShader;
 	DirectionalLight _light;
 
 	std::string _textureFilenames[NUM_TEXTURES];

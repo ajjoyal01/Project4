@@ -136,5 +136,11 @@
     <None Include="project4.vert">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="RoomFrag.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RoomVert.vert">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -68,34 +68,41 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Axes.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="Deck.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="PlayDeck.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="LoadShaders.cpp" />
     <ClCompile Include="lodepng.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Room.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="StandardDeck.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Axes.h" />
+    <ClInclude Include="C:\Dev\OpenGL\include\vmath.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Deck.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="PlayDeck.h" />
     <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="lodepng.h" />
-    <ClInclude Include="Object.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="ObjLoader.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Room.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="StandardDeck.h" />
     <ClInclude Include="Texture.h" />

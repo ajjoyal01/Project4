@@ -29,4 +29,6 @@ private:
 	unsigned int _height;
 
 	std::vector<unsigned char> _image;
+
+	std::string path;
 };

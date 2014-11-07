@@ -19,6 +19,7 @@ public:
 	StandardDeck();
 	~StandardDeck();
 	void init();
+	void setTexture(Texture*);
 
 	Card* getCard(int);
 

@@ -7,6 +7,9 @@
 #include <vector>
 
 #include "PlayDeck.h"
+#include "vmath.h"
+
+using vmath::mat4;
 
 class Player
 {
@@ -20,21 +23,33 @@ public:
 	void printDeck();
 	void recycleDiscard();
 	int getDeckSize();
-	void draw();
+	void draw(Shader);
 	void placeDeck();
+	void placeDiscard();
 
-	void setDeckLocation(vec3);
-	void setDiscardLocation(vec3);
-	vec3 getDeckLocation();
-	vec3 getDiscardLocation();
+	void setDeckLocation();
+	void setDiscardLocation();
+
+	void scale(float);
+	void translate(float, float, float);
+	void rotate(float, vmath::vec3);
+	void updateCenter();
+
+	void transformDecks(vmath::mat4);
 
 	PlayDeck deck;
 	PlayDeck discard;
 
+	vec4 center;
+	vec4 deckLocation;
+	vec4 discardLocation;
+
 private:
 
-	vec3 deckLocation;
-	vec3 discardLocation;
+	
+
+	
+	mat4 transform;
 	
 };
 

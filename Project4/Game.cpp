@@ -12,8 +12,15 @@ Game::~Game()
 void Game::init()
 {
 	master.init();
-	master.cards.at(0)->calculateDimentions();
+	
 	initPlayers();
+
+	origTarget1 = vmath::vec3(.5, 0, .5);
+	origTarget2 = vmath::vec3(-.5, 0, -.5);
+
+	tempTarget1 = origTarget1;
+	tempTarget2 = origTarget2;
+	
 }
 
 void Game::initPlayers()
@@ -26,29 +33,51 @@ void Game::initPlayers()
 	
 	vector<Card*> temp2 = master.getCards();
 	temp2.erase(temp2.begin(), temp2.begin() + 26);
+
+	/*
+	vector<Card*> ordered1;
+	vector<Card*> ordered2;
+	for (int i = 0;i < master.cards.size(); i++)
+	{
+		if (i % 2 == 0)
+			ordered1.push_back(master.cards.at(i));
+		else
+			ordered2.push_back(master.cards.at(i));
+	}*/
 	
 	// give each player half the deck
 	player1.setDeck(temp1);
 	player2.setDeck(temp2);
 
-	master.print();
+	player1.deck.translate(1.4, 0, 0);
+	player2.deck.translate(1.4, 0, 0);
+	player1.discard.translate(-1.4, 0, 0);
+	player2.discard.translate(-1.4, 0, 0);
 
-	//player1.printDeck();
+	player1.translate(0, 0, 1.4);
+	player2.translate(0, 0, -1.4);
+	
+	player2.rotate((float)180, vmath::vec3(0, 1, 0));
+	player1.deck.rotate(90, vmath::vec3(0, 1, 0));
+	player2.deck.rotate(90, vmath::vec3(0, 1, 0));
 
-	cout << endl;
-
-	//player2.printDeck();
-
-	player1.setDeckLocation(vec3(-.5, 0, .5));
-	player2.setDeckLocation(vec3(.5, 0,-.5));
-
+	// once player sides are setup, lock in deck location value as the current center
+	player1.setDeckLocation();
+	player2.setDeckLocation();
+	player1.setDiscardLocation();
+	player2.setDiscardLocation();
+	
+	// place the decks at the designated start positions
 	player1.placeDeck();
 	player2.placeDeck();
+
+	player1.deck.flip();
+	player2.deck.flip();
 }
 
-void Game::playTurn()
+void Game::playTurn1()
 {
-	int handWinner = 0;
+	handWinner = 0;
 
 	cout << "Hand:\n";
 	do
@@ -66,7 +95,14 @@ void Game::playTurn()
 
 	} while (handWinner == 0 && winner == 0);
 
+}
+	
+void Game::playTurn2()
+{
 	takePile(handWinner);
+
+	tempTarget1 = origTarget1;
+	tempTarget2 = origTarget2;
 
 	checkReshuffle();
 
@@ -78,7 +114,7 @@ void Game::playTurn()
 	{
 		cout << "Player 1 Wins!!\n";
 	}
-	else if(winner == 2)
+	else if (winner == 2)
 	{
 		cout << "Player 2 Wins!!\n";
 	}
@@ -96,7 +132,8 @@ void Game::flipCards()
 	pile.back()->print();
 	player2.deck.cards.pop_back();
 
-	cout << endl;
+	// *****animate card flips*****
+	animateCardFlip();
 }
 
 int Game::getHandWinner()
@@ -118,6 +155,10 @@ int Game::getHandWinner()
 void Game::war()
 {
 	cout << "WAR!!!\n";
+
+	tempTarget1[0] += pile.at(0)->getWidth() * 1.2;
+	tempTarget2[0] -= pile.at(0)->getWidth() * 1.2;
+
 	int warSize;
 
 	checkWinner();
@@ -126,18 +167,21 @@ void Game::war()
 	{
 		if (player1.deck.cards.size() + player1.discard.cards.size() > player2.deck.cards.size() + player2.discard.cards.size())
 		{
-			warSize = player1.deck.cards.size() + player1.discard.cards.size() - 1;
+			warSize = player2.deck.cards.size() + player2.discard.cards.size() - 1;
 		}
 		else
 		{
-			warSize = player2.deck.cards.size() + player2.discard.cards.size() - 1;
+			warSize = player1.deck.cards.size() + player1.discard.cards.size() - 1;
 		}
 	
 		for (int i = 0; i < 3 && i < warSize; i++)
 		{
 			checkReshuffle();
 			burn();
-			
+			tempTarget1[1] += master.cards.at(0)->getDepth();
+			tempTarget2[1] += master.cards.at(0)->getDepth();
+			tempTarget1[0] += master.cards.at(0)->getWidth() / 5;
+			tempTarget2[0] -= master.cards.at(0)->getWidth() / 5;
 		}
 	}
 }
@@ -152,6 +196,9 @@ void Game::burn()
 	// push player 2's card onto the pile
 	pile.push_back(player2.deck.cards.back());
 	player2.deck.cards.pop_back();
+
+	// *****animate card burns*****
+	animateBurn();
 }
 
 void Game::takePile(int player)
@@ -159,10 +206,16 @@ void Game::takePile(int player)
 	if (player == 1)
 	{
 		player1.discard.cards.insert(player1.discard.cards.end(), pile.begin(), pile.end());
+
+		// *****animate discard pile move*****
+		animateDiscard(1);
 	}
 	else
 	{
 		player2.discard.cards.insert(player2.discard.cards.end(), pile.begin(), pile.end());
+
+		// *****animate discard pile move*****
+		animateDiscard(2);
 	}
 
 	pile.clear();
@@ -194,11 +247,11 @@ void Game::checkWinner()
 {
 	if (player1.deck.cards.size() + player1.discard.cards.size() == 0)
 	{
-		winner = 1;
+		winner = 2;
 	}
 	else if (player2.deck.cards.size() + player2.discard.cards.size() == 0)
 	{
-		winner = 2;
+		winner = 1;
 	}
 }
 
@@ -207,16 +260,97 @@ int Game::getWinner()
 	return winner;
 }
 
-void Game::draw()
+void Game::draw(Shader shader)
 {
-	/*
-	player1.draw();
-	player2.draw();
+	
+	player1.draw(shader);
+	player2.draw(shader);
 
 	for (int i = 0; i < pile.size(); i++)
 	{
-		pile.at(i)->draw();
-	}*/
+		pile.at(i)->draw(shader);
+	}
+	
+	//master.cards.at(0)->draw(shader);
+}
 
-	master.cards.at(0)->draw();
+//****** ANIMATE MOVEMENTS*****
+
+void Game::animateCardFlip()
+{
+	// translate
+	pile.at(pile.size() - 2)->translate(tempTarget1[0] - pile.at(pile.size() - 2)->center.x,
+		tempTarget1[1] - pile.at(pile.size() - 2)->center.y,
+		tempTarget1[2] - pile.at(pile.size() - 2)->center.z);
+
+	pile.at(pile.size() - 1)->translate(tempTarget2[0] - pile.at(pile.size() - 1)->center.x,
+		tempTarget2[1] - pile.at(pile.size() - 1)->center.y,
+		tempTarget2[2] - pile.at(pile.size() - 1)->center.z);
+
+	// flip
+	pile.at(pile.size() - 2)->rotate(180, vmath::vec3(0, 0, 1));
+	pile.at(pile.size() - 1)->rotate(180, vmath::vec3(0, 0, 1));
+
+	pile.at(pile.size() - 2)->flip();
+	pile.at(pile.size() - 1)->flip();
+
+	
+}
+
+void Game::animateBurn()
+{
+	// just translate, no flip
+	pile.at(pile.size() - 2)->translate(tempTarget1[0] - pile.at(pile.size() - 2)->center.x,
+		tempTarget1[1] - pile.at(pile.size() - 2)->center.y,
+		tempTarget1[2] - pile.at(pile.size() - 2)->center.z);
+
+	pile.at(pile.size() - 1)->translate(tempTarget2[0] - pile.at(pile.size() - 1)->center.x,
+		tempTarget2[1] - pile.at(pile.size() - 1)->center.y,
+		tempTarget2[2] - pile.at(pile.size() - 1)->center.z);
+}
+
+void Game::animateDiscard(int player)
+{
+	if (player == 1)
+	{
+		for (int i = 0; i < pile.size(); i++)
+		{
+			if (!pile.at(i)->isFaceUp())
+			{
+				pile.at(i)->rotate(180, vmath::vec3(0, 0, 1));
+				pile.at(i)->flip();
+			}
+
+			pile.at(i)->translate(player1.discardLocation.x - pile.at(i)->center.x,
+				player1.discardLocation.y - pile.at(i)->center.y,
+				player1.discardLocation.z - pile.at(i)->center.z);
+		}
+
+		player1.discard.stack();
+	}
+	else
+	{
+		for (int i = 0; i < pile.size(); i++)
+		{
+			if (!pile.at(i)->isFaceUp())
+			{
+				pile.at(i)->rotate(180, vmath::vec3(0, 0, 1));
+				pile.at(i)->flip();
+			}
+
+			pile.at(i)->translate(player2.discardLocation.x - pile.at(i)->center.x,
+				player2.discardLocation.y - pile.at(i)->center.y,
+				player2.discardLocation.z - pile.at(i)->center.z);
+		}
+
+		player2.discard.stack();
+	}
+}
+
+void Game::animateDeckReset(int player)
+{
+	for (int i = 0; i < player1.discard.cards.size(); i++)
+	{
+
+	}
 }

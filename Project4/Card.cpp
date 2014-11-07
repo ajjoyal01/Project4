@@ -3,6 +3,8 @@
 
 Card::Card()
 {
+	faceUp = false;
+	totalRotate = 0;
 }
 
 Card::~Card()
@@ -68,4 +70,14 @@ void Card::parseData()
 		suit = "clubs";
 	else if (name.find("spades") != -1)
 		suit = "spades";
+}
+
+bool Card::isFaceUp()
+{
+	return faceUp;
+}
+
+void Card::flip()
+{
+	faceUp = !faceUp;
 }

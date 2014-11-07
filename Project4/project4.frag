@@ -3,6 +3,7 @@
 out vec4 fragColor;
 
 uniform sampler2D tex;
+
 uniform vec3 Ambient;
 uniform vec3 LightColor;
 uniform vec3 LightDirection;
@@ -11,11 +12,11 @@ uniform float Shininess;
 uniform float Strength;
 uniform float directionalLightingOn;
 
+in int textureID;
 in vec4 vertColor;
 in vec3 Normal;
 in vec2 vertTexCoord;
 flat in int vertIsTextured;
-
 
 void main()
 {
@@ -49,7 +50,10 @@ void main()
 		}
 	} else 
 		if(vertIsTextured == 1)
+		{
 			fragColor = texture(tex, vertTexCoord);
+				
+		}
 		else 
 			fragColor = vertColor;
 

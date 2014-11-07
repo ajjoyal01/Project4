@@ -13,12 +13,13 @@
 #include "Object.h"
 #include "Texture.h"
 #include "Shader.h"
-
+#include "Axes.h"
 #include "DirectionalLight.h"
 #include "Camera.h"
 #include "Game.h"
+#include "Room.h"
 
-#define NUM_TEXTURES 10
+#define NUM_TEXTURES 2 // cards and table
 #define CAM_MOVE .1
 #define NUM_OBJECTS 4
 
@@ -49,6 +50,10 @@ private:
 	Texture * _textures[NUM_TEXTURES];
 
 	Camera _cam;
+
+	bool drawAxes;
+	Axes* axes;
+	
 	GLuint _program;
 
 	//--------------------------------
@@ -61,9 +66,11 @@ private:
 	Color _directionalColor;
 	Color _ambientColor;
 	//--------------------------------
-
-	Object* objects[NUM_OBJECTS];
-
+	
 	Game game;
+	Room room;
+	Model table;
+
+	int sequenceTest;
 };
 

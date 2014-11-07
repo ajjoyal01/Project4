@@ -35,6 +35,7 @@ void Player::recycleDiscard()
 			deck.cards.at(i)->flip();
 		}
 	}
+
 	placeDeck();
 }
 

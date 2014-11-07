@@ -40,6 +40,7 @@ public:
 	void initValues();						// initializes values
 	void setupTextures();
 	
+	void idleFunc();
 
 private:
 	
@@ -71,5 +72,8 @@ private:
 	Room room;
 
 	int sequenceTest;
+
+	bool PLAY_TURN;
+
 };
 

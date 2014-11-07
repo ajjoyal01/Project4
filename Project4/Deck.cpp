@@ -82,7 +82,7 @@ void Deck::draw(Shader shader)
 
 void Deck::stack()
 {
-	// translate all cards to eck target location
+	// translate all cards to deck target location
 	for (int i = 0; i < cards.size(); i++)
 	{
 		cards.at(i)->translate(center.x - cards.at(i)->center.x, center.y - cards.at(i)->center.y, center.z - cards.at(i)->center.z);
@@ -172,8 +172,5 @@ void Deck::updateTransform(vmath::mat4 inTransform)
 
 void Deck::flip()
 {
-	for (int i = 0; i < cards.size(); i++)
-	{
-		cards.at(i)->rotate(180, vmath::vec3(0, 0, 1));
-	}
+	rotate(180, vmath::vec3(0, 0, 1));
 }

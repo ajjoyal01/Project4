@@ -15,6 +15,7 @@ World::World()
 	_lightStrength = 2.0;
 	_lightShinniness = 3.0;
 	_lightDirection = vmath::vec3(.5, .5, 1.0);
+
 }
 
 World::~World()
@@ -64,17 +65,21 @@ void World::keyPress(unsigned char key,int x,int y)
 	case 'n':
 		if (game.getWinner() == 0)
 		{
-			if (sequenceTest == 0)
+			if (game.isAnimationComplete())
 			{
-				cout << "Flip\n";
-				game.playTurn1();
-				sequenceTest = (sequenceTest + 1) % 2;
-			}	
-			else
-			{
-				cout << "Discard\n";
-				game.playTurn2();
-				sequenceTest = (sequenceTest + 1) % 2;
+				//if (sequenceTest == 0)
+				//{
+				//	cout << "Flip\n";
+					game.setAnimationComplete(false);
+					game.playTurn1();
+				//	sequenceTest = (sequenceTest + 1) % 2;
+				//}	
+				//else
+				//{
+				//	cout << "Discard\n";
+				//	game.playTurn2();
+				//	sequenceTest = (sequenceTest + 1) % 2;
+				//}
 			}
 		}
 		
@@ -133,7 +138,7 @@ void World::draw()
 	
 	game.draw(_shader);
 
-	//room.draw(_shader);
+	room.draw(_shader);
 }
 
 void World::initValues()
@@ -179,4 +184,9 @@ void World::setupTextures()
 	}
 	game.master.setTexture(_textures[0]);
 	_textures[0]->load();
+}
+
+void World::idleFunc()
+{
+	game.animateTurn();
 }

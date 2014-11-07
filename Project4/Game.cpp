@@ -287,9 +287,20 @@ void Game::animateCardFlip()
 		tempTarget2[1] - pile.at(pile.size() - 1)->center.y,
 		tempTarget2[2] - pile.at(pile.size() - 1)->center.z);
 
-	// flip
-	pile.at(pile.size() - 2)->rotate(180, vmath::vec3(0, 0, 1));
-	pile.at(pile.size() - 1)->rotate(180, vmath::vec3(0, 0, 1));
+	pile.at(pile.size() - 2)->rotate((flip_factor)* 180, vmath::vec3(0, 0, 1));
+	pile.at(pile.size() - 1)->rotate((flip_factor)* 180, vmath::vec3(0, 0, 1));
+	//-----------------------------------------------
+
+	//-----------------------------------------------
+	// ** Last Step of Animation (Animation Complete) **
+	//-----------------------------------------------
+	if (animate_amount >= 100)
+	{
+		//animate_flip = false;
+		animate_amount = 0;
+		pile.at(pile.size() - 2)->flip();
+		pile.at(pile.size() - 1)->flip();
+	}
 
 	pile.at(pile.size() - 2)->flip();
 	pile.at(pile.size() - 1)->flip();
@@ -299,14 +310,63 @@ void Game::animateCardFlip()
 
 void Game::animateBurn()
 {
-	// just translate, no flip
-	pile.at(pile.size() - 2)->translate(tempTarget1[0] - pile.at(pile.size() - 2)->center.x,
-		tempTarget1[1] - pile.at(pile.size() - 2)->center.y,
-		tempTarget1[2] - pile.at(pile.size() - 2)->center.z);
+	if (!animate_flip)
+	{
+		// translate
 
-	pile.at(pile.size() - 1)->translate(tempTarget2[0] - pile.at(pile.size() - 1)->center.x,
-		tempTarget2[1] - pile.at(pile.size() - 1)->center.y,
-		tempTarget2[2] - pile.at(pile.size() - 1)->center.z);
+		// if beginning of action
+		if (animate_amount == 0)
+		{
+			// push player 1's card onto the pile
+			pile.push_back(player1.deck.cards.back());
+			player1.deck.cards.pop_back();
+
+			// push player 2's card onto the pile
+			pile.push_back(player2.deck.cards.back());
+			player2.deck.cards.pop_back();
+
+			//tempTarget1[1] += master.cards.at(0)->getDepth();
+			//tempTarget2[1] += master.cards.at(0)->getDepth();
+			//tempTarget1[0] += master.cards.at(0)->getWidth() / 5;
+			//tempTarget2[0] -= master.cards.at(0)->getWidth() / 5;
+
+			dist_x_1 = (flip_factor)* (tempTarget1[0] - pile.at(pile.size() - 2)->center.x);
+			dist_y_1 = (flip_factor)* (tempTarget1[1] - pile.at(pile.size() - 2)->center.y);
+			dist_z_1 = (flip_factor)* (tempTarget1[2] - pile.at(pile.size() - 2)->center.z);
+			dist_x_2 = (flip_factor)* (tempTarget2[0] - pile.at(pile.size() - 1)->center.x);
+			dist_y_2 = (flip_factor)* (tempTarget2[1] - pile.at(pile.size() - 1)->center.y);
+			dist_z_2 = (flip_factor)* (tempTarget2[2] - pile.at(pile.size() - 1)->center.z);
+
+		}
+
+		if (animate_amount < 50)
+		{
+			pile.at(pile.size() - 2)->translate(dist_x_1, dist_y_1 + .01, dist_z_1);
+			pile.at(pile.size() - 1)->translate(dist_x_2, dist_y_2 + .01, dist_z_2);
+		}
+		else
+		{
+			pile.at(pile.size() - 2)->translate(dist_x_1, dist_y_1 - .01, dist_z_1);
+			pile.at(pile.size() - 1)->translate(dist_x_2, dist_y_2 - .01, dist_z_2);
+		}
+
+		animate_amount++;
+
+		if (animate_amount >= 100)
+		{
+			animate_burn = false;
+			animate_amount = 0;
+
+			tempTarget1[1] += master.cards.at(0)->getDepth();
+			tempTarget2[1] += master.cards.at(0)->getDepth();
+			tempTarget1[0] += master.cards.at(0)->getWidth() / 5;
+			tempTarget2[0] -= master.cards.at(0)->getWidth() / 5;
+
+			actionQueue.pop();
+		}
+
+		glutPostRedisplay();
+	}
 }
 
 void Game::animateDiscard(int player)
@@ -321,9 +381,29 @@ void Game::animateDiscard(int player)
 				pile.at(i)->flip();
 			}
 
-			pile.at(i)->translate(player1.discardLocation.x - pile.at(i)->center.x,
-				player1.discardLocation.y - pile.at(i)->center.y,
-				player1.discardLocation.z - pile.at(i)->center.z);
+			if (!pile.at(pile.size() - 1)->isFaceUp())
+			{
+				pile.at(pile.size() - 1)->rotate(flip_factor * 180, vmath::vec3(0, 0, 1));
+			}
+
+			pile.at(pile.size() - 1)->translate(dist_x_1, dist_y_1, dist_z_1);
+
+			animate_amount++;
+
+			if (animate_amount >= 100)
+			{
+				animate_amount = 0;
+
+				if (!pile.at(pile.size() - 1)->isFaceUp())
+				{
+					pile.at(pile.size() - 1)->flip();
+				}
+
+				discardTarget1[1] += pile.at(pile.size() - 1)->getDepth();
+				pile.pop_back();
+			}
+
+			glutPostRedisplay();
 		}
 
 		player1.discard.stack();
@@ -343,7 +423,30 @@ void Game::animateDiscard(int player)
 				player2.discardLocation.z - pile.at(i)->center.z);
 		}
 
-		player2.discard.stack();
+	// on completion of animation
+	if (pile.size() == 0)
+	{
+		//animate_discard = false;
+		animate_complete = true;
+		actionQueue.pop();
+
+		tempTarget1 = origTarget1;
+		tempTarget2 = origTarget2;
+
+		checkReshuffle();
+
+		outputStats();
+
+		checkWinner();
+
+		if (winner == 1)
+		{
+			cout << "Player 1 Wins!!\n";
+		}
+		else if (winner == 2)
+		{
+			cout << "Player 2 Wins!!\n";
+		}
 	}
 }
 

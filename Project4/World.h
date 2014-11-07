@@ -70,6 +70,7 @@ private:
 	
 	Game game;
 	Room room;
+	Model table;
 
 	int sequenceTest;
 

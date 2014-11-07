@@ -67,19 +67,9 @@ void World::keyPress(unsigned char key,int x,int y)
 		{
 			if (game.isAnimationComplete())
 			{
-				//if (sequenceTest == 0)
-				//{
-				//	cout << "Flip\n";
-					game.setAnimationComplete(false);
-					game.playTurn1();
-				//	sequenceTest = (sequenceTest + 1) % 2;
-				//}	
-				//else
-				//{
-				//	cout << "Discard\n";
-				//	game.playTurn2();
-				//	sequenceTest = (sequenceTest + 1) % 2;
-				//}
+				game.setAnimationComplete(false);
+				game.playTurn1();
+				
 			}
 		}
 		
@@ -135,8 +125,11 @@ void World::draw()
 	if (drawAxes)
 		axes->draw(_shader);
 
-	
+	_textures[0]->load();
 	game.draw(_shader);
+
+	_textures[1]->load();
+	table.draw(_shader);
 
 	room.draw(_shader);
 }
@@ -168,6 +161,8 @@ void World::initValues()
 
 	room.init("Models/room1.obj");
 	room.setColor(roomColor);
+
+	table.init("Models/table.obj");
 }
 
 void World::setupTextures()
@@ -175,15 +170,18 @@ void World::setupTextures()
 	
 	// Texture Files
 	_textureFilenames[0] = "Textures/all_cards.png";
-	//_textureFilenames[1] = "Textures/table.png";
+	_textureFilenames[1] = "Textures/table.png";
 
 	for (int i = 0; i < 1; i++)
 	{
 		_textures[i] = new Texture();
 		_textures[i]->loadFromFile(_textureFilenames[i]);
 	}
+
 	game.master.setTexture(_textures[0]);
-	_textures[0]->load();
+
+	
+	
 }
 
 void World::idleFunc()

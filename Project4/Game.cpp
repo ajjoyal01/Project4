@@ -276,7 +276,7 @@ void Game::animateCardFlip()
 	//-----------------------------------------------
 	if (animate_amount >= 100)
 	{
-		animate_flip = false;
+		//animate_flip = false;
 		animate_amount = 0;
 		pile.at(pile.size() - 2)->flip();
 		pile.at(pile.size() - 1)->flip();
@@ -318,10 +318,10 @@ void Game::animateBurn()
 			pile.push_back(player2.deck.cards.back());
 			player2.deck.cards.pop_back();
 
-			tempTarget1[1] += master.cards.at(0)->getDepth();
-			tempTarget2[1] += master.cards.at(0)->getDepth();
-			tempTarget1[0] += master.cards.at(0)->getWidth() / 5;
-			tempTarget2[0] -= master.cards.at(0)->getWidth() / 5;
+			//tempTarget1[1] += master.cards.at(0)->getDepth();
+			//tempTarget2[1] += master.cards.at(0)->getDepth();
+			//tempTarget1[0] += master.cards.at(0)->getWidth() / 5;
+			//tempTarget2[0] -= master.cards.at(0)->getWidth() / 5;
 
 			dist_x_1 = (flip_factor)* (tempTarget1[0] - pile.at(pile.size() - 2)->center.x);
 			dist_y_1 = (flip_factor)* (tempTarget1[1] - pile.at(pile.size() - 2)->center.y);
@@ -397,8 +397,6 @@ void Game::animateDiscard()
 
 				discardTarget1[1] += pile.at(pile.size() - 1)->getDepth();
 				pile.pop_back();
-
-
 			}
 
 			glutPostRedisplay();
@@ -446,7 +444,7 @@ void Game::animateDiscard()
 	// on completion of animation
 	if (pile.size() == 0)
 	{
-		animate_discard = false;
+		//animate_discard = false;
 		animate_complete = true;
 		actionQueue.pop();
 

@@ -85,7 +85,7 @@ void Deck::stack()
 	// translate all cards to deck target location
 	for (int i = 0; i < cards.size(); i++)
 	{
-		cards.at(i)->translate(center.x - cards.at(i)->center.x, center.y - cards.at(i)->center.y, center.z - cards.at(i)->center.z);
+		cards.at(i)->translate(center.x - cards.at(i)->center.x, 0 - cards.at(i)->center.y, center.z - cards.at(i)->center.z);
 	}
 
 	for (int i = 0; i < cards.size(); i++)

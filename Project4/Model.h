@@ -53,6 +53,8 @@ public:
 	void updateTransform(vmath::mat4);
 	void updateNormalMat();
 
+	float getMaxY();
+
 	vec4 center;
 	mat4 transform;
 
@@ -92,6 +94,13 @@ private:
 	float depth;
 
 	glm::mat3 nTransform;
+
+	float max_x;
+	float max_y;
+	float max_z;
+	float min_x;
+	float min_y;
+	float min_z;
 
 protected:
 

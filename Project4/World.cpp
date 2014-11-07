@@ -11,9 +11,9 @@ World::World()
 
 	// Lighting parameters
 	_directionalColor = { 0.9, 0.9, 0.9 };
-	_ambientColor = { 0.5, 0.5, 0.5 };
-	_lightStrength = 2.0;
-	_lightShinniness = 3.0;
+	_ambientColor = { 0.7, 0.7, 0.2 };
+	_lightStrength = 5.0;
+	_lightShinniness = 4.0;
 	_lightDirection = vmath::vec3(.5, .5, 1.0);
 
 }
@@ -125,10 +125,8 @@ void World::draw()
 	if (drawAxes)
 		axes->draw(_shader);
 
-	_textures[0]->load();
 	game.draw(_shader);
 
-	_textures[1]->load();
 	table.draw(_shader);
 
 	room.draw(_shader);
@@ -163,6 +161,7 @@ void World::initValues()
 	room.setColor(roomColor);
 
 	table.init("Models/table.obj");
+	table.translate(0, 0 - table.getMaxY(), 0);
 }
 
 void World::setupTextures()
@@ -172,16 +171,16 @@ void World::setupTextures()
 	_textureFilenames[0] = "Textures/all_cards.png";
 	_textureFilenames[1] = "Textures/table.png";
 
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		_textures[i] = new Texture();
 		_textures[i]->loadFromFile(_textureFilenames[i]);
 	}
 
 	game.master.setTexture(_textures[0]);
-
-	
-	
+	table.setTexture(_textures[1]);
+	_textures[0]->load();
+	_textures[1]->load();
 }
 
 void World::idleFunc()

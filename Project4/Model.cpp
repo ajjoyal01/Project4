@@ -487,12 +487,12 @@ void Model::loadObject(string filename)
 
 void Model::calculateDimentions()
 {
-	float max_x = 0;
-	float max_y = 0;
-	float max_z = 0;
-	float min_x = INFINITY;
-	float min_y = INFINITY;
-	float min_z = INFINITY;
+	max_x = 0;
+	max_y = 0;
+	max_z = 0;
+	min_x = INFINITY;
+	min_y = INFINITY;
+	min_z = INFINITY;
 
 	for (int i = 0; i < vertices.size() - 1; i++)
 	{
@@ -588,4 +588,9 @@ void Model::updateNormalMat()
 	}
 
 	nTransform = glm::transpose(glm::inverse(nTransform));
+}
+
+float Model::getMaxY()
+{
+	return max_y;
 }

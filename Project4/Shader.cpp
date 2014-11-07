@@ -9,12 +9,12 @@ Shader::~Shader()
 {
 }
 
-void Shader::init()
+void Shader::init(const char* vert, const char* frag)
 {
 	// load shader info
 	ShaderInfo shaders[] = {
-		{ GL_VERTEX_SHADER, "project4.vert" },
-		{ GL_FRAGMENT_SHADER, "project4.frag" },
+		{ GL_VERTEX_SHADER, vert },
+		{ GL_FRAGMENT_SHADER, frag },
 		{ GL_NONE, NULL },
 	};
 

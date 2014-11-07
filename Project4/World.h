@@ -40,10 +40,12 @@ public:
 	void initValues();						// initializes values
 	void setupTextures();
 	
+	void idleFunc();
 
 private:
 	
 	Shader _shader;
+	Shader _roomShader;
 	DirectionalLight _light;
 
 	std::string _textureFilenames[NUM_TEXTURES];
@@ -72,5 +74,8 @@ private:
 	Model table;
 
 	int sequenceTest;
+
+	bool PLAY_TURN;
+
 };
 

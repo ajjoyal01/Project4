@@ -17,7 +17,7 @@ void Model::draw(Shader shader)
 
 	activateTextures(shader);
 
-	glEnableVertexAttribArray(vPosition);
+	glEnableVertexAttribArray(vDirection);
 
 	if (texels.size() > 0)
 	{ 
@@ -102,10 +102,10 @@ void Model::init(string filename)
 	// create Buffers
 	glGenBuffers(NUM_BUFFERS, Buffers);
 
-	glEnableVertexAttribArray(vPosition);
+	glEnableVertexAttribArray(vDirection);
 	glBindBuffer(GL_ARRAY_BUFFER, Buffers[POS_BUFFER]);
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(vmath::vec4), &vertices[0], GL_DYNAMIC_DRAW);
-	glVertexAttribPointer(vPosition, 4, GL_FLOAT, GL_FALSE, 0, 0);
+	glVertexAttribPointer(vDirection, 4, GL_FLOAT, GL_FALSE, 0, 0);
 
 	if (texels.size() > 0)
 	{
@@ -179,7 +179,7 @@ void Model::loadObject(string filename)
 		else
 		{
 			//-----------------------------------
-			// Read Vertex Positions
+			// Read Vertex Directions
 			//-----------------------------------
 			if (line.substr(0, 2) == "v ")
 			{

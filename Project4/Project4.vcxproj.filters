@@ -69,6 +69,12 @@
     <ClCompile Include="Room.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ShadowMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -128,18 +134,30 @@
     <ClInclude Include="C:\Dev\OpenGL\include\vmath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ShadowMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PointLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="project4.frag">
+    <None Include="Shaders\DirectionalLight.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="project4.vert">
+    <None Include="Shaders\DirectionalLight.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="RoomFrag.frag">
+    <None Include="Shaders\PointLight.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="RoomVert.vert">
+    <None Include="Shaders\PointLight.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Shaders\Room.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Shaders\Room.vert">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

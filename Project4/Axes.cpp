@@ -1,6 +1,6 @@
 #include "Axes.h"
 
-void Axes::init(vec4 inPosition[NUM_AXES][NUM_VERTICES])
+void Axes::init(vec4 inDirection[NUM_AXES][NUM_VERTICES])
 {
 	// sets whether affected by transformations
 	isTransformed = 0;
@@ -11,7 +11,7 @@ void Axes::init(vec4 inPosition[NUM_AXES][NUM_VERTICES])
 	{
 		for (int j = 0; j < NUM_VERTICES; j++)
 		{
-			_position[i][j] = inPosition[i][j];
+			_position[i][j] = inDirection[i][j];
 		}
 	}
 
@@ -25,7 +25,7 @@ void Axes::init(vec4 inPosition[NUM_AXES][NUM_VERTICES])
 	glBufferData(GL_ARRAY_BUFFER, sizeof(_position), _position, GL_DYNAMIC_DRAW);
 
 	// set attrib pointer
-	glVertexAttribPointer(vPosition, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
+	glVertexAttribPointer(vDirection, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
 	
 }
 
@@ -50,7 +50,7 @@ void Axes::draw(Shader shader)
 	glBindBuffer(GL_ARRAY_BUFFER, Buffers[AXES_BUFFER]);
 
 	// enable vertex array attributes
-	glEnableVertexAttribArray(vPosition);
+	glEnableVertexAttribArray(vDirection);
 	
 	glVertexAttribI1i(vIsTextured, isTextured);
 	glVertexAttribI1i(vIsTransformed, isTransformed);

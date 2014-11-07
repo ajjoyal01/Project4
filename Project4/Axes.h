@@ -58,7 +58,7 @@ private:
 	// Vertex Attributes
 	//---------------------------------------------------------
 	enum {
-		vPosition, vTexel, vNormal, vTexture, vIsTextured, vIsTransformed,
+		vDirection, vTexel, vNormal, vTexture, vIsTextured, vIsTransformed,
 		vModelMatrix0, vModelMatrix1, vModelMatrix2, vModelMatrix3, vColor
 	};
 	//---------------------------------------------------------

@@ -29,7 +29,7 @@ void World::init()
 {
 	initValues();
 	_cam.init();
-	_shader.init(); 
+	_shader.init("Shaders/DirectionalLight.vert", "Shaders/DirectionalLight.frag"); 
 
 	
 	// Antialiasing

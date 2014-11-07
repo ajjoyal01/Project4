@@ -207,15 +207,8 @@ void Model::loadObject(string filename)
 					float x, y;
 					s >> x;
 					s >> y;
-					if (x > 1)
-						x = 1;
-					if (x < 0)
-						x = 0;
-					if (y > 1)
-						y = 1;
-					if (y < 0)
-						y = 0;
-					v = vmath::vec2(x, y);
+					y = 1 - y;
+					v = vmath::vec2(x,y);
 					in_texels.push_back(v);
 					//-----------------------------------
 				}
@@ -522,9 +515,9 @@ void Model::calculateDimentions()
 	//cout << "Height: " << max_z - min_z << endl;
 	//cout << "Depth: " << max_x - min_x << endl;
 
-	width = max_x - min_x;
+	height = max_x - min_x;
 	depth = max_y - min_y;
-	height = max_z - min_z;
+	width = max_z - min_z;
 
 
 }

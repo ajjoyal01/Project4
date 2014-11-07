@@ -39,6 +39,11 @@ void Texture::loadFromFile(std::string filename)
 	unsigned error = lodepng::decode(_image, _width, _height, buffer);
 
 	path = filename;
+
+	if (buffer.size() == 0)
+	{
+		std::cout << "No texture was loaded from " << filename << std::endl;
+	}
 }
 
 void Texture::load()

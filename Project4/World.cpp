@@ -11,11 +11,10 @@ World::World()
 
 	// Lighting parameters
 	_directionalColor = { 0.9, 0.9, 0.9 };
-	_ambientColor = { 0.7, 0.7, 0.4 };
-	_lightStrength = 5.0;
-	_lightShinniness = 2.0;
+	_ambientColor = { 0.5, 0.5, 0.5 };
+	_lightStrength = 2.0;
+	_lightShinniness = 3.0;
 	_lightDirection = vmath::vec3(.5, .5, 1.0);
-
 }
 
 World::~World()
@@ -30,8 +29,7 @@ void World::init()
 {
 	initValues();
 	_cam.init();
-	_shader.init("Project4.vert","Project4.frag");
-	//_roomShader.init("RoomVert.vert", "RoomFrag.frag");
+	_shader.init(); 
 
 	
 	// Antialiasing
@@ -66,11 +64,17 @@ void World::keyPress(unsigned char key,int x,int y)
 	case 'n':
 		if (game.getWinner() == 0)
 		{
-			if (game.isAnimationComplete())
+			if (sequenceTest == 0)
 			{
-				game.setAnimationComplete(false);
+				cout << "Flip\n";
 				game.playTurn1();
-				
+				sequenceTest = (sequenceTest + 1) % 2;
+			}	
+			else
+			{
+				cout << "Discard\n";
+				game.playTurn2();
+				sequenceTest = (sequenceTest + 1) % 2;
 			}
 		}
 		
@@ -117,8 +121,6 @@ void World::arrowInput(int key, int x, int y)
 
 void World::draw()
 {
-	//_shader.use();
-
 	// setup lighting uniforms
 	_light.render(_shader);
 
@@ -128,18 +130,12 @@ void World::draw()
 	if (drawAxes)
 		axes->draw(_shader);
 
+	_textures[0]->load();
 	game.draw(_shader);
 
+	//room.draw(_shader);
+	_textures[1]->load();
 	table.draw(_shader);
-
-	//_roomShader.use();
-
-	// setup lighting uniforms
-	//_light.render(_roomShader);
-
-	// setup camera uniforms
-	//_cam.render(_roomShader);
-	room.draw(_shader);
 }
 
 void World::initValues()
@@ -171,7 +167,9 @@ void World::initValues()
 	room.setColor(roomColor);
 
 	table.init("Models/table.obj");
-	table.translate(0, 0 - table.getMaxY(), 0);
+	table.setColor(roomColor);
+	table.translate(0, -0.2, -0.3);
+
 }
 
 void World::setupTextures()
@@ -186,14 +184,7 @@ void World::setupTextures()
 		_textures[i] = new Texture();
 		_textures[i]->loadFromFile(_textureFilenames[i]);
 	}
-
 	game.master.setTexture(_textures[0]);
 	table.setTexture(_textures[1]);
 	_textures[0]->load();
-	_textures[1]->load();
-}
-
-void World::idleFunc()
-{
-	game.animateTurn();
 }

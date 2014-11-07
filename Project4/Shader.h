@@ -13,6 +13,7 @@ public:
 	Shader();
 	~Shader();
 
+	void init();
 	void init(const char*, const char*);
 	GLint getUniformLocation(std::string);
 	void use();

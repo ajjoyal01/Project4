@@ -46,11 +46,6 @@ void specialFunc(int key, int x, int y)
 	world.arrowInput(key, x, y);
 }
 
-void idleFunc()
-{
-	world.idleFunc();
-}
-
 int main(int argc,char* argv[])
 {
 	// setup display/version information
@@ -80,7 +75,6 @@ int main(int argc,char* argv[])
 	glutDisplayFunc(display);
 	glutKeyboardFunc(keyPress);
 	glutSpecialFunc(specialFunc);
-	glutIdleFunc(idleFunc);
 
 	//glut main loop
 	glutMainLoop();

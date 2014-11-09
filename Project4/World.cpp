@@ -144,10 +144,13 @@ void World::initValues()
 	// init light values
 	_light.setColor(_directionalColor);
 	_light.setAmbient(_ambientColor);
-	_light.setPosition(vmath::vec3(0, -1.0, 0));
+	_light.setPosition(vmath::vec3(0.5, 0.5, 0.5));
 	_light.setShininess(2);
-	_light.setStrength(4);
-	_light.setConstantAttenuation(5);
+	_light.setStrength(6);
+	_light.setConstantAttenuation(0.25);
+	_light.setLinearAttenuation(0.25);
+	_light.setQuadraticAttenuation(0.01);
+	_light.setEyeDirection(vmath::vec3(0, 0, 1));
 	_light.toggle();
 
 	//----------------------------------------------------------

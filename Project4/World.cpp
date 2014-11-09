@@ -11,10 +11,8 @@ World::World()
 
 	// Lighting parameters
 	_directionalColor = { 0.9, 0.9, 0.9 };
-	_ambientColor = { 0.5, 0.5, 0.5 };
-	_lightStrength = 2.0;
-	_lightShinniness = 3.0;
-	_lightDirection = vmath::vec3(.5, .5, 1.0);
+	_ambientColor = { 0.3, 0.3, 0.4 };
+
 }
 
 World::~World()
@@ -29,9 +27,10 @@ void World::init()
 {
 	initValues();
 	_cam.init();
-	_shader.init("Shaders/DirectionalLight.vert", "Shaders/DirectionalLight.frag"); 
+	_shader.init("Shaders/PointLight.vert", "Shaders/PointLight.frag");
+	//_roomShader.init("RoomVert.vert", "RoomFrag.frag");
 
-	
+
 	// Antialiasing
 	glEnable(GL_LINE_SMOOTH);
 	glEnable(GL_BLEND);
@@ -57,30 +56,24 @@ void World::display()
 	glutSwapBuffers();
 }
 
-void World::keyPress(unsigned char key,int x,int y)
+void World::keyPress(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
 	case 'n':
 		if (game.getWinner() == 0)
 		{
-			if (sequenceTest == 0)
+			if (game.isAnimationComplete())
 			{
-				cout << "Flip\n";
+				game.setAnimationComplete(false);
 				game.playTurn1();
-				sequenceTest = (sequenceTest + 1) % 2;
-			}	
-			else
-			{
-				cout << "Discard\n";
-				game.playTurn2();
-				sequenceTest = (sequenceTest + 1) % 2;
 			}
 		}
-		
+
 		break;
 	case 'l':
 		_light.toggle();
+		cout << "Is state: " << _light.isOn() << endl;
 		break;
 	case 'i':
 		_cam.camIn(CAM_MOVE);
@@ -121,6 +114,8 @@ void World::arrowInput(int key, int x, int y)
 
 void World::draw()
 {
+	_shader.use();
+
 	// setup lighting uniforms
 	_light.render(_shader);
 
@@ -130,12 +125,18 @@ void World::draw()
 	if (drawAxes)
 		axes->draw(_shader);
 
-	_textures[0]->load();
 	game.draw(_shader);
 
-	//room.draw(_shader);
-	_textures[1]->load();
 	table.draw(_shader);
+
+	//_roomShader.use();
+
+	// setup lighting uniforms
+	//_light.render(_roomShader);
+
+	// setup camera uniforms
+	//_cam.render(_roomShader);
+	//room.draw(_shader);
 }
 
 void World::initValues()
@@ -143,18 +144,19 @@ void World::initValues()
 	// init light values
 	_light.setColor(_directionalColor);
 	_light.setAmbient(_ambientColor);
-	_light.setDirection(_lightDirection);
-	_light.setShininess(_lightShinniness);
-	_light.setStrength(_lightStrength);
+	_light.setPosition(vmath::vec3(0, -1.0, 0));
+	_light.setShininess(2);
+	_light.setStrength(4);
+	_light.setConstantAttenuation(5);
 	_light.toggle();
 
 	//----------------------------------------------------------
 	// Data for Axes
 	//----------------------------------------------------------
 	vec4 axesPosition[NUM_AXES][2] = {
-			{ vec4(-5.0, 0.0, 0.0, 1.0), vec4(5.0, 0.0, 0.0, 1.0) },
-			{ vec4(0.0, -5.0, 0.0, 1.0), vec4(0.0, 5.0, 0.0, 1.0) },
-			{ vec4(0.0, 0.0, -5.0, 1.0), vec4(0.0, 0.0, 5.0, 1.0) }
+		{ vec4(-5.0, 0.0, 0.0, 1.0), vec4(5.0, 0.0, 0.0, 1.0) },
+		{ vec4(0.0, -5.0, 0.0, 1.0), vec4(0.0, 5.0, 0.0, 1.0) },
+		{ vec4(0.0, 0.0, -5.0, 1.0), vec4(0.0, 0.0, 5.0, 1.0) }
 	};
 
 	Color axesColor = { .8, .8, .8, 1 };
@@ -167,14 +169,12 @@ void World::initValues()
 	room.setColor(roomColor);
 
 	table.init("Models/table.obj");
-	table.setColor(roomColor);
-	table.translate(0, -0.2, -0.3);
-
+	table.translate(0, 0 - table.getMaxY(), 0);
 }
 
 void World::setupTextures()
 {
-	
+
 	// Texture Files
 	_textureFilenames[0] = "Textures/all_cards.png";
 	_textureFilenames[1] = "Textures/table.png";
@@ -184,7 +184,14 @@ void World::setupTextures()
 		_textures[i] = new Texture();
 		_textures[i]->loadFromFile(_textureFilenames[i]);
 	}
+
 	game.master.setTexture(_textures[0]);
 	table.setTexture(_textures[1]);
 	_textures[0]->load();
+	_textures[1]->load();
+}
+
+void World::idleFunc()
+{
+	game.animateTurn();
 }

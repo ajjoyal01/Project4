@@ -15,6 +15,7 @@
 #include "Shader.h"
 #include "Axes.h"
 #include "DirectionalLight.h"
+#include "PointLight.h"
 #include "Camera.h"
 #include "Game.h"
 #include "Room.h"
@@ -46,7 +47,7 @@ private:
 	
 	Shader _shader;
 	Shader _roomShader;
-	DirectionalLight _light;
+	PointLight _light;
 
 	std::string _textureFilenames[NUM_TEXTURES];
 	Texture * _textures[NUM_TEXTURES];

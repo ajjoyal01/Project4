@@ -82,4 +82,5 @@ void Camera::reverse()
 void Camera::render(Shader shader)
 {
 	glUniformMatrix4fv(shader.getUniformLocation("VPMatrix"), 1, GL_FALSE, frustum * view);
+	glUniformMatrix4fv(shader.getUniformLocation("VMatrix"), 1, GL_FALSE, view);
 }

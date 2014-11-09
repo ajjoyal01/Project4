@@ -29,8 +29,13 @@ void ShadowMap::init()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
 	// Set up wrapping modes
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);	glBindTexture(GL_TEXTURE_2D, 0); // unbind the texture	glGenFramebuffers(1, &_fboID);
-	glBindFramebuffer(GL_FRAMEBUFFER, _fboID);	// Create FBO to render depth into
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glBindTexture(GL_TEXTURE_2D, 0); // unbind the texture
+
+	glGenFramebuffers(1, &_fboID);
+	glBindFramebuffer(GL_FRAMEBUFFER, _fboID);
+
+	// Create FBO to render depth into
 	glGenFramebuffers(1, &_fboID);
 	glBindFramebuffer(GL_FRAMEBUFFER, _fboID);
 	// Attach the depth texture to it

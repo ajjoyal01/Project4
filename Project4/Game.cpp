@@ -231,7 +231,6 @@ void Game::draw(Shader shader)
 }
 
 
-
 //****** ANIMATE MOVEMENTS*****
 void Game::animateCardFlip()
 {

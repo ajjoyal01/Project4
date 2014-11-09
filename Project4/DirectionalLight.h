@@ -25,20 +25,17 @@ public:
 
 	void setAmbient(Color color);
 	void setColor(Color color);
-	void setNormalMatrix(vmath::matNM<float, 3, 3> matrix);
 	void setDirection(vmath::vec3);
 	void setStrength(float strength);
 	void setShininess(float shininess);
 	void toggle();
-
-	// Translations
-	void translate(float x, float y, float z);
+	bool isOn();
 
 
-private:
+
+protected:
 
 	Color _ambient;
-	vmath::matNM<float, 3, 3> _normalMatrix;
 	Color _color; // determines the color of the light
 	vmath::vec3 _direction;
 	vmath::vec3 _halfVector; // not sure what this does

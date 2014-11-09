@@ -1,6 +1,7 @@
 #version 330 core
 
 uniform mat4 VPMatrix;		// view projection matrix
+uniform mat4 VMatrix;
 
 layout(location = 0) in vec4 in_position;
 layout(location = 1) in vec2 in_texel;
@@ -16,6 +17,7 @@ layout(location = 11) in mat3 NormalMatrix;
 out vec4 vertColor;
 out vec3 vertNormal;
 out vec2 vertTexCoord;
+out vec4 vertPosition;
 
 flat out int textureID;
 flat out int vertIsTextured;
@@ -26,13 +28,15 @@ void main()
 	
 	if(in_isTransformed == 1)
 	{
-		gl_Direction = VPMatrix * ModelMatrix * in_position;
-		Normal = normalize(NormalMatrix * in_normal);
+		gl_Position = VPMatrix * ModelMatrix * in_position;
+		vertPosition = VMatrix * ModelMatrix * in_position;
+		vertNormal = normalize(NormalMatrix * in_normal);
 	}
 	else
 	{
-		gl_Direction = VPMatrix * in_position;
-		Normal = in_normal;
+		gl_Position = VPMatrix * in_position;
+		vertPosition = VMatrix * in_position;
+		vertNormal = in_normal;
 	}
 
 	vertColor = in_color;

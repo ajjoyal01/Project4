@@ -14,7 +14,7 @@ public:
 	~Shader();
 
 	void init();
-	void init(const char*, const char*);
+	void init(std::string vertPath, std::string fragPath);
 	GLint getUniformLocation(std::string);
 	void use();
 	void unuse();

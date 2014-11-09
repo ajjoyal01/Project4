@@ -1,19 +1,18 @@
-﻿Build started 11/7/2014 1:50:23 PM.
+﻿Build started 11/8/2014 2:23:18 PM.
      1>Project "C:\Users\Gregory Venezia\Documents\Graphics\Project4\Project4\Project4.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt World.cpp
          World.cpp
-     1>c:\users\gregory venezia\documents\graphics\project4\project4\world.h(80): warning C4091: 'static ' : ignored on left of 'World' when no variable is declared
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\world.h(81): warning C4091: 'static ' : ignored on left of 'World' when no variable is declared
      1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(5): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-     1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(86): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(89): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(106): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(109): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(112): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(115): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(160): warning C4305: 'initializing' : truncation from 'double' to 'float'
-     1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(161): warning C4305: 'initializing' : truncation from 'double' to 'float'
-     1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(171): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(79): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(82): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(99): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(102): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(105): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(108): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(162): warning C4305: 'initializing' : truncation from 'double' to 'float'
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(163): warning C4305: 'initializing' : truncation from 'double' to 'float'
        Link:
          C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Gregory Venezia\Documents\Graphics\Project4\Debug\Project4.exe" /INCREMENTAL /NOLOGO freeglut.lib glew32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Gregory Venezia\Documents\Graphics\Project4\Debug\Project4.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Gregory Venezia\Documents\Graphics\Project4\Debug\Project4.lib" /MACHINE:X86 Debug\Axes.obj
          Debug\Camera.obj
@@ -40,4 +39,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.30
+Time Elapsed 00:00:02.16

@@ -17,21 +17,21 @@ void Model::draw(Shader shader)
 
 	activateTextures(shader);
 
-	glEnableVertexAttribArray(vDirection);
+	glEnableVertexAttribArray(vPosition);
 
 	if (texels.size() > 0)
-	{ 
+	{
 		glEnableVertexAttribArray(vTexel);
 	}
 	if (normals.size() > 0)
-	{ 
+	{
 		glEnableVertexAttribArray(vNormal);
 	}
 	if (textureIDs.size() > 0)
 	{
 		glEnableVertexAttribArray(vTexture);
 	}
-	
+
 	glVertexAttribI1i(vIsTextured, isTextured);
 	glVertexAttribI1i(vIsTransformed, isTransformed);
 	glVertexAttrib4fv(vModelMatrix0, &transform[0][0]);
@@ -102,10 +102,10 @@ void Model::init(string filename)
 	// create Buffers
 	glGenBuffers(NUM_BUFFERS, Buffers);
 
-	glEnableVertexAttribArray(vDirection);
+	glEnableVertexAttribArray(vPosition);
 	glBindBuffer(GL_ARRAY_BUFFER, Buffers[POS_BUFFER]);
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(vmath::vec4), &vertices[0], GL_DYNAMIC_DRAW);
-	glVertexAttribPointer(vDirection, 4, GL_FLOAT, GL_FALSE, 0, 0);
+	glVertexAttribPointer(vPosition, 4, GL_FLOAT, GL_FALSE, 0, 0);
 
 	if (texels.size() > 0)
 	{
@@ -160,7 +160,6 @@ void Model::loadObject(string filename)
 	if (!in)
 	{
 		cerr << "Cannot open " << filename << endl;
-		exit(1);
 	}
 
 	string line;
@@ -179,7 +178,7 @@ void Model::loadObject(string filename)
 		else
 		{
 			//-----------------------------------
-			// Read Vertex Directions
+			// Read Vertex Positions
 			//-----------------------------------
 			if (line.substr(0, 2) == "v ")
 			{
@@ -208,7 +207,7 @@ void Model::loadObject(string filename)
 					s >> x;
 					s >> y;
 					y = 1 - y;
-					v = vmath::vec2(x,y);
+					v = vmath::vec2(x, y);
 					in_texels.push_back(v);
 					//-----------------------------------
 				}
@@ -254,23 +253,23 @@ void Model::loadObject(string filename)
 							// if material name is already in the vector
 							for (int i = 0; i < in_materials.size(); i++)
 							{
-								if (temp == in_materials.at(i))
-								{
-									newMaterial = false;
+							if (temp == in_materials.at(i))
+							{
+							newMaterial = false;
 
-									// set current ID to the location of the existing material
-									curTextID = i;
-								}
+							// set current ID to the location of the existing material
+							curTextID = i;
+							}
 							}
 
 							// if this is a new material
 							if (newMaterial)
 							{
-								in_materials.push_back(temp);
+							in_materials.push_back(temp);
 
-								// current ID is the location of the last element in the array
-								curTextID = in_materials.size();
-							}	*/		
+							// current ID is the location of the last element in the array
+							curTextID = in_materials.size();
+							}	*/
 						}
 						else
 						{
@@ -413,7 +412,7 @@ void Model::loadObject(string filename)
 								}
 
 							}// end "f " if else
-							
+
 						}// end "usemtl " else
 
 					}// end "vn " if else
@@ -429,17 +428,17 @@ void Model::loadObject(string filename)
 	/*
 	if (filename == "Models/2_clubs.obj")
 	{
-		for (int i = 0; i < textureIDs.size(); i++)
-		{
-			//for (int j = 0; j < 2; j++)
-			//{
-				cout << textureIDs[i] << "\t";
-			//}
-			cout << endl;
+	for (int i = 0; i < textureIDs.size(); i++)
+	{
+	//for (int j = 0; j < 2; j++)
+	//{
+	cout << textureIDs[i] << "\t";
+	//}
+	cout << endl;
 
-		}
+	}
 
-		cout << endl << endl << endl;
+	cout << endl << endl << endl;
 	}*/
 
 	in.close();
@@ -448,51 +447,51 @@ void Model::loadObject(string filename)
 	// if there is a material file
 	if (matFileName != "")
 	{
-		// switch to parsing Material File
-		ifstream in("Models/" + matFileName, ios::in);
+	// switch to parsing Material File
+	ifstream in("Models/" + matFileName, ios::in);
 
-		if (!in)
-		{
-			cerr << "Cannot open " << matFileName << endl;
-			exit(1);
-		}
-
-		// while the line == map_Kd, get the filename off the back of the line
-		while (getline(in, line))
-		{
-			if (line.substr(0, 7) == "map_Kd ")
-			{
-				istringstream s(line.substr(7));
-				string texName;
-				getline(s, texName);
-
-				//erase up to file name
-				texName.erase(texName.begin(), texName.begin() + texName.find_last_of("\\") + 1);
-
-				// make new texture
-				Texture* newTexture = new Texture();
-
-				// load texture from file
-				newTexture->loadFromFile( "../Textures/Playing Cards/" + texName);
-
-				// push texture into object's texture vector
-				textures.push_back(newTexture);
-			}
-		}
+	if (!in)
+	{
+	cerr << "Cannot open " << matFileName << endl;
+	exit(1);
 	}
-	
+
+	// while the line == map_Kd, get the filename off the back of the line
+	while (getline(in, line))
+	{
+	if (line.substr(0, 7) == "map_Kd ")
+	{
+	istringstream s(line.substr(7));
+	string texName;
+	getline(s, texName);
+
+	//erase up to file name
+	texName.erase(texName.begin(), texName.begin() + texName.find_last_of("\\") + 1);
+
+	// make new texture
+	Texture* newTexture = new Texture();
+
+	// load texture from file
+	newTexture->loadFromFile( "../Textures/Playing Cards/" + texName);
+
+	// push texture into object's texture vector
+	textures.push_back(newTexture);
+	}
+	}
+	}
+
 	in.close();
 	*/
 }
 
 void Model::calculateDimentions()
 {
-	float max_x = 0;
-	float max_y = 0;
-	float max_z = 0;
-	float min_x = INFINITY;
-	float min_y = INFINITY;
-	float min_z = INFINITY;
+	max_x = 0;
+	max_y = 0;
+	max_z = 0;
+	min_x = INFINITY;
+	min_y = INFINITY;
+	min_z = INFINITY;
 
 	for (int i = 0; i < vertices.size() - 1; i++)
 	{
@@ -588,4 +587,9 @@ void Model::updateNormalMat()
 	}
 
 	nTransform = glm::transpose(glm::inverse(nTransform));
+}
+
+float Model::getMaxY()
+{
+	return max_y;
 }

@@ -9,12 +9,12 @@ Shader::~Shader()
 {
 }
 
-void Shader::init(const char* vert, const char* frag)
+void Shader::init(std::string vertPath, std::string fragPath)
 {
 	// load shader info
 	ShaderInfo shaders[] = {
-		{ GL_VERTEX_SHADER, vert },
-		{ GL_FRAGMENT_SHADER, frag },
+		{ GL_VERTEX_SHADER, vertPath.c_str() },
+		{ GL_FRAGMENT_SHADER, fragPath.c_str() },
 		{ GL_NONE, NULL },
 	};
 

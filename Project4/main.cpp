@@ -36,9 +36,9 @@ void display()
 	world.display();
 }
 
-void keyPress(unsigned char key,int x,int y)
+void keyPress(unsigned char key, int x, int y)
 {
-	world.keyPress(key,x,y);
+	world.keyPress(key, x, y);
 }
 
 void specialFunc(int key, int x, int y)
@@ -46,7 +46,12 @@ void specialFunc(int key, int x, int y)
 	world.arrowInput(key, x, y);
 }
 
-int main(int argc,char* argv[])
+void idleFunc()
+{
+	world.idleFunc();
+}
+
+int main(int argc, char* argv[])
 {
 	// setup display/version information
 	glutInit(&argc, argv);
@@ -66,7 +71,7 @@ int main(int argc,char* argv[])
 		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
 	}
 
-	
+
 
 	// initialize the world
 	world.init();
@@ -75,6 +80,7 @@ int main(int argc,char* argv[])
 	glutDisplayFunc(display);
 	glutKeyboardFunc(keyPress);
 	glutSpecialFunc(specialFunc);
+	glutIdleFunc(idleFunc);
 
 	//glut main loop
 	glutMainLoop();

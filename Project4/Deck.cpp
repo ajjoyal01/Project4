@@ -90,13 +90,13 @@ void Deck::stack()
 
 	for (int i = 0; i < cards.size(); i++)
 	{
-		//cards.at(i)->rotate(-cards.at(i)->totalRotate, vmath::vec3(0, 1, 0));
-		//cards.at(i)->totalRotate = 0;
+		cards.at(i)->rotate(-cards.at(i)->total_rotate, vmath::vec3(0, 1, 0));
+		cards.at(i)->total_rotate = 0;
 		cards.at(i)->translate(0, CARD_DEPTH * i, 0);
 		int angle = rand() % 3;
 		int sign = rand() % 3 - 1;
 		cards.at(i)->rotate(angle * sign, vmath::vec3(0, 1, 0));
-		//cards.at(i)->totalRotate += angle * sign;
+		cards.at(i)->total_rotate += angle * sign;
 	}
 }
 

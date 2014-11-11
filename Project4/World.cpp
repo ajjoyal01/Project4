@@ -13,6 +13,7 @@ World::World()
 	_directionalColor = { 0.9, 0.9, 0.9 };
 	_ambientColor = { 0.7, 0.7, 0.4 };
 
+	run_game = false;
 }
 
 World::~World()
@@ -66,10 +67,13 @@ void World::keyPress(unsigned char key, int x, int y)
 			if (game.isAnimationComplete())
 			{
 				game.setAnimationComplete(false);
-				game.playTurn1();
+				game.playTurn();
 			}
 		}
 
+		break;
+	case 'g':
+		run_game = !run_game;
 		break;
 	case 'l':
 		_light.toggle();
@@ -173,9 +177,10 @@ void World::initValues()
 	
 
 	table.init("Models/table.obj");
-	table.translate(0, - table.getMaxY(), 0);
+	table.translate(0, - table.getMaxY() + .115, 0);
 
-	room.translate(0, room.getMaxY() - 5.50, 0);
+	room.translate(0, room.getMaxY() - 5.50 + .115, 0);
+	room.rotate(-90, vmath::vec3(0, 1, 0));
 }
 
 void World::setupTextures()
@@ -203,4 +208,13 @@ void World::setupTextures()
 void World::idleFunc()
 {
 	game.animateTurn();
+
+	if (game.getWinner() == 0 && run_game == true)
+	{
+		if (game.isAnimationComplete())
+		{
+			game.setAnimationComplete(false);
+			game.playTurn();
+		}
+	}
 }

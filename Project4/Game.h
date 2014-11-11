@@ -13,6 +13,10 @@
 #include "Player.h"
 #include "StandardDeck.h"
 
+#define FRAME_RATE .002
+#define ANIMATE_MAX 100
+
+
 using namespace std;
 
 class Game
@@ -24,8 +28,7 @@ public:
 	~Game();
 
 	void init();
-	void playTurn1();
-	void playTurn2();
+	void playTurn();
 	void flipCards();
 	void getHandWinner();
 	void war();
@@ -41,6 +44,7 @@ public:
 	void animateBurn();
 	void animateDiscard();
 	void animateDeckReset(int);
+	void animatePause();
 
 	void animateTurn();
 	void setAnimateFlip();
@@ -65,6 +69,8 @@ private:
 	vmath::vec3 tempTarget1;
 	vmath::vec3 tempTarget2;
 
+	vmath::vec3 discardLocation1;
+	vmath::vec3 discardLocation2;
 	vmath::vec3 discardTarget1;
 	vmath::vec3 discardTarget2;
 
@@ -91,6 +97,9 @@ private:
 
 	queue<int> actionQueue;
 
-	enum{ FLIP, BURN, DISCARD };
+	enum{ FLIP, BURN, DISCARD, PAUSE };
+
+	double timer;
+	double temp_timer;
 };
 

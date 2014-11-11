@@ -22,7 +22,7 @@ public:
 	bool isFaceUp();
 	void flip();
 
-	float totalRotate;
+	float total_rotate;
 
 private:
 

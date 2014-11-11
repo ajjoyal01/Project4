@@ -77,6 +77,6 @@ private:
 	int sequenceTest;
 
 	bool PLAY_TURN;
-
+	bool run_game;
 };
 

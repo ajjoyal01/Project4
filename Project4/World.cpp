@@ -11,7 +11,7 @@ World::World()
 
 	// Lighting parameters
 	_directionalColor = { 0.9, 0.9, 0.9 };
-	_ambientColor = { 0.3, 0.3, 0.4 };
+	_ambientColor = { 0.7, 0.7, 0.4 };
 
 }
 
@@ -136,7 +136,7 @@ void World::draw()
 
 	// setup camera uniforms
 	//_cam.render(_roomShader);
-	//room.draw(_shader);
+	room.draw(_shader);
 }
 
 void World::initValues()
@@ -168,11 +168,14 @@ void World::initValues()
 	axes->init(axesPosition);
 	axes->setColor(axesColor);
 
-	room.init("Models/room1.obj");
+	room.init("Models/Room.obj");
 	room.setColor(roomColor);
+	
 
 	table.init("Models/table.obj");
-	table.translate(0, 0 - table.getMaxY(), 0);
+	table.translate(0, - table.getMaxY(), 0);
+
+	room.translate(0, room.getMaxY() - 5.50, 0);
 }
 
 void World::setupTextures()
@@ -181,8 +184,9 @@ void World::setupTextures()
 	// Texture Files
 	_textureFilenames[0] = "Textures/all_cards.png";
 	_textureFilenames[1] = "Textures/table.png";
+	_textureFilenames[2] = "Textures/room.png";
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		_textures[i] = new Texture();
 		_textures[i]->loadFromFile(_textureFilenames[i]);
@@ -190,8 +194,10 @@ void World::setupTextures()
 
 	game.master.setTexture(_textures[0]);
 	table.setTexture(_textures[1]);
+	room.setTexture(_textures[2]);
 	_textures[0]->load();
 	_textures[1]->load();
+	_textures[2]->load();
 }
 
 void World::idleFunc()

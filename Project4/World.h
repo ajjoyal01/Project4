@@ -20,7 +20,7 @@
 #include "Game.h"
 #include "Room.h"
 
-#define NUM_TEXTURES 2 // cards and table
+#define NUM_TEXTURES 3 // cards and table
 #define CAM_MOVE .1
 #define NUM_OBJECTS 4
 

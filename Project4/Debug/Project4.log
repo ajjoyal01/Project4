@@ -1,7 +1,9 @@
-﻿Build started 11/10/2014 7:25:04 PM.
+﻿Build started 11/10/2014 11:43:57 PM.
      1>Project "C:\Users\Gregory Venezia\Documents\Graphics\Project4\Project4\Project4.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt World.cpp
+         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Axes.cpp Camera.cpp Card.cpp Deck.cpp DirectionalLight.cpp Game.cpp Model.cpp PlayDeck.cpp Player.cpp PointLight.cpp Room.cpp Shader.cpp ShadowMap.cpp StandardDeck.cpp World.cpp main.cpp
+         main.cpp
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\world.h(81): warning C4091: 'static ' : ignored on left of 'World' when no variable is declared
          World.cpp
      1>c:\users\gregory venezia\documents\graphics\project4\project4\world.h(81): warning C4091: 'static ' : ignored on left of 'World' when no variable is declared
      1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(5): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
@@ -15,6 +17,56 @@
      1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(165): warning C4305: 'initializing' : truncation from 'double' to 'float'
      1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(166): warning C4305: 'initializing' : truncation from 'double' to 'float'
      1>c:\users\gregory venezia\documents\graphics\project4\project4\world.cpp(178): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+         StandardDeck.cpp
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\standarddeck.cpp(67): warning C4018: '<' : signed/unsigned mismatch
+         ShadowMap.cpp
+         Shader.cpp
+         Room.cpp
+         PointLight.cpp
+         Player.cpp
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\player.cpp(30): warning C4018: '<' : signed/unsigned mismatch
+         PlayDeck.cpp
+         Model.cpp
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\model.cpp(496): warning C4018: '<' : signed/unsigned mismatch
+         Game.cpp
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\game.cpp(7): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\game.cpp(50): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\game.cpp(51): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\game.cpp(52): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\game.cpp(53): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\game.cpp(55): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\game.cpp(56): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\game.cpp(143): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\game.cpp(144): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\game.cpp(225): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\game.cpp(258): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\game.cpp(259): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\game.cpp(263): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\game.cpp(264): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\game.cpp(336): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\game.cpp(337): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\game.cpp(341): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\game.cpp(342): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+         DirectionalLight.cpp
+         Deck.cpp
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\deck.cpp(59): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\deck.cpp(77): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\deck.cpp(86): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\deck.cpp(91): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\deck.cpp(95): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\deck.cpp(98): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\deck.cpp(105): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\deck.cpp(159): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\deck.cpp(175): warning C4018: '<' : signed/unsigned mismatch
+         Card.cpp
+         Camera.cpp
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\camera.cpp(64): warning C4305: 'argument' : truncation from 'double' to 'float'
+         Axes.cpp
+         Generating Code...
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\model.cpp(492): warning C4756: overflow in constant arithmetic
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\model.cpp(493): warning C4756: overflow in constant arithmetic
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\model.cpp(494): warning C4756: overflow in constant arithmetic
+     1>c:\users\gregory venezia\documents\graphics\project4\project4\model.cpp(492): warning C4756: overflow in constant arithmetic
        Link:
          C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Gregory Venezia\Documents\Graphics\Project4\Debug\Project4.exe" /INCREMENTAL /NOLOGO freeglut.lib glew32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Gregory Venezia\Documents\Graphics\Project4\Debug\Project4.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Gregory Venezia\Documents\Graphics\Project4\Debug\Project4.lib" /MACHINE:X86 Debug\Axes.obj
          Debug\Camera.obj
@@ -36,9 +88,10 @@
          Debug\StandardDeck.obj
          Debug\Texture.obj
          Debug\World.obj
+         LINK : C:\Users\Gregory Venezia\Documents\Graphics\Project4\Debug\Project4.exe not found or not built by the last incremental link; performing full link
          Project4.vcxproj -> C:\Users\Gregory Venezia\Documents\Graphics\Project4\Debug\Project4.exe
      1>Done Building Project "C:\Users\Gregory Venezia\Documents\Graphics\Project4\Project4\Project4.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.29
+Time Elapsed 00:00:56.18
